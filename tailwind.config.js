@@ -1,15 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./**/*.php",
-    "./**/*.html",
-    "./assets/js/**/*.js",
+    "./auth/**/*.php",         // páginas de login, registo, etc.
+    "./components/**/*.php",   // se tiveres componentes PHP separados
+    "./index.php",             // página principal
+    "./assets/js/**/*.js",     // JS que pode gerar classes dinamicamente
   ],
   theme: {
     extend: {
       colors: {
+        description: '#7D7987',
         primary: {
-          DEFAULT: '#4DB8A3',
+          DEFAULT: '#F1F7F7',
           dark: '#3A9B8A',
           light: '#6DCBB5',
         },
@@ -17,7 +19,7 @@ module.exports = {
         light: '#F3F4F6',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Montserrat', 'system-ui', 'sans-serif'],
       },
     },
   },

@@ -5,50 +5,48 @@
 /* ===== Estilos Personalizados OptiSpace ===== */
 
 @layer base {
-  body {
-    @apply font-sans antialiased;
-  }
+    body {
+        @apply font-sans antialiased;
+    }
 }
 
 @layer components {
-  /* Botões */
-  .btn-primary {
-    @apply bg-primary text-white px-6 py-2 rounded-lg font-medium 
-           hover:bg-primary-dark transition duration-200 
-           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
-  }
-  
-  .btn-secondary {
-    @apply bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-medium 
-           hover:bg-gray-300 transition duration-200
-           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
-  }
-  
-  /* Inputs */
-  .input-default {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg 
-           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-           placeholder:text-gray-400;
-  }
-  
-  /* Cards */
-  .card {
-    @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-200;
-  }
-  
-  /* Sidebar Item */
-  .sidebar-item {
-    @apply flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg
-           hover:bg-primary hover:text-white transition duration-200 cursor-pointer;
-  }
-  
-  .sidebar-item.active {
-    @apply bg-primary text-white;
-  }
+
+    /* Botões */
+    .btn-primary {
+        @apply bg-[#17876E] text-white px-4 py-1 rounded-lg font-medium hover:bg-[#2EA98C] transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+    }
+
+    .btn-secondary {
+        @apply bg-gray-200 text-gray-800 px-6 py-2 rounded-xl font-medium hover:bg-gray-300 transition duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2;
+    }
+
+    .btn-outline {
+        @apply bg-transparent text-[#17876E] border-4 border-[#17876E] px-6 py-2 rounded-3xl font-bold hover:bg-[#17876E] hover:text-white transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#17876E] focus:ring-offset-2;
+    }
+
+    /* Inputs */
+    .input-default {
+        @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder:text-gray-400;
+    }
+
+    /* Cards */
+    .card {
+        @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-200;
+    }
+
+    /* Sidebar Item */
+    .sidebar-item {
+        @apply flex items-center gap-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-primary hover:text-white transition duration-200 cursor-pointer;
+    }
+
+    .sidebar-item.active {
+        @apply bg-primary text-white;
+    }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent;
-  }
+    .text-gradient {
+        @apply bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent;
+    }
 }
