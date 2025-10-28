@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../assets/css/output.css">
 </head>
 <body>
     <div class="container">
-        <div class="tabs bg-black">
-            <a href="login.php" class="tab active">Login</a>
+        <div class="tabs bg-black text-white">
+            <a href="login.php" class="">Login</a>
             <a href="registo.php" class="tab">Register</a>
         </div>
 
