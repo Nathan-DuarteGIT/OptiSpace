@@ -1,44 +1,55 @@
 <!DOCTYPE html>
-<html lang="pt">
+
+<html lang="pt" class="h-screen w-screen">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
     <link rel="stylesheet" href="../assets/css/output.css">
+    <link rel="shortcut icon" href="../assets/images/logo_optispace.ico" type="image/x-icon">
+    <title>Login</title>
 </head>
 
-<body>
-    <div class="container">
-        <div class="tabs bg-black text-white w-32">
-            <img src="assets/images/logo_optispace" alt="Logo">
-            <img src="assets/images/Saly-2" alt="Decoração">
+<body class="bg-primary m-0 p-0 h-screen w-screen flex">
+    <div class="container flex flex-row items-center h-screen w-screen">
+        <div class="left-section bg-primary-dark flex-1">
+            <img class="w-32 h-32" src="../assets/images/logo_optispace_branca.png" alt="logo_OptiSpace">
+            <img class="w-50 h-50" src="../assets/images/Saly-2.png" alt="Decoração">
         </div>
+        <div class="right-section flex-1">      
+            <img class="w-50 h-50" src="../assets/images/computer_inicio.png" alt="Computer">
+        </div>     
     </div>
-
-    <div class="right-section m-5">
-                <div class="form-card">
-                        <img src="../assets/css/output.css" alt="Logo">
-                        <img src="../assets/css/output.css" alt="Decoração">
-                </div>
-    </div>       
-
-    <form method="POST">
-                <label>Insira o seu Email</label>
-                <input type="email" name="email" required placeholder="E-mail">
-                        
-                <label>Insira a sua Palavra-passe</label>
-                <input type="password" name="password" required placeholder="Palavra-passe">
-
-                <button type="submit">Entrar</button>
-
-                <h1>Bem-vindo à Optispace</h1>
-                    <h2>Entrar</h2>
-                    
-                    <div class="links">
-                        <span class="active">Não tem conta?</span>
-                        <a href="registo.php">Registe-se</a>
-                    </div>
-    </form>
         
+   <div class="form-container w-full max-w-md bg-white p-8 rounded-2xl shadow-xl 
+            absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+        <form method="POST" class="space-y-6">
+            <div class="text-left mb-6">
+                <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
+                <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Entrar</h2>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Insira o seu Email</label>
+                <input type="email" name="email" required placeholder="E-mail"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
+            </div>
+                        
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Insira a sua Palavra-passe</label>
+                <input type="password" name="password" required placeholder="Palavra-passe"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
+            </div>
+
+            <button type="submit" class="w-full bg-primary-dark text-white py-3 rounded-lg font-semibold text-lg hover:bg-primary-dark/90 transition">Entrar</button>
+            
+            <div class="links absolute top-6 right-6 text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-md">
+                <span>Não tem conta? </span><br>
+                <a href="registo.php" class="text-primary-dark font-semibold hover:underline">Registe-se</a>
+            </div>
+        </form>
+    </div>  
+    
+
 </body>
 </html>
