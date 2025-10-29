@@ -34,7 +34,7 @@
 
     /* Cards */
     .card {
-        @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-200;
+        @apply bg-white rounded-2xl shadow-md p-6 max-w-xs hover:shadow-lg transition duration-200;
     }
 
     /* Sidebar Item */
