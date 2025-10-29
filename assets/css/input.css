@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,8 +23,9 @@
     }
 
     .btn-outline {
-        @apply bg-transparent text-[#17876E] border-4 border-[#17876E] px-6 py-2 rounded-3xl font-bold hover:bg-[#17876E] hover:text-white transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#17876E] focus:ring-offset-2;
+        @apply bg-transparent text-[#17876E] border-4 border-[#17876E] px-6 py-2 rounded-3xl font-bold shadow-xl hover:bg-[#17876E] hover:text-white hover:shadow-none transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#17876E] focus:ring-offset-2;
     }
+
 
     /* Inputs */
     .input-default {
