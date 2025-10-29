@@ -9,8 +9,8 @@
     <title>OptiSpace-Homepage</title>
 </head>
 
-<body class="bg-primaryfont-sans">
-    <header class="mx-40 ">
+<body class="bg-primary mx-40 font-sans">
+    <header class="mx-40">
         <nav class="flex justify-between items-center ml-8 mr-8 mt-2">
             <img class="w-32 h-auto " src="assets/images/logo_optispace.png" alt="logo_OptiSpace">
             <ul class="flex justify-between items-center">
@@ -26,8 +26,8 @@
     <img
         src="assets/images/bg-element.png"
         alt=""
-        class="absolute -bottom-[1000px] -left-40 w-[900px] -z-10 opacity-90 select-none pointer-events-none" />
-    <section id="inicio" class="mr-40 ml-40 flex items-center my-20">
+        class="absolute -bottom-[700px] -left-0 w-[900px] -z-10 opacity-90 select-none pointer-events-none" />
+    <section id="inicio" class="mx-40 flex items-center my-20">
         <div class="flex-1">
             <h1 class="text-4xl font-bold">Reserve com inteligência, otimize com Optispace.</h1>
             <h2 class="text-2xl font-light text-description my-10">A Optispace automatiza a gestão de recursos partilhados com reservas inteligentes, eliminando conflitos e aumentando a produtividade empresarial.</h2>
