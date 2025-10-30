@@ -14,6 +14,7 @@ require_once __DIR__ . '/config/config.php';
 </head>
 
 <body class="bg-primary font-sans mx-4 lg:mx-40">
+    <!-- falta deixar a header responsiva -->
     <header class="mx-4 lg:mx-40">
         <nav class="flex justify-between items-center ml-8 mr-8 mt-2">
             <img class="w-32 h-auto" src="assets/images/logo_optispace.png" alt="logo_OptiSpace">
@@ -84,20 +85,20 @@ require_once __DIR__ . '/config/config.php';
             <h1 class="text-3xl font-bold">Registe a sua empresa!</h1>
             <div class="w-16 h-[2px] bg-black my-5"></div>
             <h2 class="text-xl font-light text-description my-10">Junte-se ao Optispace e simplifique a gestão de recursos da sua empresa! Registe-se agora para reservas automáticas e maior produtividade.</h2>
-            <a class="btn-outline" href="auth/registo-empresa.php">Registe-se agora</a>
+            <a class="btn-outline whitespace-nowrap" href="auth/registo-empresa.php">Registe-se agora</a>
         </div>
     </section>
-    <footer class=" flex flex-col justify-center items-center bg-[#085543] -mx-40 text-white">
+    <footer class=" flex flex-col justify-center items-center bg-[#085543] py-3 -mx-4 lg:-mx-40 text-white gap-[5px]">
         <img class="w-32 h-auto" src="assets/images/logo_optispace_branca.png" alt="logo OptiSpace">
-        <div>
-            <p><i class="fa-regular fa-envelope"></i>info@optispace.pt</p>
-            <p><i class="fa-solid fa-phone"></i>+ 351 987 654 321</p>
+        <div class="flex flex-col md:flex-row gap-4">
+            <p><i class="fa-regular fa-envelope"></i> info@optispace.pt</p>
+            <p><i class="fa-solid fa-phone"></i> + 351 987 654 321</p>
         </div>
         <p>Complexo Andaluz, Apartado 279 2001-904 Santarém</p>
-        <div>
-            <a href=""><i class="fa-brands fa-instagram"></i></a>
-            <a href=""><i class="fa-brands fa-whatsapp"></i></a>
-            <a href=""><i class="fa-brands fa-facebook"></i></a>
+        <div class="flex">
+            <a class="px-2" href=""><i class="fa-brands fa-instagram text-2xl"></i></a>
+            <a class="px-2" href=""><i class="fa-brands fa-whatsapp text-2xl"></i></a>
+            <a class="px-2" href=""><i class="fa-brands fa-facebook text-2xl"></i></a>
         </div>
         <p>&copy;OptiSpace LTD 2025. Todos os direitos reservados</p>
     </footer>
