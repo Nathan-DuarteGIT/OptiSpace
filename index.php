@@ -8,14 +8,15 @@ require_once __DIR__ . '/config/config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/output.css">
-    <link rel="shortcut icon" href="assets/images/logo_optispace.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/icon_optispace_1.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>OptiSpace-Homepage</title>
 </head>
 
 <body class="bg-primary font-sans mx-4 lg:mx-40">
     <header class="mx-4 lg:mx-40">
         <nav class="flex justify-between items-center ml-8 mr-8 mt-2">
-            <img class="w-32 h-auto " src="assets/images/logo_optispace.png" alt="logo_OptiSpace">
+            <img class="w-32 h-auto" src="assets/images/logo_optispace.png" alt="logo_OptiSpace">
             <ul class="flex justify-between items-center">
                 <li class="ml-4 mr-4"><a href="">Inicio</a></li>
                 <li class="ml-4 mr-4"><a href="">Serviços</a></li>
@@ -75,28 +76,32 @@ require_once __DIR__ . '/config/config.php';
             </div>
         </div>
     </section>
-    <section id="juntese" class="flex gap-8 my-20 mx-4 lg:mx-40">
+    <section id="juntese" class="flex items-center gap-8 my-20 mx-4 lg:mx-40">
         <div class="flex-1">
             <img src="assets/images/analiseEmpresa.png" alt="pessoa com uma prancheta e um grafico a subir">
         </div>
         <div class="flex-1">
-            <h1 class="text-4xl font-bold">Registe a sua empresa!</h1>
+            <h1 class="text-3xl font-bold">Registe a sua empresa!</h1>
             <div class="w-16 h-[2px] bg-black my-5"></div>
-            <h2 class="text-2xl font-light text-description my-10">Junte-se ao Optispace e simplifique a gestão de recursos da sua empresa! Registe-se agora para reservas automáticas e maior produtividade.</h2>
+            <h2 class="text-xl font-light text-description my-10">Junte-se ao Optispace e simplifique a gestão de recursos da sua empresa! Registe-se agora para reservas automáticas e maior produtividade.</h2>
             <a class="btn-outline" href="auth/registo-empresa.php">Registe-se agora</a>
         </div>
     </section>
-    <footer>
-        <img src="" alt="">
+    <footer class=" flex flex-col justify-center items-center bg-[#085543] -mx-40 text-white">
+        <img class="w-32 h-auto" src="assets/images/logo_optispace_branca.png" alt="logo OptiSpace">
         <div>
-
+            <p><i class="fa-regular fa-envelope"></i>info@optispace.pt</p>
+            <p><i class="fa-solid fa-phone"></i>+ 351 987 654 321</p>
         </div>
-        <p></p>
+        <p>Complexo Andaluz, Apartado 279 2001-904 Santarém</p>
         <div>
-
+            <a href=""><i class="fa-brands fa-instagram"></i></a>
+            <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+            <a href=""><i class="fa-brands fa-facebook"></i></a>
         </div>
-        <p></p>
+        <p>&copy;OptiSpace LTD 2025. Todos os direitos reservados</p>
     </footer>
+
 </body>
 
 </html>
