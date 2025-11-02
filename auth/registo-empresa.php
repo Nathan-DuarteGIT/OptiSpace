@@ -61,8 +61,8 @@
                 <button type="submit" class="w-full bg-primary-dark_green text-white py-3 rounded-lg font-semibold text-lg hover:bg-primary-dark/90 transition">Registar</button>
 
                 <div class="links absolute top-3 md:top-6 right-3 md:right-6 text-xs md:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-2 md:px-3 py-1 rounded-md">
-                    <span>Não tem conta? </span><br>
-                    <a href="registo.php" class="text-primary-dark font-semibold hover:underline">Registe-se</a>
+                    <span>Já tem conta? </span><br>
+                    <a href="registo.php" class="text-primary-dark font-semibold hover:underline">Entrar</a>
                 </div>
             </form>
         </div>
