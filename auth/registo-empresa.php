@@ -26,7 +26,7 @@
             alt="Computer"
             class="absolute right-1/2 md:right-[100px] top-1/2 translate-x-1/2 md:translate-x-0 -translate-y-1/2 w-[180px] md:w-[375px] h-auto md:block">
         </div>
-
+    
         <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
             <form method="POST" class="space-y-6">
                 <div class="text-left mb-6">
@@ -62,7 +62,7 @@
 
                 <div class="links absolute top-3 md:top-6 right-3 md:right-6 text-xs md:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-2 md:px-3 py-1 rounded-md">
                     <span>Já tem conta? </span><br>
-                    <a href="registo.php" class="text-primary-dark font-semibold hover:underline">Entrar</a>
+                    <a href="login.php" class="text-primary-dark font-semibold hover:underline">Entrar</a>
                 </div>
             </form>
         </div>
