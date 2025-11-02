@@ -36,6 +36,18 @@
             </div>
 
             <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Primeiro e Último Nome do Admin</label>
+                <input type="text" name="name" required placeholder="Primeiro e Último Nome"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Insira a sua Palavra-passe</label>
+                <input type="password" name="password" required placeholder="Palavra-passe"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
+            </div>
+
+            <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Insira o seu Email</label>
                 <input type="email" name="email" required placeholder="E-mail"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
