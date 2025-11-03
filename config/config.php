@@ -1,12 +1,26 @@
 <?php
 // config.php
-function base_url($path = '') {
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http';
-    $host = $_SERVER['HTTP_HOST'];
-    
-    // Remove barras duplicadas
-    $path = '/' . ltrim($path, '/');
-    
-    return $protocol . '://' . $host . $path;
-}// Se está numa subpasta
+
+// Mostrar erros 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Configurações de sessão
+session_start();
+
+// Configurações de upload
+define('UPLOAD_PATH', __DIR__ . '/../uploads/');
+define('MAX_FILE_SIZE', 5242880); // 5MB
+define('ALLOWED_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif']);
+
+// Timezone Portugal
+date_default_timezone_set('Europe/Lisbon');
+
+// URL base do projeto
+define('BASE_URL', 'http://localhost/optispace/');
+define('SITE_NAME', 'OptiSpace');
+
+// Email (para ativação de contas)
+//define('EMAIL_FROM', 'noreply@optispace.local');
+//define('EMAIL_NAME', 'OptiSpace');
 ?>
