@@ -37,13 +37,13 @@
 
             <div class="flex justify-center gap-4 mb-6">
                 <input type="text" name="digit1" maxlength="1"
-                    class="w-12 h-12 md:w-14 md:h-14 text-center border border-gray-300 rounded-xl text-2xl font-semibold bg-gray-200 focus:ring-2 focus:ring-primary-dark focus:border-transparent transition" required>
+                    class="input-activation" required>
                 <input type="text" name="digit2" maxlength="1"
-                    class="w-12 h-12 md:w-14 md:h-14 text-center border border-gray-300 rounded-xl text-2xl font-semibold bg-gray-200 focus:ring-2 focus:ring-primary-dark focus:border-transparent transition" required>
+                    class="input-activation" required>
                 <input type="text" name="digit3" maxlength="1"
-                    class="w-12 h-12 md:w-14 md:h-14 text-center border border-gray-300 rounded-xl text-2xl font-semibold bg-gray-200 focus:ring-2 focus:ring-primary-dark focus:border-transparent transition" required>
+                    class="input-activation" required>
                 <input type="text" name="digit4" maxlength="1"
-                    class="w-12 h-12 md:w-14 md:h-14 text-center border border-gray-300 rounded-xl text-2xl font-semibold bg-gray-200 focus:ring-2 focus:ring-primary-dark focus:border-transparent transition" required>
+                    class="input-activation" required>
             </div>
 
             <button type="submit"
