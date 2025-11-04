@@ -91,7 +91,7 @@ function isActive($folder)
     $relativePath = str_replace($rootFolder, '', $uri);
 
     // Compara se o caminho começa com a pasta
-    return strpos($relativePath, $folder) === 0 ? 'text-activeted' : 'text-description';
+    return strpos($relativePath, $folder) === 0 ? 'text-[#17876E]' : 'text-description';
 }
 
 // ============================================
