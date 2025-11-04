@@ -73,6 +73,19 @@ function logout() {
 }
 
 // ============================================
+// Sidebar
+// ============================================
+
+function isActive($folder) {
+    $rootFolder = '/OptiSpace';
+    $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
+    $relativePath = str_replace($rootFolder, '', $uri);
+
+    // Compara se o caminho começa com a pasta
+    return strpos($relativePath, $folder) === 0 ? 'text-[#17876E]' : 'text-description';
+}
+
+// ============================================
 // UPLOAD DE FICHEIROS
 // ============================================
 
