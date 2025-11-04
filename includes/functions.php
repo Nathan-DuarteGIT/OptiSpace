@@ -7,7 +7,8 @@
 /**
  * Limpa dados de entrada (previne XSS)
  */
-function limpar($data) {
+function limpar($data)
+{
     if (is_array($data)) {
         return array_map('limpar', $data);
     }
@@ -17,21 +18,24 @@ function limpar($data) {
 /**
  * Valida email
  */
-function validar_email($email) {
+function validar_email($email)
+{
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
 /**
  * Cria hash de password
  */
-function hash_password($password) {
+function hash_password($password)
+{
     return password_hash($password, PASSWORD_DEFAULT);
 }
 
 /**
  * Verifica password
  */
-function verificar_password($password, $hash) {
+function verificar_password($password, $hash)
+{
     return password_verify($password, $hash);
 }
 
@@ -42,14 +46,16 @@ function verificar_password($password, $hash) {
 /**
  * Verifica se utilizador está logado
  */
-function esta_logado() {
+function esta_logado()
+{
     return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
 }
 
 /**
  * Redireciona se não estiver logado
  */
-function requer_login() {
+function requer_login()
+{
     if (!esta_logado()) {
         header('Location: ' . BASE_URL . 'auth/login.php');
         exit();
@@ -59,14 +65,16 @@ function requer_login() {
 /**
  * Verifica se é admin
  */
-function e_admin() {
+function e_admin()
+{
     return isset($_SESSION['nivel_acesso']) && $_SESSION['nivel_acesso'] === 'admin';
 }
 
 /**
  * Faz logout
  */
-function logout() {
+function logout()
+{
     session_destroy();
     header('Location: ' . BASE_URL . 'auth/login.php');
     exit();
@@ -76,13 +84,14 @@ function logout() {
 // Sidebar
 // ============================================
 
-function isActive($folder) {
+function isActive($folder)
+{
     $rootFolder = '/OptiSpace';
     $uri = explode('?', $_SERVER['REQUEST_URI'])[0];
     $relativePath = str_replace($rootFolder, '', $uri);
 
     // Compara se o caminho começa com a pasta
-    return strpos($relativePath, $folder) === 0 ? 'text-[#17876E]' : 'text-description';
+    return strpos($relativePath, $folder) === 0 ? 'text-activeted' : 'text-description';
 }
 
 // ============================================
@@ -92,7 +101,8 @@ function isActive($folder) {
 /**
  * Faz upload seguro de imagem
  */
-function upload_imagem($file, $pasta) {
+function upload_imagem($file, $pasta)
+{
     // Verifica se houve upload
     if (!isset($file['error']) || $file['error'] !== UPLOAD_ERR_OK) {
         return ['sucesso' => false, 'mensagem' => 'Erro no upload'];
@@ -125,5 +135,3 @@ function upload_imagem($file, $pasta) {
 
     return ['sucesso' => false, 'mensagem' => 'Erro ao guardar ficheiro'];
 }
-
-?>

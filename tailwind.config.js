@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./auth/**/*.php",         // páginas de login, registo, etc.
-    "./components/**/*.php",   // se tiveres componentes PHP separados
+    "./auth//*.php",         // páginas de login, registo, etc.
+    "./components//*.php",   // se tiveres componentes PHP separados
     "./index.php",             // página principal
-    "./assets/js/**/*.js",     // JS que pode gerar classes dinamicamente
+    "./assets/js//*.js",     // JS que pode gerar classes dinamicamente
   ],
   theme: {
     extend: {
@@ -24,5 +24,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [],
 }

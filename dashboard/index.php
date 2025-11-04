@@ -1,11 +1,5 @@
 <?php
-function showVar()
-{
-    echo "<pre>";
-    print_r(basename($_SERVER['REQUEST_URI']));
-    echo "</pre>";
-}
-showvar();
+include_once '../includes/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +17,10 @@ showvar();
 
 <body>
     <?php include '../includes/header.php'; ?>
-
+    <?php include '../includes/sidebar.php'; ?>
     <main class="flex-1 p-8">
         <section class="mt-8">
-            <h3 class="text-2xl font-semibold mb-6">Dashboard</h3>
+            <h3 class="text-2xl font-semibold mb-6 text-[#17876E]">Dashboard</h3>
 
             <!-- Container dos cards -->
             <div class="flex flex-col sm:flex-row gap-6">
