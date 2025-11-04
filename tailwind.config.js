@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./auth//*.php",         // páginas de login, registo, etc.
-    "./components//*.php",   // se tiveres componentes PHP separados
+   "./auth/**/*.php",
+    "./dashboard/**/*.php",
+    "./recursos/**/*.php",
+    "./reservas/**/*.php",
+    "./definicoes/**/*.php",   
     "./index.php",             // página principal
     "./assets/js//*.js",     // JS que pode gerar classes dinamicamente
   ],
