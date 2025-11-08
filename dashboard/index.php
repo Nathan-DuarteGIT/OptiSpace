@@ -23,33 +23,33 @@ include_once '../includes/functions.php';
             <h3 class="text-2xl font-semibold mb-6 text-[#17876E]">Dashboard</h3>
 
             <!-- Container dos cards -->
-            <div class="flex flex-col sm:flex-row gap-6">
+            <div class="flex flex-col sm:flex-row justify-start gap-8">
 
-            <!-- Card: Salas -->
-            <div class="bg-white w-full sm:w-1/3 px-5 py-6 h-44 rounded-2xl border border-gray-200 shadow-lg flex items-center justify-between">
-                <div class="leading-tight">
-                <h4 class="text-base font-semibold text-gray-700">Salas</h4>
-                <p id="salas" class="text-4xl font-black text-gray-900 mt-1">0</p>
+                <!-- Card: Salas -->
+                <div class="card-dashboard">
+                    <div class="leading-tight">
+                        <h4 class="text-base font-medium text-gray-700">Salas</h4>
+                        <p id="salas" class="text-xl font-black text-gray-900 mt-1">0</p>
+                    </div>
+                    <img src="../assets/images/salas.png" alt="Salas" class="w-10 h-auto ml-2">
                 </div>
-                <img src="../assets/images/salas.png" alt="Salas" class="w-10 h-auto ml-1">
-            </div>
 
                 <!-- Card: Equipamentos -->
-                <div class="bg-white w-full sm:w-1/3 px-3 py-2 rounded-xl shadow-md hover:shadow-lg transition flex justify-between items-center">
-                    <div class="leading-none">
+                <div class="card-dashboard">
+                    <div class="leading-tight">
                         <h4 class="text-base font-medium text-gray-700">Equipamentos</h4>
-                        <p id="equipamentos" class="text-xl font-bold text-gray-900 mt-0.5">0</p>
+                        <p id="equipamentos" class="text-xl font-black text-gray-900 mt-1">0</p>
                     </div>
-                    <img src="../assets/images/equipamentos.png" alt="Equipamentos" class="w-8 h-auto ml-1">
+                    <img src="../assets/images/equipamentos.png" alt="Equipamentos" class="w-10 h-auto ml-2">
                 </div>
 
                 <!-- Card: Viaturas -->
-                <div class="bg-white w-full sm:w-1/3 px-3 py-2 rounded-xl shadow-md hover:shadow-lg transition flex justify-between items-center">
-                    <div class="leading-none">
+                <div class="card-dashboard ">
+                    <div class="leading-tight">
                         <h4 class="text-base font-medium text-gray-700">Viaturas</h4>
-                        <p id="viaturas" class="text-xl font-bold text-gray-900 mt-0.5">0</p>
+                        <p id="viaturas" class="text-xl font-black text-gray-900 mt-1">0</p>
                     </div>
-                    <img src="../assets/images/viaturas.png" alt="Viaturas" class="w-8 h-auto ml-1">
+                    <img src="../assets/images/viaturas.png" alt="Viaturas" class="w-10 h-auto ml-2">
                 </div>
 
             </div>
