@@ -1,5 +1,5 @@
 <!--Admin-->
-<aside>
+<aside class="w-64 flex flex-col items-center px-4 py-6 border-r-2 border-r-[#DDDDDD]">
     <img src="../assets/images/logo_optispace.png" class="w-32 h-auto" alt="Logo da aplicação">
     <ul>
         <li><a href="../dashboard/index.php" class="<?php echo isActive('/dashboard/'); ?>"><i class="fa-solid fa-chart-simple"></i> Dashboard</a></li>
@@ -10,7 +10,7 @@
     </ul>
 </aside>
 
-<!--User-->
+<!--User
 <aside>
     <img src="../assets/images/logo_optispace.png" class="w-32 h-auto" alt="Logo da aplicação">
     <ul>
@@ -19,3 +19,4 @@
         <li><a href="../definicoes/index.php" class="<?php echo isActive('/definicoes/'); ?>"><i class="fa-solid fa-chart-simple"></i> Definições</a></li>
     </ul>
 </aside>
+-->

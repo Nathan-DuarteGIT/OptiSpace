@@ -15,44 +15,53 @@ include_once '../includes/functions.php';
     <title>Dashboard</title>
 </head>
 
-<body class="bg-primary font-sans text-gray-900 min-h-screen flex flex-col">
-    <?php include '../includes/header.php'; ?>
+<body class="bg-primary font-sans text-gray-900 min-h-screen flex">
+    <!-- Sidebar fixa à esquerda -->
     <?php include '../includes/sidebar.php'; ?>
-    <main class="flex-1 p-8">
-        <section class="mt-8">
-            <h3 class="text-2xl font-semibold mb-6 text-[#17876E]">Dashboard</h3>
 
-            <!-- Container dos cards -->
-            <div class="flex flex-col sm:flex-row justify-start gap-8">
+    <!-- Conteúdo principal ocupa o resto -->
+    <div class="flex-1 flex flex-col">
+        <!-- Header no topo -->
+        <?php include '../includes/header.php'; ?>
 
-                <!-- Card: Salas -->
-                <div class="card-dashboard">
-                    <div class="leading-tight">
-                        <h4 class="text-base font-medium text-gray-700">Salas</h4>
-                        <p id="salas" class="text-xl font-black text-gray-900 mt-1">0</p>
+        <!-- Conteúdo principal -->
+
+        <main class="flex-1 p-8">
+            <section class="mt-8">
+                <h3 class="text-2xl font-semibold mb-6">Dashboard</h3>
+
+                <!-- Container dos cards -->
+                <div class="flex flex-col sm:flex-row justify-start gap-8">
+
+                    <!-- Card: Salas -->
+                    <div class="card-dashboard">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-medium text-gray-700">Salas</h4>
+                            <p id="salas" class="text-xl font-black text-gray-900 mt-1">0</p>
+                        </div>
+                        <img src="../assets/images/salas.png" alt="Salas" class="w-10 h-auto ml-2">
                     </div>
-                    <img src="../assets/images/salas.png" alt="Salas" class="w-10 h-auto ml-2">
-                </div>
 
-                <!-- Card: Equipamentos -->
-                <div class="card-dashboard">
-                    <div class="leading-tight">
-                        <h4 class="text-base font-medium text-gray-700">Equipamentos</h4>
-                        <p id="equipamentos" class="text-xl font-black text-gray-900 mt-1">0</p>
+                    <!-- Card: Equipamentos -->
+                    <div class="card-dashboard">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-medium text-gray-700">Equipamentos</h4>
+                            <p id="equipamentos" class="text-xl font-black text-gray-900 mt-1">0</p>
+                        </div>
+                        <img src="../assets/images/equipamentos.png" alt="Equipamentos" class="w-10 h-auto ml-2">
                     </div>
-                    <img src="../assets/images/equipamentos.png" alt="Equipamentos" class="w-10 h-auto ml-2">
-                </div>
 
-                <!-- Card: Viaturas -->
-                <div class="card-dashboard ">
-                    <div class="leading-tight">
-                        <h4 class="text-base font-medium text-gray-700">Viaturas</h4>
-                        <p id="viaturas" class="text-xl font-black text-gray-900 mt-1">0</p>
+                    <!-- Card: Viaturas -->
+                    <div class="card-dashboard ">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-medium text-gray-700">Viaturas</h4>
+                            <p id="viaturas" class="text-xl font-black text-gray-900 mt-1">0</p>
+                        </div>
+                        <img src="../assets/images/viaturas.png" alt="Viaturas" class="w-10 h-auto ml-2">
                     </div>
-                    <img src="../assets/images/viaturas.png" alt="Viaturas" class="w-10 h-auto ml-2">
-                </div>
 
-            </div>
-        </section>
-    </main>
+                </div>
+            </section>
+        </main>
+    </div><!-- Conteúdo principal ocupa o resto -->
 </body>
