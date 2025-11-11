@@ -19,11 +19,11 @@ require_once __DIR__ . '/config/config.php';
         <nav class="flex justify-between items-center ml-8 mr-8 mt-2">
             <img class="w-32 h-auto" src="assets/images/logo_optispace.png" alt="logo_OptiSpace">
             <ul class="flex justify-between items-center">
-                <li class="ml-4 mr-4"><a href="">Inicio</a></li>
-                <li class="ml-4 mr-4"><a href="">Serviços</a></li>
-                <li class="ml-4 mr-4"><a href="">Junte-se a nós</a></li>
-                <li class="ml-4 mr-4"><a class="btn-primary" href="">Registo</a></li>
-                <li class="ml-4 mr-4"><a class="btn-primary" href="">Entrar</a></li>
+                <li class="ml-4 mr-4"><a href="#inicio">Inicio</a></li>
+                <li class="ml-4 mr-4"><a href="#servicos">Serviços</a></li>
+                <li class="ml-4 mr-4"><a href="#juntese">Junte-se a nós</a></li>
+                <li class="ml-4 mr-4"><a class="btn-primary" href="auth/registo-empresa.php">Registo</a></li>
+                <li class="ml-4 mr-4"><a class="btn-primary" href="auth/login.php">Entrar</a></li>
             </ul>
         </nav>
     </header>
