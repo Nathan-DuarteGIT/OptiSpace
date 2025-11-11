@@ -1,3 +1,9 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Location: ativacao.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 
 <html lang="pt" class="h-screen w-screen">
