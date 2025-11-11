@@ -14,8 +14,20 @@ include_once '../includes/functions.php';
     <title>Document</title>
 </head>
 
-<body>
+<body class="bg-primary font-sans text-gray-900 min-h-screen flex">
+    <!-- Sidebar fixa à esquerda -->
     <?php include '../includes/sidebar.php'; ?>
+
+    <!-- Conteúdo principal ocupa o resto -->
+    <div class="flex-1 flex flex-col">
+        <!-- Header no topo -->
+        <?php include '../includes/header.php'; ?>
+
+        <!-- Conteúdo principal -->
+
+        <main class="flex-1 p-8">
+        </main>
+    </div>
 </body>
 
 </html>

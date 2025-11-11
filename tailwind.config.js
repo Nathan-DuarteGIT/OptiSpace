@@ -1,13 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-   "./auth/**/*.php",
+    "./auth/**/*.php",
     "./dashboard/**/*.php",
     "./recursos/**/*.php",
     "./reservas/**/*.php",
-    "./definicoes/**/*.php",   
-    "./index.php",             // página principal
-    "./assets/js//*.js",     // JS que pode gerar classes dinamicamente
+    "./definicoes/**/*.php",
+    "./includes/**/*.php",        // ⭐ ADICIONAR ESTA LINHA
+    "./utilizadores/**/*.php",    // ⭐ TAMBÉM FALTAVA ESTA
+    "./index.php",
+    "./assets/js/**/*.js",        // ⭐ CORRIGIR: tinha // em vez de /**
   ],
   theme: {
     extend: {
@@ -27,5 +29,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [],
 }
