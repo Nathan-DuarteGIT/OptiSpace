@@ -54,7 +54,7 @@ include_once '../includes/functions.php';
                             ?>
                         </datalist>
 
-                        <!-- Horários (lado a lado em telas ≥640px) -->
+                        <!-- Horários  -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Hora de início</label>
@@ -77,7 +77,7 @@ include_once '../includes/functions.php';
                             </div>
                         </div>
 
-                        <!-- Tipo de Recurso (principal) -->
+                        <!-- Tipo de Recurso -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de recurso</label>
                             <div class="relative">
@@ -94,7 +94,7 @@ include_once '../includes/functions.php';
                             </div>
                         </div>
 
-                        <!-- === Campos condicionais para SALA === -->
+                        <!-- Campos condicionais para SALA -->
                         <div id="campos-sala" class="hidden space-y-6">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Nº de participantes</label>
@@ -117,7 +117,7 @@ include_once '../includes/functions.php';
                             </div>
                         </div>
 
-                        <!-- === Campos condicionais para VIATURA === -->
+                        <!-- Campos condicionais para VIATURA -->
                         <div id="campos-viatura" class="hidden">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Viatura</label>
                             <div class="space-y-3">
@@ -127,7 +127,7 @@ include_once '../includes/functions.php';
                             </div>
                         </div>
 
-                        <!-- === Campos condicionais para EQUIPAMENTO === -->
+                        <!-- Campos condicionais para EQUIPAMENTO -->
                         <div id="campos-equipamento" class="hidden">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Equipamento</label>
                             <div class="space-y-3">
@@ -137,7 +137,6 @@ include_once '../includes/functions.php';
                             </div>
                         </div>
 
-                        <!-- Botão final -->
                         <div class="pt-6">
                             <button type="submit"
                                 class="w-full bg-primary-dark_green hover:bg-primary-600 text-white font-medium py-4 rounded-xl transition duration-200 shadow-lg hover:shadow-xl">
@@ -160,12 +159,10 @@ include_once '../includes/functions.php';
     const camposEquipamento = document.getElementById('campos-equipamento');
 
     function atualizarCampos() {
-        // Esconde todos
         camposSala.classList.add('hidden');
         camposViatura.classList.add('hidden');
         camposEquipamento.classList.add('hidden');
 
-        // Mostra o selecionado
         if (tipoRecurso.value === 'sala') {
             camposSala.classList.remove('hidden');
         } else if (tipoRecurso.value === 'viatura') {
@@ -175,7 +172,6 @@ include_once '../includes/functions.php';
         }
     }
 
-    // Executa ao carregar e ao mudar
     tipoRecurso.addEventListener('change', atualizarCampos);
     document.addEventListener('DOMContentLoaded', atualizarCampos);
 </script>
