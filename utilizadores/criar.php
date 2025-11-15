@@ -65,6 +65,7 @@ include_once '../includes/functions.php';
                         </div>
                     </form>
                 </div>
+            </div>
         </main>
     </div>
 </body>
