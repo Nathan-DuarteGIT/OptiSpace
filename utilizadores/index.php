@@ -66,8 +66,8 @@ include_once '../includes/functions.php';
                                             <i class="fa-solid fa-user text-indigo-600 text-sm"></i>
                                         </div>
                                         <div>
-                                            <div class="font-medium text-gray-900 text-sm">Justin Septimus</div>
-                                            <div class="text-gray-500 text-xs">example@email.com</div>
+                                            <div class="font-medium text-gray-900 text-sm">Sonia Almeida</div>
+                                            <div class="text-gray-500 text-xs">sonia.almeida@optispace.pt</div>
                                         </div>
                                     </div>
                                 </td>
@@ -87,12 +87,12 @@ include_once '../includes/functions.php';
                                             <i class="fa-solid fa-user text-indigo-600 text-sm"></i>
                                         </div>
                                         <div>
-                                            <div class="font-medium text-gray-900 text-sm">Anika Rhiel Madsen</div>
-                                            <div class="text-gray-500 text-xs">example@email.com</div>
+                                            <div class="font-medium text-gray-900 text-sm">Nathan Duarte</div>
+                                            <div class="text-gray-500 text-xs">nathan.duarte@optispace.pt</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="pl-0 pr-6 py-4">
                                     <span class="inline-flex items-center gap-1 text-sm">
                                         <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
                                         <span class="text-indigo-600 font-medium">Active</span>
@@ -108,12 +108,12 @@ include_once '../includes/functions.php';
                                             <i class="fa-solid fa-user text-indigo-600 text-sm"></i>
                                         </div>
                                         <div>
-                                            <div class="font-medium text-gray-900 text-sm">Miracle Vaccaro</div>
-                                            <div class="text-gray-500 text-xs">example@email.com</div>
+                                            <div class="font-medium text-gray-900 text-sm">Andrea Rego</div>
+                                            <div class="text-gray-500 text-xs">andrea.regoa@optispace.pt</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="pl-0 pr-6 py-4">
                                     <span class="inline-flex items-center gap-1 text-sm">
                                         <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
                                         <span class="text-indigo-600 font-medium">Active</span>
@@ -129,12 +129,12 @@ include_once '../includes/functions.php';
                                             <i class="fa-solid fa-user text-indigo-600 text-sm"></i>
                                         </div>
                                         <div>
-                                            <div class="font-medium text-gray-900 text-sm">Erin Levin</div>
-                                            <div class="text-gray-500 text-xs">example@email.com</div>
+                                            <div class="font-medium text-gray-900 text-sm">Jorge Oliveira</div>
+                                            <div class="text-gray-500 text-xs">jorge.oliveira@optispace.pt</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="pl-0 pr-6 py-4">
                                     <span class="inline-flex items-center gap-1 text-sm">
                                         <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
                                         <span class="text-indigo-600 font-medium">Active</span>
@@ -142,7 +142,7 @@ include_once '../includes/functions.php';
                                 </td>
                             </tr>
 
-                            <!-- Utilizador 5 - Inactive -->
+                            <!-- Utilizador 5 -->
                             <tr class="hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
@@ -151,19 +151,19 @@ include_once '../includes/functions.php';
                                         </div>
                                         <div>
                                             <div class="font-medium text-gray-900 text-sm">Mira Herwitz</div>
-                                            <div class="text-gray-500 text-xs">example@email.com</div>
+                                            <div class="text-gray-500 text-xs">mira.herwitz@optispace.pt</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="pl-0 pr-6 py-4">
                                     <span class="inline-flex items-center gap-1 text-sm">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-                                        <span class="text-gray-600 font-medium">Inactive</span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
+                                        <span class="text-indigo-600 font-medium">Active</span>
                                     </span>
                                 </td>
                             </tr>
 
-                            <!-- Utilizador 6 - Inactive -->
+                            <!-- Utilizador 6 -->
                             <tr class="hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
@@ -171,12 +171,12 @@ include_once '../includes/functions.php';
                                             <i class="fa-solid fa-user text-indigo-600 text-sm"></i>
                                         </div>
                                         <div>
-                                            <div class="font-medium text-gray-900 text-sm">Jaxson Siphron</div>
-                                            <div class="text-gray-500 text-xs">example@email.com</div>
+                                            <div class="font-medium text-gray-900 text-sm">Ines Gomes</div>
+                                            <div class="text-gray-500 text-xs">ines.gomes@optispace.pt</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="pl-0 pr-6 py-4">
                                     <span class="inline-flex items-center gap-1 text-sm">
                                         <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
                                         <span class="text-gray-600 font-medium">Inactive</span>
@@ -192,15 +192,15 @@ include_once '../includes/functions.php';
                                             <i class="fa-solid fa-user text-indigo-600 text-sm"></i>
                                         </div>
                                         <div>
-                                            <div class="font-medium text-gray-900 text-sm">Mira Levin</div>
-                                            <div class="text-gray-500 text-xs">example@email.com</div>
+                                            <div class="font-medium text-gray-900 text-sm">João Marques</div>
+                                            <div class="text-gray-500 text-xs">joao.marques@optispace.pt</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="pl-0 pr-6 py-4">
                                     <span class="inline-flex items-center gap-1 text-sm">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-                                        <span class="text-indigo-600 font-medium">Active</span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                                        <span class="text-gray-600 font-medium">Inactive</span>
                                     </span>
                                 </td>
                             </tr>
