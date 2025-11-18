@@ -25,7 +25,9 @@ Desenvolvido como projeto académico para a disciplina *Projeto de Tecnologias e
 2. Configure um servidor local com PHP e MySQL (ex.: XAMPP).
 3. Importe a base de dados via phpMyAdmin (ficheiro SQL disponível em `/database`).
 4. Copie os ficheiros para o diretório do servidor (ex.: `htdocs`).
-5. Aceda à aplicação através de `http://localhost/optispace`.
+5. Instale as dependencias de node.js: npm install
+6. Crie o ficheiro de output.css através do comando: npm run watch
+7. Aceda à aplicação através de `http://localhost/optispace`.
 
 ## Licença
 Este projeto é exclusivamente para fins académicos e não possui licença de distribuição comercial.
