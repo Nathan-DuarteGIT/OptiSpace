@@ -1,0 +1,29 @@
+<?php
+    require_once "./config/database.php";
+    require_once "./config/config.php";
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $password = $_POST['password'];
+
+        $db = new Database();
+        $conn = $db->getConnection();
+
+        // Preparar e executar a consulta
+        $stmt = $conn->prepare("SELECT id, password FROM utilizadores WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password'])) {
+            // Credenciais válidas, iniciar sessão
+            $_SESSION['user_id'] = $user['id'];
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            // Credenciais inválidas
+            $error_message = "Email ou palavra-passe inválidos.";
+        }
+        $db->closeConnection();
+    }
+?>
