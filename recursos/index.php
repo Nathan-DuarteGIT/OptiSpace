@@ -29,8 +29,8 @@ include_once '../includes/functions.php';
                     <h3 class="text-2xl font-semibold">Gestão de Recursos</h3>
 
                     <!-- Botão verde para adicionar -->
-                    <a href="criar.php" 
-                    class="bg-primary-dark hover:bg-primary-dark text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl font-light shadow-lg transition-colors">+</a>
+                    <a href="criar.php"
+                        class="bg-primary-dark hover:bg-primary-dark text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl font-light shadow-lg transition-colors">+</a>
                 </div>
 
                 <!-- Abas de filtro -->
@@ -38,10 +38,10 @@ include_once '../includes/functions.php';
                     <button class="px-6 py-2 rounded-full border border-primary-dark bg-primary-dark text-white text-sm font-normal cursor-pointer transition-all tab-btn" data-filter="salas">
                         Salas
                     </button>
-                    <button class="px-6 py-2 rounded-full border border-primary-dark transparent text-primary-dark text-sm font-normal cursor-pointer transition-all tab-btn" data-filter="equipamentos">
+                    <button class="px-6 py-2 rounded-full border border-primary-dark text-primary-dark text-sm font-normal cursor-pointer transition-all tab-btn" data-filter="equipamentos">
                         Equipamentos
                     </button>
-                    <button class="px-6 py-2 rounded-full border border-primary-dark transparent text-primary-dark text-sm font-normal cursor-pointer transition-all tab-btn" data-filter="viaturas">
+                    <button class="px-6 py-2 rounded-full border border-primary-dark text-primary-dark text-sm font-normal cursor-pointer transition-all tab-btn" data-filter="viaturas">
                         Viaturas
                     </button>
                 </div>
@@ -75,39 +75,45 @@ include_once '../includes/functions.php';
 
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
                     <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-black-800 mb-1">MackBook Air</h4>
+                        <div class="leading-tight flex flex-col items-center">
+                            <h4 class="text-base font-semibold text-gray-800 mb-3">MacBook Air</h4>
+                            <img src="../assets/images/mackbook_air.png" alt="MacBook Air" class="w-20 h-20 object-contain">
                         </div>
                     </div>
 
                     <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-gray-800 mb-1">iPad</h4>
+                        <div class="leading-tight flex flex-col items-center">
+                            <h4 class="text-base font-semibold text-gray-800 mb-3">iPad</h4>
+                            <img src="../assets/images/iPad.png" alt="iPad" class="w-20 h-20 object-contain">
                         </div>
                     </div>
 
                     <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-gray-800 mb-1">Canon Eos R5</h4>
+                        <div class="leading-tight flex flex-col items-center">
+                            <h4 class="text-base font-semibold text-gray-800 mb-3">Canon Eos R5</h4>
+                            <img src="../assets/images/canon_eos.png" alt="Canon Eos R5" class="w-20 h-20 object-contain">
                         </div>
                     </div>
 
                     <!-- Cards de Viaturas (inicialmente ocultos) -->
                     <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-gray-800 mb-1">BMW Série 5</h4>
+                        <div class="leading-tight flex flex-col items-center">
+                            <h4 class="text-base font-semibold text-gray-800 mb-3">BMW Série 5</h4>
+                            <img src="../assets/images/carro.png" alt="BMW Série 5" class="w-20 h-20 object-contain">
                         </div>
                     </div>
 
                     <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-gray-800 mb-1">Peugeot e-208</h4>
+                        <div class="leading-tight flex flex-col items-center">
+                            <h4 class="text-base font-semibold text-gray-800 mb-3">Peugeot e-208</h4>
+                            <img src="../assets/images/carro.png" alt="Peugeot e-208" class="w-20 h-20 object-contain">
                         </div>
                     </div>
 
                     <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <div class="leading-tight">
+                        <div class="leading-tight flex flex-col items-center">
                             <h4 class="text-base font-semibold text-gray-800 mb-1">Renault Kangoo Van</h4>
+                            <img src="../assets/images/van.png" alt="Renault Kangoo Van" class="w-20 h-20 object-contain">
                         </div>
                     </div>
 
@@ -129,11 +135,11 @@ include_once '../includes/functions.php';
 
                         // Atualizar aba ativa
                         tabButtons.forEach(btn => {
-                            btn.classList.remove('primary-dark', 'text-white');
-                            btn.classList.add('white', 'text-primary-dark');
+                            btn.classList.remove('bg-primary-dark', 'text-white');
+                            btn.classList.add('bg-transparent', 'text-primary-dark');
                         });
-                        this.classList.remove('white', 'text-primary-dark');
-                        this.classList.add('primary-dark', 'text-white');
+                        this.classList.remove('bg-transparent', 'text-primary-dark');
+                        this.classList.add('bg-primary-dark', 'text-white');
 
                         // Filtrar cards
                         cards.forEach(card => {
