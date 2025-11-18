@@ -24,10 +24,10 @@ include_once '../includes/functions.php';
         <?php include '../includes/header.php'; ?>
         <!-- Conteúdo principal -->
         <main class="flex-1 p-8">
-            <h3 class="text-2xl font-semibold mb-6 text-black">Ajuda</h3>
+            <h3 class="text-3xl font-semibold mb-6 text-black">Ajuda</h3>
 
             <div class="max-w-4xl mx-auto">
-                <h4 class="text-3xl font-semibold mb-2 text-gray-900">Ajuda e Suporte - Optispace</h4>
+                <h4 class="text-2xl font-semibold mb-2 text-gray-900">Ajuda e Suporte - Optispace</h4>
                 <p class="text-lg text-gray-600 mb-8">Guia rápido para gerir os seus recursos de forma eficiente.</p>
 
                 <section class="mb-8">
