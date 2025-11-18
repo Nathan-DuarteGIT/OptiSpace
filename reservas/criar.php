@@ -25,10 +25,10 @@ include_once '../includes/functions.php';
 
         <!-- Conteúdo principal -->
         <main class="flex-1 p-8">
-            <div class="w-full max-w-2xl">
+            <div class="w-full max-w-md">
                 <h3 class="text-2xl font-semibold mb-6 text-black">Nova reserva</h3>
                 <!-- Card do formulário -->
-                <div class="bg-white rounded-2xl shadow-md border border-gray-200 px-8 py-10">
+                <div class="rounded-2xl px-8 py-10">
 
                     <form action="" method="post" class="space-y-8">
 
