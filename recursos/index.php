@@ -24,9 +24,126 @@ include_once '../includes/functions.php';
         <?php include '../includes/header.php'; ?>
         <!-- Conteúdo principal -->
         <main class="flex-1 p-8">
-            
-        </main>
-    </div>
-</body>
+            <section class="mt-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-semibold">Gestão de Recursos</h3>
 
-</html>
+                    <!-- Botão verde para adicionar -->
+                    <a href="criar.php" 
+                    class="bg-primary-dark hover:bg-primary-dark text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl font-light shadow-lg transition-colors">+</a>
+                </div>
+
+                <!-- Abas de filtro -->
+                <div class="flex gap-3 mb-6">
+                    <button class="px-6 py-2 rounded-full border border-primary-dark bg-primary-dark text-white text-sm font-normal cursor-pointer transition-all tab-btn" data-filter="salas">
+                        Salas
+                    </button>
+                    <button class="px-6 py-2 rounded-full border border-primary-dark transparent text-primary-dark text-sm font-normal cursor-pointer transition-all tab-btn" data-filter="equipamentos">
+                        Equipamentos
+                    </button>
+                    <button class="px-6 py-2 rounded-full border border-primary-dark transparent text-primary-dark text-sm font-normal cursor-pointer transition-all tab-btn" data-filter="viaturas">
+                        Viaturas
+                    </button>
+                </div>
+
+                <!-- Container dos cards -->
+                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8">
+                    <!-- Cards de Salas -->
+                    <div class="card-dashboard card-item" data-category="salas">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 1</h4>
+                            <p class="text-base font-semibold text-black-600 mb-2">12 lugares</p>
+                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
+                        </div>
+                    </div>
+
+                    <div class="card-dashboard card-item" data-category="salas">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 2</h4>
+                            <p class="text-base font-semibold text-black-600 mb-2">10 lugares</p>
+                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
+                        </div>
+                    </div>
+
+                    <div class="card-dashboard card-item" data-category="salas">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 3</h4>
+                            <p class="text-base font-semibold text-black-600 mb-2">6 lugares</p>
+                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
+                        </div>
+                    </div>
+
+                    <!-- Cards de Equipamentos (inicialmente ocultos) -->
+                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-black-800 mb-1">MackBook Air</h4>
+                        </div>
+                    </div>
+
+                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-gray-800 mb-1">iPad</h4>
+                        </div>
+                    </div>
+
+                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-gray-800 mb-1">Canon Eos R5</h4>
+                        </div>
+                    </div>
+
+                    <!-- Cards de Viaturas (inicialmente ocultos) -->
+                    <div class="card-dashboard card-item hidden" data-category="viaturas">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-gray-800 mb-1">BMW Série 5</h4>
+                        </div>
+                    </div>
+
+                    <div class="card-dashboard card-item hidden" data-category="viaturas">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-gray-800 mb-1">Peugeot e-208</h4>
+                        </div>
+                    </div>
+
+                    <div class="card-dashboard card-item hidden" data-category="viaturas">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-gray-800 mb-1">Renault Kangoo Van</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+
+
+        <script>
+            // Script para filtrar os cards
+            document.addEventListener('DOMContentLoaded', function() {
+                const tabButtons = document.querySelectorAll('.tab-btn');
+                const cards = document.querySelectorAll('.card-item');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const filter = this.getAttribute('data-filter');
+
+                        // Atualizar aba ativa
+                        tabButtons.forEach(btn => {
+                            btn.classList.remove('primary-dark', 'text-white');
+                            btn.classList.add('white', 'text-primary-dark');
+                        });
+                        this.classList.remove('white', 'text-primary-dark');
+                        this.classList.add('primary-dark', 'text-white');
+
+                        // Filtrar cards
+                        cards.forEach(card => {
+                            if (card.getAttribute('data-category') === filter) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
