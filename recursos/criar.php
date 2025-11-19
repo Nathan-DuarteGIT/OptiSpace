@@ -22,12 +22,140 @@ include_once '../includes/functions.php';
     <div class="flex-1 flex flex-col">
         <!-- Header no topo -->
         <?php include '../includes/header.php'; ?>
-
         <!-- Conteúdo principal -->
-
         <main class="flex-1 p-8">
-        </main>
-    </div>
-</body>
+            <div class="w-full max-w-md">
+                <h3 class="text-2xl font-semibold mb-6 text-black">Novo Recurso</h3>
+                <form action="" method="post" class="space-y-6">
+                    <!-- Card do formulário -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nome do recurso</label>
+                        <input type="text" name="name" placeholder="Nome do recurso" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                    </div>
 
-</html>
+                    <!-- Tipo de Recurso -->
+                    <div>
+                        <div class="relative">
+                            <select name="tipo_recurso" id="tipo_recurso" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                                <option value="" disabled selected>Recurso</option>
+                                <option value="sala">Sala</option>
+                                <option value="viatura">Viatura</option>
+                                <option value="equipamento">Equipamento</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campos condicionais para SALA -->
+                    <div id="campos-sala" class="hidden space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Capacidade máxima</label>
+                            <input type="number" name="capacidade" min="1" placeholder="Digite o número de participantes" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Equipamentos (opcional)</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" name="equipamentos_sala[]" value="computador" class="mr-3 w-4 h-4 text-indigo-600 rounded focus:ring-2 focus:ring-indigo-500">
+                                    <span>Computador</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" name="equipamentos_sala[]" value="projetor" class="mr-3 w-4 h-4 text-indigo-600 rounded focus:ring-2 focus:ring-indigo-500">
+                                    <span>Projetor</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" name="equipamentos_sala[]" value="videoconferencia" class="mr-3 w-4 h-4 text-indigo-600 rounded focus:ring-2 focus:ring-indigo-500">
+                                    <span>Videoconferência</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Outro equipamento (opcional)</label>
+                            <input type="text" name="outro_equipamento" placeholder="Especifique outro equipamento"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        </div>
+                    </div>
+
+                    <!-- Campos condicionais para VIATURA -->
+                    <div id="campos-viatura" class="hidden space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Marca *</label>
+                            <input type="text" name="marca" placeholder="Ex: BMW, Peugeot, Renault..." required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Modelo *</label>
+                            <input type="text" name="modelo" placeholder="Ex: 320i, 208, Clio..." required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Matrícula *</label>
+                            <input type="text" name="matricula" placeholder="Ex: AA-00-BB" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        </div>
+                    </div>
+
+                    <!-- Campos condicionais para EQUIPAMENTO -->
+                    <div id="campos-equipamento" class="hidden">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome do equipamento *</label>
+                            <input type="text" name="nome_equipamento" placeholder="Ex: MacBook Air, iPad, Canon EOS R5..." required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        </div>
+                    </div>
+
+                    <!-- Criar recurso -->
+                    <div class="pt-6">
+                        <button type="submit" class="w-full bg-primary-dark_green hover:bg-primary-600 text-white font-medium py-4 rounded-xl transition duration-200 shadow-lg hover:shadow-xl">
+                            Criar Recurso
+                        </button>
+                    </div>
+                </form>
+            </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tipoRecurso = document.getElementById('tipo_recurso');
+            const camposSala = document.getElementById('campos-sala');
+            const camposViatura = document.getElementById('campos-viatura');
+            const camposEquipamento = document.getElementById('campos-equipamento');
+
+            tipoRecurso.addEventListener('change', function() {
+                // Esconder todos os campos
+                camposSala.classList.add('hidden');
+                camposViatura.classList.add('hidden');
+                camposEquipamento.classList.add('hidden');
+
+                // Remover required dos campos escondidos
+                document.querySelectorAll('#campos-sala input, #campos-viatura input, #campos-equipamento input').forEach(input => {
+                    input.removeAttribute('required');
+                });
+
+                // Mostrar campos correspondentes 
+                if (this.value === 'sala') {
+                    camposSala.classList.remove('hidden');
+                    document.querySelector('input[name="capacidade"]').setAttribute('required', 'required');
+                } else if (this.value === 'viatura') {
+                    camposViatura.classList.remove('hidden');
+                    document.querySelector('input[name="marca"]').setAttribute('required', 'required');
+                    document.querySelector('input[name="modelo"]').setAttribute('required', 'required');
+                    document.querySelector('input[name="matricula"]').setAttribute('required', 'required');
+                } else if (this.value === 'equipamento') {
+                    camposEquipamento.classList.remove('hidden');
+                    document.querySelector('input[name="nome_equipamento"]').setAttribute('required', 'required');
+                }
+            });
+        });
+    </script>
