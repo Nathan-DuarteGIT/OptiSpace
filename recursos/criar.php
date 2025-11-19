@@ -143,7 +143,7 @@ include_once '../includes/functions.php';
                     input.removeAttribute('required');
                 });
 
-                // Mostrar campos correspondentes e adicionar required
+                // Mostrar campos correspondentes 
                 if (this.value === 'sala') {
                     camposSala.classList.remove('hidden');
                     document.querySelector('input[name="capacidade"]').setAttribute('required', 'required');
