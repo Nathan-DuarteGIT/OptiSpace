@@ -4,11 +4,11 @@
  */
 
 class Database {
-    private $host = "localhost";
-    private $db_name = "optispace";
-    private $username = "root";
-    private $password = "";
-    private $charset = "utf8mb4";
+    private $host = 'localhost';
+    private $db_name = 'u506280443_andnatDB';
+    private $username = 'u506280443_andnatdbUser';
+    private $password = 'c9$X~DMlY';
+    private $charset = 'utf8mb4';
     private $conn = null;
 
     /**
