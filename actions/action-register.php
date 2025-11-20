@@ -29,7 +29,7 @@
                     $stmt->bindParam(':email', $email);
                     $stmt->execute();
                     $codigo_ativacao = $stmt->fetch(PDO::FETCH_ASSOC);
-                    
+                    //continuar apartir daqui
                 } else {
                     // Erro no registo do utilizador
                     $error_message = "Erro ao registar o utilizador administrador.";
