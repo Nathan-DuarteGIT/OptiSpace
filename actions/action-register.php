@@ -1,6 +1,6 @@
 <?php
-    require_once "./config/database.php";
-    require_once "./config/config.php";
+    require_once "../config/database.php";
+    require_once "../config/config.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(isset($_POST['name_admin'], $_POST['name_empresa'], $_POST['email'], $_POST['password'])) {
