@@ -31,6 +31,7 @@
                     $stmt->execute();
                     $codigo_ativacao = $stmt->fetch(PDO::FETCH_ASSOC);
                     enviarCodigoAtivacao($email, $codigo_ativacao['codigo_ativacao']);
+                    $_SESSION['email_user'] = $email;
                     header("Location: " . BASE_URL . "auth/ativacao.php");
                 } else {
                     // Erro no registo do utilizador
