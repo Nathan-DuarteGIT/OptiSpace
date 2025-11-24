@@ -14,7 +14,7 @@
             $conn = $db->getConnection();
 
             // Preparar e executar a inserção
-            $stmt = $conn->prepare("INSERT INTO empresas (nome) VALUES (:name_empresa)");
+            $stmt = $conn->prepare("INSERT INTO empresa (nome) VALUES (:name_empresa)");
             $stmt->bindParam(':name_empresa', $name_empresa);
 
             if ($stmt->execute()) {
