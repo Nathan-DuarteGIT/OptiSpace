@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $stmt = $conn->prepare('UPDATE utilizadores SET status_utilizador = "ativo" WHERE email = :email');
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        echo "Linhas afetadas: " . $stmt->rowCount() . PHP_EOL;
+        $_SESSION['linhas'] = $stmt->rowCount();
         if($stmt->rowCount() > 0) {
             // Ativação bem-sucedida
             unset($_SESSION['email_user']);
