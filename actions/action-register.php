@@ -33,6 +33,7 @@
                     enviarCodigoAtivacao($email, $codigo_ativacao['codigo_ativacao']);
                     $_SESSION['email_user'] = $email;
                     header("Location: " . BASE_URL . "auth/ativacao.php");
+                    exit();
                 } else {
                     // Erro no registo do utilizador
                     $error_message = "Erro ao registar o utilizador administrador.";

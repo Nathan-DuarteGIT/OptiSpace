@@ -17,7 +17,7 @@ define('ALLOWED_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif']);
 date_default_timezone_set('Europe/Lisbon');
 
 // URL base do projeto
-define('BASE_URL', 'https://andnat.antrob.eu');
+define('BASE_URL', 'https://andnat.antrob.eu/');
 define('SITE_NAME', 'OptiSpace');
 
 // Email (para ativação de contas)
