@@ -43,17 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="flex justify-center gap-6 mb-6">
                 <input type="text" name="digit1" maxlength="1"
-                    class="input-activation" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
                 <input type="text" name="digit2" maxlength="1"
-                    class="input-activation" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
                 <input type="text" name="digit3" maxlength="1"
-                    class="input-activation" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
                 <input type="text" name="digit4" maxlength="1"
-                    class="input-activation" required>
-                <input type="text" name="digit4" maxlength="1"
-                    class="input-activation" required>
-                <input type="text" name="digit4" maxlength="1"
-                    class="input-activation" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
+                <input type="text" name="digit5" maxlength="1"
+                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
+                <input type="text" name="digit6" maxlength="1"
+                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
             </div>
 
             <button type="submit"

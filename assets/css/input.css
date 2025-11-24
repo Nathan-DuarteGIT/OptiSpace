@@ -33,7 +33,7 @@
     }
 
     .input-activation {
-        @apply w-24 h-24 md:w-8 md:h-8 text-center border border-gray-300 rounded-xl text-2xl font-semibold bg-gray-200 shadow-inner-deep focus:ring-2 focus:ring-primary-dark focus:border-transparent transition;
+        @apply text-center border border-gray-300 rounded-xl text-2xl font-semibold bg-gray-200 shadow-inner-deep focus:ring-2 focus:ring-primary-dark focus:border-transparent transition;
     }
 
     /* Cards */
