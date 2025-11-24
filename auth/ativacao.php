@@ -41,12 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Ative a sua conta</h2>
             </div>
 
-            <div class="flex justify-center gap-4 mb-6">
+            <div class="flex justify-center gap-6 mb-6">
                 <input type="text" name="digit1" maxlength="1"
                     class="input-activation" required>
                 <input type="text" name="digit2" maxlength="1"
                     class="input-activation" required>
                 <input type="text" name="digit3" maxlength="1"
+                    class="input-activation" required>
+                <input type="text" name="digit4" maxlength="1"
+                    class="input-activation" required>
+                <input type="text" name="digit4" maxlength="1"
                     class="input-activation" required>
                 <input type="text" name="digit4" maxlength="1"
                     class="input-activation" required>
