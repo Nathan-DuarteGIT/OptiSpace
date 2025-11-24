@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $stmt->execute();
     $codigo_user = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($codigo == $codigo_user['codigo_ativacao']) {
-        // Código válido, ativar conta
+        var_dump($email);
         $stmt = $conn->prepare('UPDATE utilizadores SET status_utilizador = "ativo" WHERE email = :email');
         $stmt->bindParam(':email', $email);
         $stmt->execute();
