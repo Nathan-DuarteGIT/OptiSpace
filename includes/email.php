@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -13,7 +13,8 @@ $mail->Password   = '&t1Q6=njx]BK';
 $mail->SMTPSecure = 'tls';
 $mail->Port       = 587;
 
-function enviarCodigoAtivacao($destinatario, $codigo_ativacao) {
+function enviarCodigoAtivacao($destinatario, $codigo_ativacao)
+{
     global $mail;
 
     try {
@@ -23,15 +24,13 @@ function enviarCodigoAtivacao($destinatario, $codigo_ativacao) {
         $mail->Subject = 'Código de Ativação';
         $mail->Body    = 'Seu código de ativação é: ' . $codigo_ativacao;
 
-        if($mail->send()) {
+        if ($mail->send()) {
             return true;
         } else {
             return false;
         }
-
     } catch (Exception $e) {
         echo "Erro ao enviar email: {$mail->ErrorInfo}";
         return false;
     }
 }
-?>
