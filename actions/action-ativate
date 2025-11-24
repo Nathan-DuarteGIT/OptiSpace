@@ -2,46 +2,90 @@
 require_once "../config/database.php";
 require_once "../config/config.php";
 
+// Função para escrever no log
+function debug_log($message) {
+    $log_file = __DIR__ . '/../debug.txt';
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($log_file, "[$timestamp] $message\n", FILE_APPEND);
+}
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_SESSION['email_user']) && isset($_POST['digit1'], $_POST['digit2'], $_POST['digit3'], $_POST['digit4'], $_POST['digit5'], $_POST['digit6'])) {
-    $db = new Database();
-    $conn = $db->getConnection();
-    $codigo = $_POST['digit1'] . $_POST['digit2'] . $_POST['digit3'] . $_POST['digit4'] . $_POST['digit5'] . $_POST['digit6'];
-    $email = $_SESSION['email_user'];
-    // Preparar e executar a consulta
-    $stmt = $conn->prepare("SELECT codigo_ativacao FROM utilizadores WHERE email = :email");
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-    $codigo_user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($codigo == $codigo_user['codigo_ativacao']) {
-        var_dump($email);
-        $stmt = $conn->prepare('UPDATE utilizadores SET status_utilizador = "ativo" WHERE email = :email');
+        $db = new Database();
+        $conn = $db->getConnection();
+        $codigo = $_POST['digit1'] . $_POST['digit2'] . $_POST['digit3'] . $_POST['digit4'] . $_POST['digit5'] . $_POST['digit6'];
+        $email = $_SESSION['email_user'];
+        
+        debug_log("=== INÍCIO DA ATIVAÇÃO ===");
+        debug_log("Email: " . $email);
+        debug_log("Código digitado: " . $codigo);
+        
+        $stmt = $conn->prepare("SELECT codigo_ativacao, status_utilizador FROM utilizadores WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        $_SESSION['linhas'] = $stmt->rowCount();
-        if($stmt->rowCount() > 0) {
-            // Ativação bem-sucedida
-            unset($_SESSION['email_user']);
-            header("Location: " . BASE_URL . "auth/login.php");
+        $codigo_user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        debug_log("Código DB: " . ($codigo_user['codigo_ativacao'] ?? 'NULL'));
+        debug_log("Status atual: " . ($codigo_user['status_utilizador'] ?? 'NULL'));
+        debug_log("Usuário encontrado: " . ($codigo_user ? 'SIM' : 'NÃO'));
+        
+        if (!$codigo_user) {
+            debug_log("ERRO: Utilizador não encontrado");
+            $error_message = "Utilizador não encontrado.";
+            echo "<script>alert('{$error_message}'); window.location.href = '" . BASE_URL . "auth/ativacao.php';</script>";
             exit();
+        }
+        
+        if ($codigo == $codigo_user['codigo_ativacao']) {
+            debug_log("Código correto!");
+            
+            if ($codigo_user['status_utilizador'] === 'ativo') {
+                debug_log("Usuário já está ativo");
+                unset($_SESSION['email_user']);
+                header("Location: " . BASE_URL . "auth/login.php?msg=ja_ativo");
+                exit();
+            }
+            
+            debug_log("Executando UPDATE...");
+            $stmt = $conn->prepare('UPDATE utilizadores SET status_utilizador = :status WHERE email = :email');
+            $status = 'ativo';
+            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            
+            $linhas_afetadas = $stmt->rowCount();
+            debug_log("Linhas afetadas pelo UPDATE: " . $linhas_afetadas);
+            
+            // Verificar se realmente foi atualizado
+            $stmt = $conn->prepare("SELECT status_utilizador FROM utilizadores WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $check = $stmt->fetch(PDO::FETCH_ASSOC);
+            debug_log("Status após UPDATE: " . ($check['status_utilizador'] ?? 'NULL'));
+            
+            if ($check['status_utilizador'] === 'ativo') {
+                debug_log("SUCCESS: Conta ativada com sucesso!");
+                unset($_SESSION['email_user']);
+                header("Location: " . BASE_URL . "auth/login.php?msg=ativado");
+                exit();
+            } else {
+                debug_log("ERRO: Falha ao ativar a conta");
+                $error_message = "Erro ao ativar a conta. Por favor, tente novamente.";
+                echo "<script>alert('{$error_message}'); window.location.href = '" . BASE_URL . "auth/ativacao.php';</script>";
+                exit();
+            }
         } else {
-            // Erro na ativação
-            $error_message = "Erro ao ativar a conta.";
+            debug_log("ERRO: Código inválido");
+            $error_message = "Código de ativação inválido.";
             echo "<script>alert('{$error_message}'); window.location.href = '" . BASE_URL . "auth/ativacao.php';</script>";
             exit();
         }
     } else {
-        // Código inválido
-        $error_message = "Código de ativação inválido.";
-        echo "<script>alert('{$error_message}'); window.location.href = '" . BASE_URL . "auth/ativacao.php';</script>";
+        debug_log("ERRO: Sessão ou dados POST inválidos");
+        header("Location: " . BASE_URL . "auth/register.php");
         exit();
     }
-
-
-} else {
-    header("Location: " . BASE_URL . "auth/register.php");
-    exit();
 }
-}
+?>
 
 ?>
