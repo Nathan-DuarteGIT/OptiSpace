@@ -6,10 +6,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 $mail = new PHPMailer(true);
 
 $mail->isSMTP();
-$mail->Host       = 'smtp.gmail.com';
+$mail->Host       = 'smtp.hostinger.com';
 $mail->SMTPAuth   = true;
-$mail->Username   = 'teuemail@gmail.com';
-$mail->Password   = 'TUA_SENHA_DE_APP';
+$mail->Username   = 'andnat@antrob.eu';
+$mail->Password   = '&t1Q6=njx]BK';
 $mail->SMTPSecure = 'tls';
 $mail->Port       = 587;
 

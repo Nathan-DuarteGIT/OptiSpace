@@ -1,6 +1,7 @@
 <?php
     require_once "../config/database.php";
     require_once "../config/config.php";
+    require_once "../includes/email.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(isset($_POST['name_admin'], $_POST['name_empresa'], $_POST['email'], $_POST['password'])) {
@@ -29,7 +30,8 @@
                     $stmt->bindParam(':email', $email);
                     $stmt->execute();
                     $codigo_ativacao = $stmt->fetch(PDO::FETCH_ASSOC);
-                    //continuar apartir daqui
+                    enviarCodigoAtivacao($email, $codigo_ativacao['codigo_ativacao']);
+                    header("Location: " . BASE_URL . "auth/ativacao.php");
                 } else {
                     // Erro no registo do utilizador
                     $error_message = "Erro ao registar o utilizador administrador.";
