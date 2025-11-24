@@ -35,12 +35,14 @@
                 } else {
                     // Erro no registo do utilizador
                     $error_message = "Erro ao registar o utilizador administrador.";
+                    echo $error_message;
                 }
 
 
             } else {
                 // Erro no registo
                 $error_message = "Erro ao registar a empresa.";
+                echo $error_message;
             }
             $db->closeConnection();
         }
