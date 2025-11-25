@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         // Credenciais válidas, iniciar sessão
         $_SESSION['user_id'] = $user['id'];
-        header("Location: dashboard.php");
+        header("Location: " . BASE_URL . "dashboard/index.php");
         exit();
     } else {
         // Credenciais inválidas
