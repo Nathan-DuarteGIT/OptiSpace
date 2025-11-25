@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn = $db->getConnection();
 
     // Preparar e executar a consulta
-    $stmt = $conn->prepare("SELECT id, nome, foto_path, nivel_acesso password FROM utilizadores WHERE email = :email");
+    $stmt = $conn->prepare("SELECT id, nome, foto_path, nivel_acesso, password FROM utilizadores WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
