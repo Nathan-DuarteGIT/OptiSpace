@@ -1535,6 +1535,10 @@ body{
   text-align: center;
 }
 
+.text-right{
+  text-align: right;
+}
+
 .font-sans{
   font-family: Montserrat, system-ui, sans-serif;
 }
