@@ -65,7 +65,7 @@ function showVar($var)
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
 
                     <div class="text-right mt-2">
-                        <a href="recuperar-passe.php" class="text-sm text-primary-dark hover:underline">Recuperar palavra-passe</a>
+                        <a href="recuperar-passe.php" class="font-semibold text-sm text-primary-dark hover:underline">Recuperar palavra-passe</a>
                     </div>
                 </div>
 

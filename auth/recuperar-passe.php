@@ -41,12 +41,15 @@ function showVar($var)
 
     <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
         <form method="POST" action="../actions/action-ativate.php" class="space-y-6 text-center">
-            <div class="text-left mb-6">
+            <div class=" flex justify-between text-left mb-6">
                 <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
-                <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Recuperar palavra-passe</h2>
+                <div class="absolute top-3 md:top-6 right-3 md:right-6 text-xs md:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-2 md:px-3 py-1 rounded-md">
+                    <span>Já tem conta? </span><br>
+                    <a href="login.php" class="text-primary-dark font-semibold hover:underline">Entrar</a>
+                </div>
             </div>
-
-            <div class="flex justify-center gap-6 mb-6">
+            <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Recuperar palavra-passe</h2>
+            <div class="gap-6 mb-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Insira o seu Email</label>
                 <input type="email" name="email" required placeholder="Email"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
@@ -57,10 +60,7 @@ function showVar($var)
                 Recuperar
             </button>
 
-            <div class="absolute top-3 md:top-6 right-3 md:right-6 text-xs md:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-2 md:px-3 py-1 rounded-md">
-                <span>Já tem conta? </span><br>
-                <a href="login.php" class="text-primary-dark font-semibold hover:underline">Entrar</a>
-            </div>
+            
         </form>
     </div>
 </body>
