@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } else {
         // Credenciais inválidas
-        $error_message = "Email ou palavra-passe inválidos.";
-        echo "<script>alert('{$error_message}'); window.location.href = '../auth/login.php';</script>";
+        header("Location: " . BASE_URL . "auth/login.php?erro_credenciais=" . urlencode("Email ou palavra-passe inválidos."));
         exit();
     }
     $db->closeConnection();

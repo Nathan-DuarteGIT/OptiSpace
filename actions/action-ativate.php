@@ -15,13 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $codigo_user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$codigo_user) {
-            $error_message = "Utilizador não encontrado.";
-            echo "<script>alert('{$error_message}'); window.location.href = '" . BASE_URL . "auth/ativacao.php';</script>";
+            header("Location: " . BASE_URL . "auth/ativacao.php?erro_utilizador=" . urlencode("Utilizador não encontrado."));
             exit();
         }
 
         if ($codigo == $codigo_user['codigo_ativacao']) {
-            $log .= "Código correto!\n";
 
             if ($codigo_user['status_utilizador'] === 'ativo') {
                 unset($_SESSION['email_user']);
@@ -29,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             }
 
-            $log .= "Executando UPDATE...\n";
             $stmt = $conn->prepare('UPDATE utilizadores SET status_utilizador = :status WHERE email = :email');
             $status = 'ativo';
             $stmt->bindParam(':status', $status);
@@ -47,17 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: " . BASE_URL . "auth/login.php?msg=ativado");
                 exit();
             } else {
-                $error_message = "Erro ao ativar a conta.";
-                echo "<script>alert('{$error_message}'); window.location.href = '" . BASE_URL . "auth/ativacao.php';</script>";
+                header("Location: " . BASE_URL . "auth/ativacao.php?erro_ativarConta=" . urlencode("Erro ao ativar a conta."));
                 exit();
             }
         } else {
-            $error_message = "Código de ativação inválido.";
-            echo "<script>alert('{$error_message}'); window.location.href = '" . BASE_URL . "auth/ativacao.php';</script>";
+            header("Location: " . BASE_URL . "auth/ativacao.php?erro_codigoInvalido=" . urlencode("Código de ativação inválido."));
             exit();
         }
     } else {
-        header("Location: " . BASE_URL . "auth/register.php");
+        header("Location: " . BASE_URL . "auth/ativacao.php");
         exit();
     }
 }

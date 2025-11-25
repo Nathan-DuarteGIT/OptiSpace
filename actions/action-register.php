@@ -12,6 +12,14 @@
 
             $db = new Database();
             $conn = $db->getConnection();
+            //verificar se o email já existe
+            $stmt = $conn->prepare("SELECT id FROM utilizadores WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            if($stmt->rowCount() > 0) {
+                header("Location: " . BASE_URL . "auth/registo_empresa.php?erro_email=" . urlencode("Email já existe!"));
+                exit();
+            }
 
             // Preparar e executar a inserção
             $stmt = $conn->prepare("INSERT INTO empresa (nome) VALUES (:name_empresa)");
@@ -36,15 +44,15 @@
                     exit();
                 } else {
                     // Erro no registo do utilizador
-                    $error_message = "Erro ao registar o utilizador administrador.";
-                    echo $error_message;
+                    header("Location: " . BASE_URL . "auth/registo_empresa.php?erro_registoUtilizador=" . urlencode("Erro ao registar o utilizador!"));
+                    exit();
                 }
 
 
             } else {
                 // Erro no registo
-                $error_message = "Erro ao registar a empresa.";
-                echo $error_message;
+                header("Location: " . BASE_URL . "auth/registo_empresa.php?erro_registoEmpresa=" . urlencode("Erro ao registar a empresa."));
+                exit();
             }
             $db->closeConnection();
         }
