@@ -33,4 +33,4 @@ Thumbs.db
 .temp/
 
 # Tailwind CSS gerado
-<!-- /assets/css/output.css -->
+/assets/css/output.css
