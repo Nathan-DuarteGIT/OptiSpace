@@ -40,7 +40,7 @@ function showVar($var)
     </div>
 
     <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        <form method="POST" action="../actions/action-ativate.php" class="space-y-6">
+        <form method="POST" action="../actions/action-mudarPasse.php" class="space-y-6">
             <div class="flex justify-between text-left mb-6">
                 <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
                 <div class="absolute top-3 md:top-6 right-3 md:right-6 text-xs md:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-2 md:px-3 py-1 rounded-md">
