@@ -24,6 +24,6 @@
                 <li><a href="../definicoes/index.php" class="<?php echo isActive('/definicoes/'); ?>"><i class="fa-solid fa-gear"></i> Definições</a></li>
             </ul>
         </div>
-        <a href="../index.php"><button class="text-red-500"><i class="fa-solid fa-arrow-right-from-bracket text-red-500"></i>Sair</button></a>
+        <a href="../actions/action-logout.php"><button class="text-red-500"><i class="fa-solid fa-arrow-right-from-bracket text-red-500"></i>Sair</button></a>
     </aside>
 <?php endif; ?>
