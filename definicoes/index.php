@@ -1,6 +1,6 @@
 <?php
 include_once '../includes/functions.php';
-
+require_once "../config/config.php";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['nova_senha']) && isset($_POST['confirmar_senha'])) {
     } elseif (isset($_FILES['foto_perfil'])) {
