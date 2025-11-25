@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn = $db->getConnection();
 
     // Preparar e executar a consulta
-    $stmt = $conn->prepare("SELECT id, password FROM utilizadores WHERE email = :email");
+    $stmt = $conn->prepare("SELECT id, nome, foto_path, nivel_acesso password FROM utilizadores WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -18,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         // Credenciais válidas, iniciar sessão
         $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['nome'];
+        $_SESSION['user_photo'] = $user['foto_path'];
+        $_SESSION['nivel_acesso'] = $user['nivel_acesso'];
         header("Location: " . BASE_URL . "dashboard/index.php");
         exit();
     } else {
