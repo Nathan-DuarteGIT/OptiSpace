@@ -1,12 +1,5 @@
 <?php
 require_once "../config/config.php";
-
-function showVar($var)
-{
-    echo '<pre>';
-    print_r($var);
-    echo '</pre>';
-}
 ?>
 <!DOCTYPE html>
 
@@ -21,7 +14,6 @@ function showVar($var)
 </head>
 
 <body class="bg-primary m-0 p-0 h-screen w-screen">
-    <?php showVar($_SESSION); ?>
     <div class="flex flex-col md:flex-row h-full relative">
         <div class="left-section bg-primary-dark flex flex-col justify-between items-center flex-1 h-[40vh] md:h-screen relative order-2 md:order-1 relative z-0">
             <img src="../assets/images/logo_optispace_branca.png"
@@ -40,7 +32,7 @@ function showVar($var)
     </div>
 
     <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        <form method="POST" action="../actions/action-mudarPasse.php" class="space-y-6">
+        <form method="POST" action="../auth/mudar-passe.php" class="space-y-6">
             <div class="flex justify-between text-left mb-6">
                 <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
                 <div class="absolute top-3 md:top-6 right-3 md:right-6 text-xs md:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-2 md:px-3 py-1 rounded-md">

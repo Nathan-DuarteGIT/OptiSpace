@@ -4,12 +4,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: ../dashboard/index.php');
     exit();
 }
-function showVar($var)
-{
-    echo '<pre>';
-    print_r($var);
-    echo '</pre>';
-}
 ?>
 <!DOCTYPE html>
 
@@ -24,7 +18,6 @@ function showVar($var)
 </head>
 
 <body class="bg-primary m-0 p-0 h-screen w-screen">
-    <?php showVar($_SESSION); ?>
     <div class="flex flex-col md:flex-row h-full relative">
         <div class="left-section bg-primary-dark flex flex-col justify-between items-center flex-1 h-[40vh] md:h-screen relative order-2 md:order-1 relative z-0">
             <img src="../assets/images/logo_optispace_branca.png"
