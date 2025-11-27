@@ -4,7 +4,7 @@
     require_once "../includes/email.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['ConfrimPassword'])) {
+        if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['ConfirmPassword'])) {
             if($_POST['password'] !== $_POST['ConfirmPassword']) {
                 header("Location: " . BASE_URL . "auth/mudar-passe.php?email=" . urlencode($_POST['email']) . "&erro_mudar=" . urlencode("As palavras-passe não coincidem."));
                 exit();
