@@ -45,8 +45,8 @@ function enviarEmailRecuperacao($destinatario){
         $mail->addAddress($destinatario);
 
         $mail->Subject = 'Redefinição da Sua Palavra-passe';
-        $mail->Body    = 'Recebemos um pedido para recuperar o acesso à sua conta.\n' . 'Para continuar, clique no link abaixo e siga as instruções:\n' .
-                         BASE_URL . 'auth/mudar-passe.php?email=' . urlencode($destinatario) . '\n\n' .
+        $mail->Body    = 'Recebemos um pedido para recuperar o acesso à sua conta.<br>' . 'Para continuar, clique no link abaixo e siga as instruções:<br>' .
+                         BASE_URL . 'auth/mudar-passe.php?email=' . urlencode($destinatario) . '<br><br>' .
                          'Se você não solicitou essa alteração, por favor ignore este email.';
 
         if ($mail->send()) {
