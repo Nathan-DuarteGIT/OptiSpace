@@ -34,3 +34,29 @@ function enviarCodigoAtivacao($destinatario, $codigo_ativacao)
         return false;
     }
 }
+
+
+function enviarEmailRecuperacao($destinatario){
+
+    global $mail;
+
+    try {
+        $mail->setFrom($mail->Username, 'OptiSpace');
+        $mail->addAddress($destinatario);
+
+        $mail->Subject = 'Redefinição da Sua Palavra-passe';
+        $mail->Body    = 'Recebemos um pedido para recuperar o acesso à sua conta.\n' . 'Para continuar, clique no link abaixo e siga as instruções:\n' .
+                         BASE_URL . 'auth/mudar-passe.php?email=' . urlencode($destinatario) . '\n\n' .
+                         'Se você não solicitou essa alteração, por favor ignore este email.';
+
+        if ($mail->send()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        echo "Erro ao enviar email: {$mail->ErrorInfo}";
+        return false;
+    }
+    
+}
