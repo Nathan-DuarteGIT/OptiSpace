@@ -41,7 +41,11 @@ require_once "../config/config.php";
                 </div>
             </div>
             <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Alterar palavra-passe</h2>
-
+            <?php 
+                if(isset($_GET['email'])) {
+                    echo '<input type="hidden" name="email" value="' . htmlspecialchars($_GET['email']) . '">';
+                }
+            ?>
             <div class="space-y-6 mb-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira a nova palavra-passe</label>
