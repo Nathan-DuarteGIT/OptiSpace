@@ -16,6 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
+
+        // Verificar se a conta está ativa
+        if ($user['ativo'] == 0) {
+            header("Location: " . BASE_URL . "auth/login.php?conta_inativa=" . urlencode("A conta está inativa."));
+            exit();
+        }
+
         // Credenciais válidas, iniciar sessão
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['nome'];
