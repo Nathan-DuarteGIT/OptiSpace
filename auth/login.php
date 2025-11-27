@@ -1,10 +1,20 @@
 <?php
 require_once "../config/config.php";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: ../dashboard/index.php');
     exit();
 }
+
+if (isset($_GET['erro_credenciais'])) {
+    $erro_credenciais = htmlspecialchars($_GET['erro_credenciais']);
+    echo "<script>alert('$erro_credenciais');</script>";
+} else if (isset($_GET['conta_inativa'])) {
+    $conta_inativa = htmlspecialchars($_GET['conta_inativa']);
+    echo "<script>alert('$conta_inativa');</script>";
+}
 ?>
+
 <!DOCTYPE html>
 
 <html lang="pt" class="h-screen w-screen">
