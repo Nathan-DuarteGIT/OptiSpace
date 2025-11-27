@@ -55,7 +55,7 @@ require_once "../config/config.php";
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Confirme a nova palavra-passe</label>
-                    <input type="password" name="password" required placeholder="Confirme a nova palavra-passe"
+                    <input type="password" name="ConfirmPassword" required placeholder="Confirme a nova palavra-passe"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
             </div>
