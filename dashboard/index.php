@@ -67,7 +67,7 @@ require_once "../config/config.php";
             </main>
         </div><!-- Conteúdo principal ocupa o resto -->
     </body>
-<!--CORPO DA PAGINA UTILIZADOR-->
+<!--CORPO DA PAGINA UTILIZADOR (reformular a area do utilizador)-->
 <?php else: ?>
     <body class="bg-primary font-sans text-gray-900 min-h-screen flex">
         <!-- Sidebar fixa à esquerda -->

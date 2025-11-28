@@ -25,6 +25,7 @@ require_once "../config/config.php";
         <?php include '../includes/header.php'; ?>
         <!-- Conteúdo principal -->
         <main class="flex-1 p-8">
+            <?php showvar(buscar_empresa($_SESSION['user_id'])) ?>
             <h3 class="text-2xl font-semibold mb-6 text-black">Gestão de Utilizadores</h3>
 
             <!-- Botão criar utilizador -->

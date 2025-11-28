@@ -1,8 +1,13 @@
 <?php
-
+require_once "../config/database.php";
+require_once "../config/config.php";
 // ============================================
 // FUNÇÕES DE SEGURANÇA
 // ============================================
+
+function showvar($var) {
+    echo $var;
+}
 
 /**
  * Limpa dados de entrada (previne XSS)
@@ -62,23 +67,9 @@ function requer_login()
     }
 }
 
-/**
- * Verifica se é admin
- */
-function e_admin()
-{
-    return isset($_SESSION['nivel_acesso']) && $_SESSION['nivel_acesso'] === 'admin';
-}
 
-/**
- * Faz logout
- */
-function logout()
-{
-    session_destroy();
-    header('Location: ' . BASE_URL . 'auth/login.php');
-    exit();
-}
+
+
 
 // ============================================
 // Sidebar
@@ -134,4 +125,35 @@ function upload_imagem($file, $pasta)
     }
 
     return ['sucesso' => false, 'mensagem' => 'Erro ao guardar ficheiro'];
+}
+
+
+// ============================================
+// FUNÇÕES DATABASE 
+// ============================================
+/**
+ * BUSCAR EMPRESA PELO USER_ID
+ */
+
+function buscar_empresa($user_id){
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT empresa_id FROM utilizadores WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->execute();
+
+    $empresa_id = $stmt->fetch(PDO::FETCH_ASSOC)['empresa_id'];
+
+    $db->closeConnection();
+
+    return $empresa_id;
+}
+
+/**
+ * BUSCA POR UTILIZADORES DA EMPRESA
+ */
+
+function buscar_utilizadores($user_id){
+
 }
