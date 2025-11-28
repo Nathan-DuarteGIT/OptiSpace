@@ -160,7 +160,7 @@ function buscar_utilizadores($user_id){
     $db = new Database();
     $conn = $db->getConnection();
 
-    $stmt = $conn->prepare("SELECT id, nome, email, nivel_acesso, foto_path, status_utilizador FROM utilizadores WHERE empresa_id = :empresa_id");
+    $stmt = $conn->prepare("SELECT id, nome, email, nivel_acesso, foto_path, status_utilizador FROM utilizadores WHERE empresa_id = :empresa_id AND nivel_acesso != 'admin'");
     $stmt->bindParam(':empresa_id', $empresa_id);
     $stmt->execute();
 
