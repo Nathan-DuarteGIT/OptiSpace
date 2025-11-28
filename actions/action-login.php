@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn = $db->getConnection();
 
     // Preparar e executar a consulta
-    $stmt = $conn->prepare("SELECT id, nome, foto_path, nivel_acesso, password FROM utilizadores WHERE email = :email");
+    $stmt = $conn->prepare("SELECT id, nome, foto_path, nivel_acesso, password, status_utilizador FROM utilizadores WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password'])) {
 
         // Verificar se a conta está ativa
-        if ($user['ativo'] == 0) {
+        if ($user['status_utilizador'] == 0) {
             header("Location: " . BASE_URL . "auth/login.php?conta_inativa=" . urlencode("A conta está inativa."));
             exit();
         }
