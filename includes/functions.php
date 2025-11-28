@@ -168,20 +168,30 @@ function buscar_utilizadores($user_id){
 
     $db->closeConnection();
 
-    if($utilizadores){
-        echo <<<TABELAUM
-         <table class="w-full">
+    if ($utilizadores) {
+
+        echo <<<HTML
+        <table class="w-full">
             <thead>
-                    <tr class="border-b border-gray-100">
-                        <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-3/5">Name</th>
-                        <th class="text-left pl-0 pr-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">User Status</th>
-                    </tr>
-                </thead>
+                <tr class="border-b border-gray-100">
+                    <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-3/5">Name</th>
+                    <th class="text-left pl-0 pr-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">User Status</th>
+                </tr>
+            </thead>
             <tbody class="divide-y divide-gray-50">
-        TABELAUM;
-        foreach($utilizadores as $utilizador){
-            $foto_path = $utilizador['foto_path'] ? $utilizador['foto_path'] : "../uploads/user-default.png";
-            echo <<<USER
+        HTML;
+
+        foreach ($utilizadores as $u) {
+
+            $nome  = htmlspecialchars($u['nome']);
+            $email = htmlspecialchars($u['email']);
+            $foto  = $u['foto_path'] ?: "../uploads/user-default.png";
+
+            // COR DINÂMICA
+            $corStatus = $u['status_utilizador'] === "ativo" ? "bg-indigo-600" : "bg-gray-400";
+            $statusTxt = htmlspecialchars($u['status_utilizador']);
+
+            echo <<<ROW
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="px-6 py-4 w-3/5">
                     <div class="flex items-center gap-3">
@@ -189,25 +199,25 @@ function buscar_utilizadores($user_id){
                             <i class="fa-solid fa-user text-indigo-600 text-sm"></i>
                         </div>
                         <div>
-                            <div class="font-medium text-gray-900 text-sm"><?php echo {$utilizador['nome']} ?></div>
-                            <div class="text-gray-500 text-xs"><?php echo {$utilizador['email']} ?></div>
+                            <div class="font-medium text-gray-900 text-sm">$nome</div>
+                            <div class="text-gray-500 text-xs">$email</div>
                         </div>
                     </div>
                 </td>
+
                 <td class="pl-0 pr-6 py-4">
                     <span class="inline-flex items-center gap-1 text-sm">
-                        <span class="<?php echo ({$utilizador['status_utilizador']} === 'ativo') ? 'bg-indigo-600' : 'bg-gray-400'; ?> w-1.5 h-1.5 rounded-full"></span>
-                        <span class="text-indigo-600 font-medium"><?php echo {$utilizador['status_utilizador']} ?></span>
+                        <span class="$corStatus w-1.5 h-1.5 rounded-full"></span>
+                        <span class="text-indigo-600 font-medium">$statusTxt</span>
                     </span>
                 </td>
-                </tr>
-            USER;
-            }
-        echo <<<TABELADOIS
-            </tbody>
-        </table>
-        TABELADOIS;
-    }else{
+            </tr>
+            ROW;
+        }
+
+        echo "</tbody></table>";
+
+    } else {
         echo "<p class='text-center text-gray-500'>Nenhum utilizador encontrado.</p>";
     }
     $db->closeConnection();
