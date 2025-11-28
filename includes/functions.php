@@ -155,5 +155,60 @@ function buscar_empresa($user_id){
  */
 
 function buscar_utilizadores($user_id){
+    $empresa_id = buscar_empresa($user_id);
 
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT id, nome, email, nivel_acesso, foto_path, status_utilizador FROM utilizadores WHERE empresa_id = :empresa_id");
+    $stmt->bindParam(':empresa_id', $empresa_id);
+    $stmt->execute();
+
+    $utilizadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $db->closeConnection();
+
+    if($utilizadores){
+        echo <<<TABELAUM
+         <table class="w-full">
+            <thead>
+                    <tr class="border-b border-gray-100">
+                        <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider w-3/5">Name</th>
+                        <th class="text-left pl-0 pr-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">User Status</th>
+                    </tr>
+                </thead>
+            <tbody class="divide-y divide-gray-50">
+        TABELAUM;
+        foreach($utilizadores as $utilizador){
+            $foto_path = $utilizador['foto_path'] ? $utilizador['foto_path'] : "../uploads/user-default.png";
+            echo <<<USER
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="px-6 py-4 w-3/5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-user text-indigo-600 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-900 text-sm"><?php echo {$utilizador['nome']} ?></div>
+                            <div class="text-gray-500 text-xs"><?php echo {$utilizador['email']} ?></div>
+                        </div>
+                    </div>
+                </td>
+                <td class="pl-0 pr-6 py-4">
+                    <span class="inline-flex items-center gap-1 text-sm">
+                        <span class="<?php echo ({$utilizador['status_utilizador']} === 'ativo') ? 'bg-indigo-600' : 'bg-gray-400'; ?> w-1.5 h-1.5 rounded-full"></span>
+                        <span class="text-indigo-600 font-medium"><?php echo {$utilizador['status_utilizador']} ?></span>
+                    </span>
+                </td>
+                </tr>
+            USER;
+            }
+        echo <<<TABELADOIS
+            </tbody>
+        </table>
+        TABELADOIS;
+    }else{
+        echo "<p class='text-center text-gray-500'>Nenhum utilizador encontrado.</p>";
+    }
+    $db->closeConnection();
 }

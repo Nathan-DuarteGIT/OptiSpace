@@ -25,7 +25,6 @@ require_once "../config/config.php";
         <?php include '../includes/header.php'; ?>
         <!-- Conteúdo principal -->
         <main class="flex-1 p-8">
-            <?php showvar(buscar_empresa($_SESSION['user_id'])) ?>
             <h3 class="text-2xl font-semibold mb-6 text-black">Gestão de Utilizadores</h3>
 
             <!-- Botão criar utilizador -->
@@ -52,6 +51,7 @@ require_once "../config/config.php";
             <div class="bg rounded-lg shadow-sm">
                 <!-- Tabela de utilizadores -->
                 <div class="overflow-x-auto">
+                    <?php buscar_utilizadores($_SESSION['user_id']) ?>
                     <table class="w-full">
                         <thead>
                             <tr class="border-b border-gray-100">
