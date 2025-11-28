@@ -139,7 +139,7 @@ function buscar_empresa($user_id){
     $db = new Database();
     $conn = $db->getConnection();
 
-    $stmt = $conn->prepare("SELECT empresa_id FROM utilizadores WHERE user_id = :user_id");
+    $stmt = $conn->prepare("SELECT empresa_id FROM utilizadores WHERE id = :user_id");
     $stmt->bindParam(':user_id', $user_id);
     $stmt->execute();
 
