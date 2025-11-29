@@ -1,17 +1,15 @@
 <?php
 require_once "../config/config.php";
 
-echo "<pre>";
-echo "GET email: " . (isset($_GET['email']) ? $_GET['email'] : 'NÃO EXISTE') . "\n";
-echo "GET email empty: " . (empty($_GET['email']) ? 'SIM' : 'NÃO') . "\n";
-echo "SESSION email_user: " . (!empty($_SESSION['email_user']) ? $_SESSION['email_user'] : 'NÃO EXISTE') . "\n";
-echo "</pre>";
-die();
 // Capturar o email do GET ou da SESSION
 $email = '';
 if (isset($_GET['email']) && !empty($_GET['email'])) {
     $email = htmlspecialchars($_GET['email']);
 }
+// DEBUG
+echo "Email capturado: '" . $email . "'<br>";
+echo "Empty? " . (empty($email) ? "SIM" : "NÃO");
+die();
 
 // Se não houver email, redirecionar ou mostrar erro
 if (empty($email)) {
