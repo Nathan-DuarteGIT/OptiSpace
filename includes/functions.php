@@ -189,6 +189,7 @@ function buscar_utilizadores($user_id){
 
             // COR DINÂMICA
             $corStatus = $u['status_utilizador'] === "ativo" ? "bg-indigo-600" : "bg-gray-400";
+            $corTextStatus = $u['status_utilizador'] === "ativo" ? "text-indigo-600" : "text-gray-400";
             $statusTxt = htmlspecialchars($u['status_utilizador']);
 
             echo <<<ROW
@@ -208,7 +209,7 @@ function buscar_utilizadores($user_id){
                 <td class="pl-0 pr-6 py-4">
                     <span class="inline-flex items-center gap-1 text-sm">
                         <span class="$corStatus w-1.5 h-1.5 rounded-full"></span>
-                        <span class="text-indigo-600 font-medium">$statusTxt</span>
+                        <span class="$corTextStatus font-medium">$statusTxt</span>
                     </span>
                 </td>
             </tr>

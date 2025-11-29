@@ -71,7 +71,7 @@ function enviarEmailBoasVindas($destinatario, $nome, $codigo_ativacao) {
         $mail->Subject = 'Bem-vindo à OptiSpace!';
         $mail->Body    = "Olá $nome,\n\n" .
                          "Bem-vindo à OptiSpace! Estamos entusiasmados por tê-lo a bordo.\n\n" .
-                         "Para ativar a sua conta, utilize o seguinte código de ativação: $codigo_ativacao\n\n" .
+                         "Para ativar a sua conta, utilize o seguinte código de ativação: $codigo_ativacao no seguinte link:" . BASE_URL . 'auth/mudar-passe.php?email=' . $destinatario . " \n\n" .
                          "Se tiver alguma dúvida, não hesite em contactar-nos.\n\n" .
                          "Atenciosamente,\n" .
                          "A Equipa OptiSpace";
