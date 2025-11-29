@@ -29,11 +29,11 @@
 
 
             // Inserir novo utilizador
-            $stmt = $conn->prepare("INSERT INTO utilizadores (empresa_id, nome, email, palavra_passe) VALUES (:empresa_id, :nome, :email, :palavra_passe)");
+            $stmt = $conn->prepare("INSERT INTO utilizadores (empresa_id, nome, email, password) VALUES (:empresa_id, :nome, :email, :password)");
             $stmt->bindParam(':empresa_id', $empresa['empresa_id']);
             $stmt->bindParam(':nome', $name);
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':palavra_passe', $palavra_passe);
+            $stmt->bindParam(':password', $palavra_passe);
 
             // Obter o código de ativação do novo utilizador
             $stmt_codigo = $conn->prepare("SELECT codigo_ativacao FROM utilizadores WHERE email = :email");
