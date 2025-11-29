@@ -86,6 +86,15 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('registerForm');
+            const hasError = <?php echo !empty($erro) ? 'true' : 'false'; ?>;
+
+            // Se houver erro, focar no primeiro campo
+            if (hasError) {
+                const firstInput = form.querySelector('input');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }
 
             form.addEventListener('submit', function(e) {
                 const nameAdmin = document.querySelector('input[name="name_admin"]').value.trim();
@@ -96,14 +105,14 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                 // Validar campos vazios
                 if (!nameAdmin || !nameEmpresa || !email || !password) {
                     e.preventDefault();
-                    alert('Por favor, preencha todos os campos.');
+                    showError('Por favor, preencha todos os campos.');
                     return false;
                 }
 
                 // Validar nome completo (pelo menos 2 palavras)
-                if (nameAdmin.split(' ').length < 2) {
+                if (nameAdmin.split(' ').filter(n => n.length > 0).length < 2) {
                     e.preventDefault();
-                    alert('Por favor, insira o primeiro e último nome.');
+                    showError('Por favor, insira o primeiro e último nome.');
                     return false;
                 }
 
@@ -111,17 +120,40 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(email)) {
                     e.preventDefault();
-                    alert('Por favor, insira um email válido.');
+                    showError('Por favor, insira um email válido.');
                     return false;
                 }
 
                 // Validar palavra-passe (mínimo 6 caracteres)
                 if (password.length < 6) {
                     e.preventDefault();
-                    alert('A palavra-passe deve ter no mínimo 6 caracteres.');
+                    showError('A palavra-passe deve ter no mínimo 6 caracteres.');
                     return false;
                 }
             });
+
+            function showError(message) {
+                // Remover erro anterior se existir
+                const oldError = document.querySelector('.error-message-js');
+                if (oldError) {
+                    oldError.remove();
+                }
+
+                // Criar nova mensagem de erro
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message-js bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4 text-left';
+                errorDiv.innerHTML = '<strong class="font-bold">Erro: </strong><span class="block sm:inline">' + message + '</span>';
+
+                // Inserir antes do primeiro campo
+                const firstDiv = form.querySelector('div');
+                firstDiv.parentNode.insertBefore(errorDiv, firstDiv.nextSibling);
+
+                // Scroll para o erro
+                errorDiv.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
         });
     </script>
 </body>
