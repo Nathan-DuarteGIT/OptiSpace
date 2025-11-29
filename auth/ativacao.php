@@ -6,16 +6,12 @@ $email = '';
 if (isset($_GET['email']) && !empty($_GET['email'])) {
     $email = htmlspecialchars($_GET['email']);
 }
-// DEBUG
-echo "Email capturado: '" . $email . "'<br>";
-echo "Empty? " . (empty($email) ? "SIM" : "NÃO");
-die();
 
 // Se não houver email, redirecionar ou mostrar erro
-if (empty($email)) {
+/*if (empty($email)) {
     header("Location: " . BASE_URL . "auth/login.php?erro=" . urlencode("Email não fornecido."));
     exit();
-}
+}*/
 ?>
 <!DOCTYPE html>
 
