@@ -73,19 +73,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        // Verificar se o código está correto 
+        // Verificar se o código está correto (converter ambos para string para comparação)
         if (strval($codigo) !== strval($codigo_user['codigo_ativacao'])) {
             header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("Código incorreto. Por favor, insira novamente."));
             exit();
         }
 
-        // Código correto - determinar o status baseado no nível de acesso
+        // Código correto 
         $novo_status = ($codigo_user['nivel_acesso'] === 'admin') ? 'admin' : 'colaborador';
+
+        // Log para debug
+        error_log("Ativando conta - Email: $email, Nível: {$codigo_user['nivel_acesso']}, Novo Status: $novo_status");
 
         $stmt = $conn->prepare('UPDATE utilizadores SET status_utilizador = :status WHERE email = :email');
         $stmt->bindParam(':status', $novo_status);
         $stmt->bindParam(':email', $email);
-        $stmt->execute();
+
+        if (!$stmt->execute()) {
+            error_log("Erro ao executar UPDATE para email: $email");
+            header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("Erro ao atualizar o status. Tente novamente."));
+            exit();
+        }
+
+        // Verificar quantas linhas foram afetadas
+        $rowsAffected = $stmt->rowCount();
+        error_log("Linhas afetadas pelo UPDATE: $rowsAffected");
 
         // Verificar se a atualização foi bem-sucedida
         $stmt = $conn->prepare("SELECT status_utilizador FROM utilizadores WHERE email = :email");
@@ -93,13 +105,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $check = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($check && $check['status_utilizador'] !== 'inativo') {
+        error_log("Status após UPDATE: " . ($check ? $check['status_utilizador'] : 'não encontrado'));
+
+        if ($check && ($check['status_utilizador'] === 'admin' || $check['status_utilizador'] === 'colaborador')) {
             if (!empty($_SESSION['email_user'])) {
                 unset($_SESSION['email_user']);
             }
+            error_log("Conta ativada com sucesso para: $email");
             header("Location: " . BASE_URL . "auth/login.php?msg=ativado");
             exit();
         } else {
+            error_log("Falha na ativação - Status final: " . ($check ? $check['status_utilizador'] : 'não encontrado'));
             header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("Erro ao ativar a conta. Tente novamente."));
             exit();
         }
@@ -114,4 +130,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: " . BASE_URL . "auth/ativacao.php");
     exit();
 }
-?>
