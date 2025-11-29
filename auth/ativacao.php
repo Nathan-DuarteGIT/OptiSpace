@@ -1,5 +1,16 @@
 <?php
 require_once "../config/config.php";
+// Capturar o email do GET ou da SESSION
+$email = '';
+if (isset($_GET['email']) && !empty($_GET['email'])) {
+    $email = htmlspecialchars($_GET['email']);
+}
+
+// Se não houver email, redirecionar ou mostrar erro
+if (empty($email)) {
+    header("Location: " . BASE_URL . "auth/login.php?erro=" . urlencode("Email não fornecido."));
+    exit();
+}
 ?>
 <!DOCTYPE html>
 
@@ -32,7 +43,7 @@ require_once "../config/config.php";
     </div>
 
     <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        <form method="POST" action="../actions/action-ativate.php" class="space-y-6 text-center">
+        <form method="POST" action="../actions/action-ativate.php?<?php echo !empty($email) ? '?email=' . $email : ''; ?>" class="space-y-6 text-center">
             <div class="text-left mb-6">
                 <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
                 <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Ative a sua conta</h2>
