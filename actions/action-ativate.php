@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $codigo_user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$codigo_user) {
-            header("Location: " . BASE_URL . "auth/ativacao.php?erro_utilizador=" . urlencode("Utilizador não encontrado."));
+            header("Location: " . BASE_URL . "auth/ativacao.php?email={$_GET['email']}&erro_utilizador=" . urlencode("Utilizador não encontrado."));
             exit();
         }
 
@@ -39,15 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $check = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($check['status_utilizador'] === 'ativo') {
-                unset($_SESSION['email_user']);
                 header("Location: " . BASE_URL . "auth/login.php?msg=ativado");
                 exit();
             } else {
-                header("Location: " . BASE_URL . "auth/ativacao.php?erro_ativarConta=" . urlencode("Erro ao ativar a conta."));
+                header("Location: " . BASE_URL . "auth/ativacao.php?email={$_GET['email']}&erro_ativarConta=" . urlencode("Erro ao ativar a conta."));
                 exit();
             }
+        }else {
+            header("Location: " . BASE_URL . "auth/ativacao.php?erro_codigoInvalido=" . urlencode("Código de ativação inválido."));
+            exit();
         }
-    } else if (isset($_SESSION['email_user']) && isset($_POST['digit1'], $_POST['digit2'], $_POST['digit3'], $_POST['digit4'], $_POST['digit5'], $_POST['digit6'])) {
+
+    } else if (!empty($_SESSION['email_user']) && isset($_POST['digit1'], $_POST['digit2'], $_POST['digit3'], $_POST['digit4'], $_POST['digit5'], $_POST['digit6'])) {
         $db = new Database();
         $conn = $db->getConnection();
         $codigo = $_POST['digit1'] . $_POST['digit2'] . $_POST['digit3'] . $_POST['digit4'] . $_POST['digit5'] . $_POST['digit6'];
@@ -96,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     } else {
-            header("Location: " . BASE_URL . "auth/ativacao.php?erro_codigoInvalido=" . urlencode("Código de ativação inválido."));
+            header("Location: " . BASE_URL . "auth/ativacao.php?");
             exit();
     }
 }
