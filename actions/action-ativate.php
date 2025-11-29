@@ -1,6 +1,7 @@
 <?php
 require_once "../config/database.php";
 require_once "../config/config.php";
+require_once "../includes/functions.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_GET['email']) && isset($_POST['digit1'], $_POST['digit2'], $_POST['digit3'], $_POST['digit4'], $_POST['digit5'], $_POST['digit6'])){
