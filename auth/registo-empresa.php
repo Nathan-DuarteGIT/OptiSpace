@@ -1,10 +1,15 @@
 <?php
 require_once "../config/config.php";
 
-// Capturar mensagens de erro
 $erro = '';
 if (isset($_GET['erro']) && !empty($_GET['erro'])) {
     $erro = htmlspecialchars($_GET['erro']);
+
+    echo "<script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.pathname);
+        }
+    </script>";
 }
 
 // Manter os valores preenchidos em caso de erro
@@ -43,33 +48,56 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
         </div>
 
         <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <form method="POST" action="../actions/action-register.php" class="space-y-6">
+            <form method="POST" action="../actions/action-register.php" class="space-y-6" id="registerForm">
                 <div class="text-left mb-6">
                     <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
                     <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Entrar</h2>
                 </div>
 
+                <?php if (!empty($erro)): ?>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4 text-left" role="alert">
+                        <strong class="font-bold">Erro: </strong>
+                        <span class="block sm:inline"><?php echo $erro; ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Primeiro e Último Nome do Admin</label>
-                    <input type="text" name="name_admin" required placeholder="Primeiro e Último Nome"
+                    <input type="text"
+                        name="name_admin"
+                        required
+                        placeholder="Primeiro e Último Nome"
+                        value="<?php echo $name_admin; ?>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nome da Empresa</label>
-                    <input type="text" name="name_empresa" required placeholder="Nome da Empresa"
+                    <input type="text"
+                        name="name_empresa"
+                        required
+                        placeholder="Nome da Empresa"
+                        value="<?php echo $name_empresa; ?>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira o Email do Admin</label>
-                    <input type="email" name="email" required placeholder="Email"
+                    <input type="email"
+                        name="email"
+                        required
+                        placeholder="exemplo@email.com"
+                        value="<?php echo $email; ?>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira a sua Palavra-passe</label>
-                    <input type="password" name="password" required placeholder="Palavra-passe"
+                    <input type="password"
+                        name="password"
+                        required
+                        placeholder="Mínimo 6 caracteres"
+                        minlength="6"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
