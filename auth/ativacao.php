@@ -1,15 +1,18 @@
 <?php
 require_once "../config/config.php";
 
+// Capturar o email do GET ou da SESSION
 $email = '';
 if (isset($_GET['email']) && !empty($_GET['email'])) {
     $email = htmlspecialchars($_GET['email']);
 }
 
+// Capturar mensagem de erro se existir e limpar da URL
 $erro = '';
 if (isset($_GET['erro']) && !empty($_GET['erro'])) {
     $erro = htmlspecialchars($_GET['erro']);
 
+    // Redirecionar para limpar a URL (só mantém o email)
     if (isset($_GET['email'])) {
         echo "<script>
             if (window.history.replaceState) {
@@ -102,16 +105,20 @@ if (empty($email)) {
             const form = document.getElementById('activationForm');
             const hasError = <?php echo !empty($erro) ? 'true' : 'false'; ?>;
 
-            // Se houver erro, limpar todos os campos e focar no primeiro
+            // SEMPRE limpar todos os campos ao carregar a página se houver erro
             if (hasError) {
                 inputs.forEach(input => {
                     input.value = '';
                 });
+                // Focar no primeiro campo
+                if (inputs[0]) {
+                    inputs[0].focus();
+                }
             }
 
             inputs.forEach((input, index) => {
-                // Focar no primeiro campo ao carregar
-                if (index === 0) {
+                // Focar no primeiro campo ao carregar 
+                if (index === 0 && !hasError) {
                     input.focus();
                 }
 
@@ -145,9 +152,11 @@ if (empty($email)) {
 
                 // Permitir voltar com backspace
                 input.addEventListener('keydown', function(e) {
-                    if (e.key === 'Backspace' && this.value === '' && index > 0) {
-                        inputs[index - 1].focus();
-                        inputs[index - 1].value = '';
+                    if (e.key === 'Backspace') {
+                        if (this.value === '' && index > 0) {
+                            inputs[index - 1].focus();
+                            inputs[index - 1].value = '';
+                        }
                     }
                 });
 
@@ -162,7 +171,7 @@ if (empty($email)) {
                         });
                         inputs[5].focus();
 
-                        // Submeter automaticamente após colar
+                        // Submeter automaticamente após colar ou preencher tudos os campos
                         setTimeout(() => {
                             form.submit();
                         }, 300);
