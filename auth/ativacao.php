@@ -1,16 +1,22 @@
 <?php
 require_once "../config/config.php";
 
-// Capturar o email do GET ou da SESSION
 $email = '';
 if (isset($_GET['email']) && !empty($_GET['email'])) {
     $email = htmlspecialchars($_GET['email']);
 }
 
-/// Capturar mensagem de erro se existir
 $erro = '';
 if (isset($_GET['erro']) && !empty($_GET['erro'])) {
     $erro = htmlspecialchars($_GET['erro']);
+
+    if (isset($_GET['email'])) {
+        echo "<script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, '?email=" . urlencode($_GET['email']) . "');
+            }
+        </script>";
+    }
 }
 
 // Se não houver email, redirecionar ou mostrar erro
@@ -19,7 +25,6 @@ if (empty($email)) {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 
 <html lang="pt" class="h-screen w-screen">
@@ -51,25 +56,32 @@ if (empty($email)) {
     </div>
 
     <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        <form method="POST" action="../actions/action-ativate.php?<?php echo !empty($email) ? 'email=' . $email : ''; ?>" class="space-y-6 text-center">
+        <form method="POST" action="../actions/action-ativate.php?<?php echo !empty($email) ? 'email=' . urlencode($email) : ''; ?>" class="space-y-6 text-center" id="activationForm">
             <div class="text-left mb-6">
                 <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
                 <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Ative a sua conta</h2>
             </div>
 
+            <?php if (!empty($erro)): ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4 text-left" role="alert">
+                    <strong class="font-bold">Erro: </strong>
+                    <span class="block sm:inline"><?php echo $erro; ?></span>
+                </div>
+            <?php endif; ?>
+
             <div class="flex justify-center gap-6 mb-6">
                 <input type="text" name="digit1" maxlength="1"
-                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-primary-dark focus:ring-2 focus:ring-primary-dark transition" required>
                 <input type="text" name="digit2" maxlength="1"
-                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-primary-dark focus:ring-2 focus:ring-primary-dark transition" required>
                 <input type="text" name="digit3" maxlength="1"
-                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-primary-dark focus:ring-2 focus:ring-primary-dark transition" required>
                 <input type="text" name="digit4" maxlength="1"
-                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-primary-dark focus:ring-2 focus:ring-primary-dark transition" required>
                 <input type="text" name="digit5" maxlength="1"
-                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-primary-dark focus:ring-2 focus:ring-primary-dark transition" required>
                 <input type="text" name="digit6" maxlength="1"
-                    class="input-activation w-10 h-10 md:w-10 md:h-10" required>
+                    class="input-activation w-10 h-10 md:w-10 md:h-10 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-primary-dark focus:ring-2 focus:ring-primary-dark transition" required>
             </div>
 
             <button type="submit"
@@ -83,6 +95,7 @@ if (empty($email)) {
             </div>
         </form>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const inputs = document.querySelectorAll('.input-activation');
