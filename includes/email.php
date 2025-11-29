@@ -60,3 +60,29 @@ function enviarEmailRecuperacao($destinatario){
     }
     
 }
+
+function enviarEmailBoasVindas($destinatario, $nome, $codigo_ativacao) {
+    global $mail;
+
+    try {
+        $mail->setFrom($mail->Username, 'OptiSpace');
+        $mail->addAddress($destinatario);
+
+        $mail->Subject = 'Bem-vindo à OptiSpace!';
+        $mail->Body    = "Olá $nome,\n\n" .
+                         "Bem-vindo à OptiSpace! Estamos entusiasmados por tê-lo a bordo.\n\n" .
+                         "Para ativar a sua conta, utilize o seguinte código de ativação: $codigo_ativacao\n\n" .
+                         "Se tiver alguma dúvida, não hesite em contactar-nos.\n\n" .
+                         "Atenciosamente,\n" .
+                         "A Equipa OptiSpace";
+
+        if ($mail->send()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        echo "Erro ao enviar email: {$mail->ErrorInfo}";
+        return false;
+    }
+}
