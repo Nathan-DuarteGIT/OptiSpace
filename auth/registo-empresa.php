@@ -1,17 +1,16 @@
 <?php
 require_once "../config/config.php";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Location: ativacao.php');
-    exit();
+
+// Capturar mensagens de erro
+$erro = '';
+if (isset($_GET['erro']) && !empty($_GET['erro'])) {
+    $erro = htmlspecialchars($_GET['erro']);
 }
 
-if (isset($_GET['erro_credenciais'])) {
-    $erro_credenciais = htmlspecialchars($_GET['erro_credenciais']);
-    echo "<script>alert('$erro_credenciais');</script>";
-} else if (isset($_GET['conta_inativa'])) {
-    $conta_inativa = htmlspecialchars($_GET['conta_inativa']);
-    echo "<script>alert('$conta_inativa');</script>";
-}
+// Manter os valores preenchidos em caso de erro
+$name_admin = isset($_GET['name_admin']) ? htmlspecialchars($_GET['name_admin']) : '';
+$name_empresa = isset($_GET['name_empresa']) ? htmlspecialchars($_GET['name_empresa']) : '';
+$email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +82,48 @@ if (isset($_GET['erro_credenciais'])) {
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+
+            form.addEventListener('submit', function(e) {
+                const nameAdmin = document.querySelector('input[name="name_admin"]').value.trim();
+                const nameEmpresa = document.querySelector('input[name="name_empresa"]').value.trim();
+                const email = document.querySelector('input[name="email"]').value.trim();
+                const password = document.querySelector('input[name="password"]').value;
+
+                // Validar campos vazios
+                if (!nameAdmin || !nameEmpresa || !email || !password) {
+                    e.preventDefault();
+                    alert('Por favor, preencha todos os campos.');
+                    return false;
+                }
+
+                // Validar nome completo (pelo menos 2 palavras)
+                if (nameAdmin.split(' ').length < 2) {
+                    e.preventDefault();
+                    alert('Por favor, insira o primeiro e último nome.');
+                    return false;
+                }
+
+                // Validar email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    e.preventDefault();
+                    alert('Por favor, insira um email válido.');
+                    return false;
+                }
+
+                // Validar palavra-passe (mínimo 6 caracteres)
+                if (password.length < 6) {
+                    e.preventDefault();
+                    alert('A palavra-passe deve ter no mínimo 6 caracteres.');
+                    return false;
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
