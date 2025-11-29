@@ -1,9 +1,17 @@
 <?php
 require_once "../config/config.php";
 
-if (isset($_GET['erro_mudar'])) {
-    $erro_mudar = htmlspecialchars($_GET['erro_mudar']);
-    echo "<script>alert('$erro_mudar');</script>";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Location: ../dashboard/index.php');
+    exit();
+}
+
+if (isset($_GET['erro_credenciais'])) {
+    $erro_credenciais = htmlspecialchars($_GET['erro_credenciais']);
+    echo "<script>alert('$erro_credenciais');</script>";
+} else if (isset($_GET['conta_inativa'])) {
+    $conta_inativa = htmlspecialchars($_GET['conta_inativa']);
+    echo "<script>alert('$conta_inativa');</script>";
 }
 ?>
 
@@ -47,46 +55,30 @@ if (isset($_GET['erro_mudar'])) {
                 </div>
             </div>
             <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Alterar palavra-passe</h2>
-            <?php
-            if (isset($_GET['email'])) {
-                echo '<input type="hidden" name="email" value="' . htmlspecialchars($_GET['email']) . '">';
-            }
+            <?php 
+                if(isset($_GET['email'])) {
+                    echo '<input type="hidden" name="email" value="' . htmlspecialchars($_GET['email']) . '">';
+                }
             ?>
             <div class="space-y-6 mb-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira a nova palavra-passe</label>
-                    <input type="password" name="password" id="newPassword" required placeholder="Nova palavra-passe"
+                    <input type="password" name="password" required placeholder="Nova palavra-passe"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Confirme a nova palavra-passe</label>
-                    <input type="password" name="ConfirmPassword" id="confirmPassword" required placeholder="Confirme a nova palavra-passe"
+                    <input type="password" name="ConfirmPassword" required placeholder="Confirme a nova palavra-passe"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
             </div>
-            <button type="submit" id="submitBtn"
-                class="w-full bg-primary-dark_green text-white py-3 rounded-lg font-semibold text-lg hover:bg-primary-dark/90 transition" disabled>
+            <button type="submit"
+                class="w-full bg-primary-dark_green text-white py-3 rounded-lg font-semibold text-lg hover:bg-primary-dark/90 transition">
                 Confirmar
             </button>
         </form>
     </div>
-    <script>
-        const newPass = document.getElementById('newPassword');
-        const confirmPass = document.getElementById('confirmPassword');
-        const submitBtn = document.getElementById('submitBtn');
-
-        function checkInputs() {
-            if (newPass.value.trim() !== '' && confirmPass.value.trim() !== '' && newPass.value === confirmPass.value) {
-                submitBtn.disabled = false;
-            } else {
-                submitBtn.disabled = true;
-            }
-        }
-
-        newPass.addEventListener('input', checkInputs);
-        confirmPass.addEventListener('input', checkInputs);
-    </script>
 </body>
 
 </html>
