@@ -98,12 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
             header("Location: " . BASE_URL . "auth/ativacao.php?erro_codigoInvalido=" . urlencode("Código de ativação inválido."));
             exit();
-        }
-    } else {
-        header("Location: " . BASE_URL . "auth/ativacao.php");
-        exit();
     }
 }
-?>
 
 ?>
