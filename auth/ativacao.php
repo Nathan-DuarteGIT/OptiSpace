@@ -7,12 +7,19 @@ if (isset($_GET['email']) && !empty($_GET['email'])) {
     $email = htmlspecialchars($_GET['email']);
 }
 
+/// Capturar mensagem de erro se existir
+$erro = '';
+if (isset($_GET['erro']) && !empty($_GET['erro'])) {
+    $erro = htmlspecialchars($_GET['erro']);
+}
+
 // Se não houver email, redirecionar ou mostrar erro
-/*if (empty($email)) {
+if (empty($email)) {
     header("Location: " . BASE_URL . "auth/login.php?erro=" . urlencode("Email não fornecido."));
     exit();
-}*/
+}
 ?>
+
 <!DOCTYPE html>
 
 <html lang="pt" class="h-screen w-screen">
@@ -76,6 +83,66 @@ if (isset($_GET['email']) && !empty($_GET['email'])) {
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.input-activation');
+            const form = document.getElementById('activationForm');
+
+            inputs.forEach((input, index) => {
+                // Focar no primeiro campo ao carregar
+                if (index === 0) {
+                    input.focus();
+                }
+
+                // Avançar automaticamente para o próximo campo
+                input.addEventListener('input', function() {
+                    // Permitir apenas números
+                    this.value = this.value.replace(/[^0-9]/g, '');
+
+                    if (this.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+
+                    // Se for o último campo e estiver preenchido, submeter automaticamente
+                    if (index === inputs.length - 1 && this.value.length === 1) {
+                        // Verificar se todos os campos estão preenchidos
+                        let allFilled = true;
+                        inputs.forEach(inp => {
+                            if (inp.value.length === 0) {
+                                allFilled = false;
+                            }
+                        });
+
+                        if (allFilled) {
+                            setTimeout(() => {
+                                form.submit();
+                            }, 100);
+                        }
+                    }
+                });
+
+                // Permitir voltar com backspace
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+
+                // Permitir colar código completo
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pasteData = e.clipboardData.getData('text').replace(/[^0-9]/g, '');
+
+                    if (pasteData.length === 6) {
+                        inputs.forEach((inp, i) => {
+                            inp.value = pasteData[i] || '';
+                        });
+                        inputs[5].focus();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
