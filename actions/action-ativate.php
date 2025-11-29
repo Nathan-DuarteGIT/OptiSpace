@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // Determinar o email (prioridade: GET > SESSION)
+    // Determinar o email 
     $email = null;
 
     if (isset($_GET['email']) && !empty($_GET['email'])) {
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        // Verificar se já está ativo (se status_utilizador NÃO é 'inativo')
+        // Verificar se já está ativo 
         if ($codigo_user['status_utilizador'] !== 'inativo') {
             if (!empty($_SESSION['email_user'])) {
                 unset($_SESSION['email_user']);
@@ -73,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        // Verificar se o código está correto
-        if ($codigo !== $codigo_user['codigo_ativacao']) {
+        // Verificar se o código está correto 
+        if (strval($codigo) !== strval($codigo_user['codigo_ativacao'])) {
             header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("Código incorreto. Por favor, insira novamente."));
             exit();
         }
@@ -114,3 +114,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: " . BASE_URL . "auth/ativacao.php");
     exit();
 }
+?>

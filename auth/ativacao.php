@@ -87,6 +87,14 @@ if (empty($email)) {
         document.addEventListener('DOMContentLoaded', function() {
             const inputs = document.querySelectorAll('.input-activation');
             const form = document.getElementById('activationForm');
+            const hasError = <?php echo !empty($erro) ? 'true' : 'false'; ?>;
+
+            // Se houver erro, limpar todos os campos e focar no primeiro
+            if (hasError) {
+                inputs.forEach(input => {
+                    input.value = '';
+                });
+            }
 
             inputs.forEach((input, index) => {
                 // Focar no primeiro campo ao carregar
@@ -114,9 +122,10 @@ if (empty($email)) {
                         });
 
                         if (allFilled) {
+                            // Submeter automaticamente após breve delay
                             setTimeout(() => {
                                 form.submit();
-                            }, 100);
+                            }, 300);
                         }
                     }
                 });
@@ -125,6 +134,7 @@ if (empty($email)) {
                 input.addEventListener('keydown', function(e) {
                     if (e.key === 'Backspace' && this.value === '' && index > 0) {
                         inputs[index - 1].focus();
+                        inputs[index - 1].value = '';
                     }
                 });
 
@@ -133,11 +143,16 @@ if (empty($email)) {
                     e.preventDefault();
                     const pasteData = e.clipboardData.getData('text').replace(/[^0-9]/g, '');
 
-                    if (pasteData.length === 6) {
+                    if (pasteData.length >= 6) {
                         inputs.forEach((inp, i) => {
                             inp.value = pasteData[i] || '';
                         });
                         inputs[5].focus();
+
+                        // Submeter automaticamente após colar
+                        setTimeout(() => {
+                            form.submit();
+                        }, 300);
                     }
                 });
             });
