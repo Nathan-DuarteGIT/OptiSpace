@@ -2,20 +2,20 @@
 require_once "../config/config.php";
 
 $erro = '';
-if (isset($_GET['erro']) && !empty($_GET['erro'])) {
-    $erro = htmlspecialchars($_GET['erro']);
-
-    echo "<script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.pathname);
-        }
-    </script>";
+if (isset($_SESSION['erro_registo'])) {
+    $erro = htmlspecialchars($_SESSION['erro_registo']);
+    unset($_SESSION['erro_registo']);
 }
 
-// Manter os valores preenchidos em caso de erro
-$name_admin = isset($_GET['name_admin']) ? htmlspecialchars($_GET['name_admin']) : '';
-$name_empresa = isset($_GET['name_empresa']) ? htmlspecialchars($_GET['name_empresa']) : '';
-$email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
+$name_admin = '';
+$name_empresa = '';
+$email = '';
+if (isset($_SESSION['form_data'])) {
+    $name_admin = htmlspecialchars($_SESSION['form_data']['name_admin'] ?? '');
+    $name_empresa = htmlspecialchars($_SESSION['form_data']['name_empresa'] ?? '');
+    $email = htmlspecialchars($_SESSION['form_data']['email'] ?? '');
+    unset($_SESSION['form_data']);
+}
 ?>
 
 <!DOCTYPE html>

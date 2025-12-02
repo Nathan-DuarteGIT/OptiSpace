@@ -23,50 +23,50 @@ $password = trim($_POST['password']);
 
 // Validar campos vazios
 if (empty($name_admin) || empty($name_empresa) || empty($email) || empty($password)) {
-    $params = http_build_query([
-        'erro' => 'Todos os campos são obrigatórios.',
+    $_SESSION['erro_registo'] = 'Todos os campos são obrigatórios.';
+    $_SESSION['form_data'] = [
         'name_admin' => $name_admin,
         'name_empresa' => $name_empresa,
         'email' => $email
-    ]);
-    header("Location: " . BASE_URL . "auth/registo_empresa.php?" . $params);
+    ];
+    header("Location: " . BASE_URL . "auth/registo_empresa.php");
     exit();
 }
 
 // Validar nome completo (pelo menos 2 palavras)
 $name_parts = explode(' ', $name_admin);
 if (count($name_parts) < 2) {
-    $params = http_build_query([
-        'erro' => 'Por favor, insira o primeiro e último nome.',
+    $_SESSION['erro_registo'] = 'Por favor, insira o primeiro e último nome.';
+    $_SESSION['form_data'] = [
         'name_admin' => $name_admin,
         'name_empresa' => $name_empresa,
         'email' => $email
-    ]);
-    header("Location: " . BASE_URL . "auth/registo_empresa.php?" . $params);
+    ];
+    header("Location: " . BASE_URL . "auth/registo_empresa.php");
     exit();
 }
 
 // Validar formato de email
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $params = http_build_query([
-        'erro' => 'Por favor, insira um email válido.',
+    $_SESSION['erro_registo'] = 'Por favor, insira um email válido.';
+    $_SESSION['form_data'] = [
         'name_admin' => $name_admin,
         'name_empresa' => $name_empresa,
         'email' => $email
-    ]);
-    header("Location: " . BASE_URL . "auth/registo_empresa.php?" . $params);
+    ];
+    header("Location: " . BASE_URL . "auth/registo_empresa.php");
     exit();
 }
 
 // Validar tamanho da palavra-passe
 if (strlen($password) < 6) {
-    $params = http_build_query([
-        'erro' => 'A palavra-passe deve ter no mínimo 6 caracteres.',
+    $_SESSION['erro_registo'] = 'A palavra-passe deve ter no mínimo 6 caracteres.';
+    $_SESSION['form_data'] = [
         'name_admin' => $name_admin,
         'name_empresa' => $name_empresa,
         'email' => $email
-    ]);
-    header("Location: " . BASE_URL . "auth/registo_empresa.php?" . $params);
+    ];
+    header("Location: " . BASE_URL . "auth/registo_empresa.php");
     exit();
 }
 
@@ -83,13 +83,29 @@ try {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        $params = http_build_query([
-            'erro' => 'Este email já está registado.',
+        $_SESSION['erro_registo'] = 'Este email já está registado.';
+        $_SESSION['form_data'] = [
             'name_admin' => $name_admin,
             'name_empresa' => $name_empresa,
             'email' => $email
-        ]);
-        header("Location: " . BASE_URL . "auth/registo_empresa.php?" . $params);
+        ];
+        header("Location: " . BASE_URL . "auth/registo_empresa.php");
+        exit();
+    }
+
+    // Verificar se a empresa já existe
+    $stmt = $conn->prepare("SELECT id FROM empresa WHERE nome = :name_empresa");
+    $stmt->bindParam(':name_empresa', $name_empresa);
+    $stmt->execute();
+
+    if ($stmt->rowCount() > 0) {
+        $_SESSION['erro_registo'] = 'Esta empresa já está cadastrada.';
+        $_SESSION['form_data'] = [
+            'name_admin' => $name_admin,
+            'name_empresa' => $name_empresa,
+            'email' => $email
+        ];
+        header("Location: " . BASE_URL . "auth/registo_empresa.php");
         exit();
     }
 
@@ -125,15 +141,33 @@ try {
                 header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email));
                 exit();
             } else {
-                header("Location: " . BASE_URL . "auth/registo_empresa.php?erro=" . urlencode("Erro ao gerar código de ativação."));
+                $_SESSION['erro_registo'] = 'Erro ao gerar código de ativação.';
+                $_SESSION['form_data'] = [
+                    'name_admin' => $name_admin,
+                    'name_empresa' => $name_empresa,
+                    'email' => $email
+                ];
+                header("Location: " . BASE_URL . "auth/registo_empresa.php");
                 exit();
             }
         } else {
-            header("Location: " . BASE_URL . "auth/registo_empresa.php?erro=" . urlencode("Erro ao registar o utilizador."));
+            $_SESSION['erro_registo'] = 'Erro ao registar o utilizador.';
+            $_SESSION['form_data'] = [
+                'name_admin' => $name_admin,
+                'name_empresa' => $name_empresa,
+                'email' => $email
+            ];
+            header("Location: " . BASE_URL . "auth/registo_empresa.php");
             exit();
         }
     } else {
-        header("Location: " . BASE_URL . "auth/registo_empresa.php?erro=" . urlencode("Erro ao registar a empresa."));
+        $_SESSION['erro_registo'] = 'Erro ao registar a empresa.';
+        $_SESSION['form_data'] = [
+            'name_admin' => $name_admin,
+            'name_empresa' => $name_empresa,
+            'email' => $email
+        ];
+        header("Location: " . BASE_URL . "auth/registo_empresa.php");
         exit();
     }
 
@@ -141,12 +175,12 @@ try {
 } catch (PDOException $e) {
     error_log("Erro no registo: " . $e->getMessage());
 
-    $params = http_build_query([
-        'erro' => 'Erro ao processar o registo. Tente novamente.',
+    $_SESSION['erro_registo'] = 'Erro ao processar o registo. Tente novamente.';
+    $_SESSION['form_data'] = [
         'name_admin' => $name_admin,
         'name_empresa' => $name_empresa,
         'email' => $email
-    ]);
-    header("Location: " . BASE_URL . "auth/registo_empresa.php?" . $params);
+    ];
+    header("Location: " . BASE_URL . "auth/registo_empresa.php");
     exit();
 }
