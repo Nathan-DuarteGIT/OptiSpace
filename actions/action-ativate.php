@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Verificar se já está ativo 
-        if ($codigo_user['status_utilizador'] !== 'inativo') {
+        if ($codigo_user['status_utilizador'] === 'ativo') {
             if (!empty($_SESSION['email_user'])) {
                 unset($_SESSION['email_user']);
             }
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Código correto - determinar o status baseado no nível de acesso
-        $novo_status = ($codigo_user['nivel_acesso'] === 'admin') ? 'admin' : 'colaborador';
+        $novo_status = 'ativo';
 
         // Log para debug
         error_log("Ativando conta - Email: $email, Nível: {$codigo_user['nivel_acesso']}, Novo Status: $novo_status");
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         error_log("Status após UPDATE: " . ($check ? $check['status_utilizador'] : 'não encontrado'));
 
-        if ($check && ($check['status_utilizador'] === 'admin' || $check['status_utilizador'] === 'colaborador')) {
+        if ($check && $check['status_utilizador'] === 'ativo') {
             if (!empty($_SESSION['email_user'])) {
                 unset($_SESSION['email_user']);
             }
