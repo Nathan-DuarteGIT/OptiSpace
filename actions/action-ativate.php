@@ -4,27 +4,27 @@ require_once "../config/config.php";
 require_once "../includes/functions.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+
     // Verificar se todos os dígitos foram enviados
     if (!isset($_POST['digit1'], $_POST['digit2'], $_POST['digit3'], $_POST['digit4'], $_POST['digit5'], $_POST['digit6'])) {
         header("Location: " . BASE_URL . "auth/ativacao.php?erro=" . urlencode("Todos os dígitos são obrigatórios."));
         exit();
     }
-    
+
     // Determinar o email 
     $email = null;
-    
+
     if (isset($_GET['email']) && !empty($_GET['email'])) {
         $email = trim($_GET['email']);
     } else if (!empty($_SESSION['email_user'])) {
         $email = $_SESSION['email_user'];
     }
-    
+
     if (!$email) {
         header("Location: " . BASE_URL . "auth/ativacao.php?erro=" . urlencode("Email não fornecido."));
         exit();
     }
-    
+
     // Validar se os dígitos não estão vazios
     $digit1 = isset($_POST['digit1']) ? trim($_POST['digit1']) : '';
     $digit2 = isset($_POST['digit2']) ? trim($_POST['digit2']) : '';
@@ -32,18 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $digit4 = isset($_POST['digit4']) ? trim($_POST['digit4']) : '';
     $digit5 = isset($_POST['digit5']) ? trim($_POST['digit5']) : '';
     $digit6 = isset($_POST['digit6']) ? trim($_POST['digit6']) : '';
-    
-    if (empty($digit1) || empty($digit2) || empty($digit3) || 
-        empty($digit4) || empty($digit5) || empty($digit6)) {
+
+    if (
+        $digit1 === '' || $digit2 === '' || $digit3 === '' ||
+        $digit4 === '' || $digit5 === '' || $digit6 === ''
+    ) {
         header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("Por favor, preencha todos os dígitos do código."));
         exit();
     }
-    
+
     $db = new Database();
     $conn = $db->getConnection();
-    
+
     $codigo = $digit1 . $digit2 . $digit3 . $digit4 . $digit5 . $digit6;
-    
+
     // Validar se o código contém apenas números
     if (!ctype_digit($codigo)) {
         header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("O código deve conter apenas números."));
@@ -79,20 +81,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Código correto - determinar o status baseado no nível de acesso
         $novo_status = ($codigo_user['nivel_acesso'] === 'admin') ? 'admin' : 'colaborador';
-        
+
         // Log para debug
         error_log("Ativando conta - Email: $email, Nível: {$codigo_user['nivel_acesso']}, Novo Status: $novo_status");
-        
+
         $stmt = $conn->prepare('UPDATE utilizadores SET status_utilizador = :status WHERE email = :email');
         $stmt->bindParam(':status', $novo_status);
         $stmt->bindParam(':email', $email);
-        
+
         if (!$stmt->execute()) {
             error_log("Erro ao executar UPDATE para email: $email");
             header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("Erro ao atualizar o status. Tente novamente."));
             exit();
         }
-        
+
         // Verificar quantas linhas foram afetadas
         $rowsAffected = $stmt->rowCount();
         error_log("Linhas afetadas pelo UPDATE: $rowsAffected");
@@ -102,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         $check = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         error_log("Status após UPDATE: " . ($check ? $check['status_utilizador'] : 'não encontrado'));
 
         if ($check && ($check['status_utilizador'] === 'admin' || $check['status_utilizador'] === 'colaborador')) {
@@ -117,11 +119,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("Erro ao ativar a conta. Tente novamente."));
             exit();
         }
-        
     } catch (PDOException $e) {
         // Log do erro para depuração
         error_log("Erro na ativação: " . $e->getMessage());
-        
+
         header("Location: " . BASE_URL . "auth/ativacao.php?email=" . urlencode($email) . "&erro=" . urlencode("Erro ao processar a ativação. Tente novamente."));
         exit();
     }
@@ -129,4 +130,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: " . BASE_URL . "auth/ativacao.php");
     exit();
 }
-?>
