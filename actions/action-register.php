@@ -1,7 +1,10 @@
 <?php
 require_once "../config/database.php";
 require_once "../config/config.php";
+require_once "../includes/functions.php";
 require_once "../includes/email.php";
+
+ob_start();
 
 // Verificar se é POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
