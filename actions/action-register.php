@@ -4,17 +4,15 @@ require_once "../config/config.php";
 require_once "../includes/functions.php";
 require_once "../includes/email.php";
 
-ob_start();
-
 // Verificar se é POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: " . BASE_URL . "auth/registo_empresa.php");
+    header("Location: " . BASE_URL . "auth/registo-empresa.php");
     exit();
 }
 
 // Verificar se todos os campos foram enviados
 if (!isset($_POST['name_admin'], $_POST['name_empresa'], $_POST['email'], $_POST['password'])) {
-    header("Location: " . BASE_URL . "auth/registo_empresa.php?erro=" . urlencode("Todos os campos são obrigatórios."));
+    header("Location: " . BASE_URL . "auth/registo-empresa.php?erro=" . urlencode("Todos os campos são obrigatórios."));
     exit();
 }
 
@@ -32,7 +30,7 @@ if (empty($name_admin) || empty($name_empresa) || empty($email) || empty($passwo
         'name_empresa' => $name_empresa,
         'email' => $email
     ];
-    header("Location: " . BASE_URL . "auth/registo_empresa.php");
+    header("Location: " . BASE_URL . "auth/registo-empresa.php");
     exit();
 }
 
@@ -45,7 +43,7 @@ if (count($name_parts) < 2) {
         'name_empresa' => $name_empresa,
         'email' => $email
     ];
-    header("Location: " . BASE_URL . "auth/registo_empresa.php");
+    header("Location: " . BASE_URL . "auth/registo-empresa.php");
     exit();
 }
 
@@ -57,7 +55,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         'name_empresa' => $name_empresa,
         'email' => $email
     ];
-    header("Location: " . BASE_URL . "auth/registo_empresa.php");
+    header("Location: " . BASE_URL . "auth/registo-empresa.php");
     exit();
 }
 
@@ -69,7 +67,7 @@ if (strlen($password) < 6) {
         'name_empresa' => $name_empresa,
         'email' => $email
     ];
-    header("Location: " . BASE_URL . "auth/registo_empresa.php");
+    header("Location: " . BASE_URL . "auth/registo-empresa.php");
     exit();
 }
 
@@ -92,7 +90,7 @@ try {
             'name_empresa' => $name_empresa,
             'email' => $email
         ];
-        header("Location: " . BASE_URL . "auth/registo_empresa.php");
+        header("Location: " . BASE_URL . "auth/registo-empresa.php");
         exit();
     }
 
@@ -108,7 +106,7 @@ try {
             'name_empresa' => $name_empresa,
             'email' => $email
         ];
-        header("Location: " . BASE_URL . "auth/registo_empresa.php");
+        header("Location: " . BASE_URL . "auth/registo-empresa.php");
         exit();
     }
 
@@ -150,7 +148,7 @@ try {
                     'name_empresa' => $name_empresa,
                     'email' => $email
                 ];
-                header("Location: " . BASE_URL . "auth/registo_empresa.php");
+                header("Location: " . BASE_URL . "auth/registo-empresa.php");
                 exit();
             }
         } else {
@@ -160,7 +158,7 @@ try {
                 'name_empresa' => $name_empresa,
                 'email' => $email
             ];
-            header("Location: " . BASE_URL . "auth/registo_empresa.php");
+            header("Location: " . BASE_URL . "auth/registo-empresa.php");
             exit();
         }
     } else {
@@ -170,7 +168,7 @@ try {
             'name_empresa' => $name_empresa,
             'email' => $email
         ];
-        header("Location: " . BASE_URL . "auth/registo_empresa.php");
+        header("Location: " . BASE_URL . "auth/registo-empresa.php");
         exit();
     }
 
@@ -184,6 +182,6 @@ try {
         'name_empresa' => $name_empresa,
         'email' => $email
     ];
-    header("Location: " . BASE_URL . "auth/registo_empresa.php");
+    header("Location: " . BASE_URL . "auth/registo-empresa.php");
     exit();
 }
