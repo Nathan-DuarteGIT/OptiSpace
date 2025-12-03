@@ -6,7 +6,7 @@
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['ConfirmPassword'])) {
             if($_POST['password'] !== $_POST['ConfirmPassword']) {
-                header("Location: " . BASE_URL . "auth/mudar-passe.php?email=" . urlencode($_POST['email']) . "&erro_mudar=" . urlencode("As palavras-passe não coincidem."));
+                header("Location: " . BASE_URL . "auth/mudar-passe.php?email=" . $_POST['email'] . "&erro_mudar=" . urlencode("As palavras-passe não coincidem."));
                 exit();
             }
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -25,12 +25,12 @@
             if ($row) {
                 $old_hash = $row['password'];
                 if (password_verify($new_password, $old_hash)) {
-                    header("Location: " . BASE_URL . "auth/mudar-passe.php?email=" . urlencode($_POST['email']) . "&erro_mudar=" . urlencode("A nova palavra-passe não pode ser igual à anterior."));
+                    header("Location: " . BASE_URL . "auth/mudar-passe.php?email=" . $_POST['email'] . "&erro_mudar=" . urlencode("A nova palavra-passe não pode ser igual à anterior."));
                     exit();
                 }
             } else {
                 // Se o utilizador não existir, redirecionar com erro
-                header("Location: " . BASE_URL . "auth/mudar-passe.php?email=" . urlencode($_POST['email']) . "&erro_mudar=" . urlencode("Utilizador não encontrado."));
+                header("Location: " . BASE_URL . "auth/mudar-passe.php?email=" . $_POST['email'] . "&erro_mudar=" . urlencode("Utilizador não encontrado."));
                 exit();
             }
 
