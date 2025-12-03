@@ -46,7 +46,7 @@ function enviarEmailRecuperacao($destinatario){
 
         $mail->Subject = 'Redefinição da Sua Palavra-passe';
         $mail->Body    = "Recebemos um pedido para recuperar o acesso à sua conta. \n" . "Para continuar, clique no link abaixo e siga as instruções: \n" .
-                         BASE_URL . 'auth/ativacao.php?email=' . $destinatario . "\n \n" .
+                         BASE_URL . 'auth/mudar-passe.php?email=' . $destinatario . "\n \n" .
                          'Se você não solicitou essa alteração, por favor ignore este email.';
 
         if ($mail->send()) {
@@ -71,7 +71,7 @@ function enviarEmailBoasVindas($destinatario, $nome, $codigo_ativacao) {
         $mail->Subject = 'Bem-vindo à OptiSpace!';
         $mail->Body    = "Olá $nome,\n\n" .
                          "Bem-vindo à OptiSpace! Estamos entusiasmados por tê-lo a bordo.\n\n" .
-                         "Para ativar a sua conta, utilize o seguinte código de ativação: $codigo_ativacao no seguinte link:" . BASE_URL . 'auth/mudar-passe.php?email=' . $destinatario . " \n\n" .
+                         "Para ativar a sua conta, utilize o seguinte código de ativação: $codigo_ativacao no seguinte link:" . BASE_URL . 'auth/ativacao.php?email=' . $destinatario . " \n\n" .
                          "Se tiver alguma dúvida, não hesite em contactar-nos.\n\n" .
                          "Atenciosamente,\n" .
                          "A Equipa OptiSpace";
