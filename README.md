@@ -18,7 +18,7 @@ O Optispace é uma plataforma web que simplifica a gestão de recursos partilhad
 - Andréa Rego
 
 ## Objetivo
-Desenvolvido como projeto académico para as disciplinas *Projeto de Tecnologias e Programação de Sistemas de Informação* e *Programação para a Web* do terceiro semestre do Curso Superior de Tecnologias e Programação de Sistemas de Informação. O Optispace visa demonstrar a aplicação de tecnologias web para resolver problemas reais de gestão de recursos, promovendo colaboração e produtividade em contextos empresariais.
+Desenvolvido como projeto académico para as disciplinas *Projeto de Tecnologias e Programação de Sistemas de Informação* e *Programação para a Web*, do terceiro semestre do Curso Superior de Tecnologias e Programação de Sistemas de Informação. O Optispace visa demonstrar a aplicação de tecnologias web para resolver problemas reais de gestão de recursos, promovendo colaboração e produtividade em contextos empresariais.
 
 ## Como Executar
 Aceda à aplicação através de `https://andnat.antrob.eu/index.php`.
