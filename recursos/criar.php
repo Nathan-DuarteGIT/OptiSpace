@@ -64,6 +64,7 @@ require_once "../config/config.php";
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Equipamentos (opcional)</label>
                             <div class="space-y-3">
+                                <?php render_equipamentos_fixos_formCriar($_SESSION['user_id'])?>
                                 <label class="flex items-center cursor-pointer">
                                     <input type="checkbox" name="equipamentos_sala[]" value="computador" class="mr-3 w-4 h-4 text-indigo-600 rounded focus:ring-2 focus:ring-indigo-500">
                                     <span>Computador</span>
@@ -128,12 +129,6 @@ require_once "../config/config.php";
 
                     <!-- Campos condicionais para EQUIPAMENTO -->
                     <div id="campos-equipamento" class="hidden space-y-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome do equipamento *</label>
-                            <input type="text" name="nome_equipamento" placeholder="Ex: MacBook Air, iPad, Canon EOS R5..." required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
-                        </div>
-
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de equipamento *</label>
                             <div class="space-y-3">
