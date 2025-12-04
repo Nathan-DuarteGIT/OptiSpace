@@ -1,5 +1,7 @@
 <?php
-    // ... (restante do código de includes)
+    require_once "../config/database.php";
+    require_once "../config/config.php";
+    require_once "../includes/email.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if(isset($_POST['name'], $_POST['email'], $_POST['palavra_passe'])) {
