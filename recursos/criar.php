@@ -112,15 +112,11 @@ require_once "../config/config.php";
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
 
                             <!-- Preview da imagem -->
-                            <div id="preview-container-viatura" class="hidden mt-4">
-                                <p class="text-sm font-medium text-gray-700 mb-2">Preview:</p>
-                                <div class="relative inline-block">
-                                    <img id="preview-imagem-viatura" src="" alt="Preview" class="max-w-xs max-h-64 rounded-lg border-2 border-gray-300 shadow-md">
-                                    <button type="button" id="remover-imagem-viatura" class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg transition z-10 focus:outline-none focus:ring-2 focus:ring-red-400">
-                                        <i class="fa-solid fa-xmark text-white"></i>
-                                    </button>
-                                </div>
-                            </div>
+                            <button type="button" id="remover-imagem-viatura" style="background-color: #ce0909ff !important;" class="absolute -top-2 -right-2 hover:bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg transition z-10 focus:outline-none focus:ring-2 focus:ring-red-400">
+                                <svg class="w-5 h-5" fill="white" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -152,15 +148,11 @@ require_once "../config/config.php";
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
 
                             <!-- Preview da imagem -->
-                            <div id="preview-container" class="hidden mt-4">
-                                <p class="text-sm font-medium text-gray-700 mb-2">Preview:</p>
-                                <div class="relative inline-block">
-                                    <img id="preview-imagem" src="" alt="Preview" class="max-w-xs max-h-64 rounded-lg border-2 border-gray-300 shadow-md">
-                                    <button type="button" id="remover-imagem" class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg transition z-10 focus:outline-none focus:ring-2 focus:ring-red-400">
-                                        <i class="fa-solid fa-xmark text-white"></i>
-                                    </button>
-                                </div>
-                            </div>
+                            <button type="button" id="remover-imagem" style="background-color: #ce0909ff !important;" class="absolute -top-2 -right-2 hover:bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg transition z-10 focus:outline-none focus:ring-2 focus:ring-red-400">
+                                <svg class="w-5 h-5" fill="white" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
