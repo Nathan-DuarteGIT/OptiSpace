@@ -27,7 +27,7 @@ require_once "../config/config.php";
         <main class="flex-1 p-8">
             <div class="w-full max-w-md">
                 <h3 class="text-2xl font-semibold mb-6 text-black">Novo Recurso</h3>
-                <form action="" method="post" class="space-y-6">
+                <form action="" method="post" enctype="multipart/form-data" class="space-y-6">
                     <!-- Card do formulário -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Nome do recurso</label>
@@ -108,11 +108,44 @@ require_once "../config/config.php";
                     </div>
 
                     <!-- Campos condicionais para EQUIPAMENTO -->
-                    <div id="campos-equipamento" class="hidden">
+                    <div id="campos-equipamento" class="hidden space-y-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Nome do equipamento *</label>
                             <input type="text" name="nome_equipamento" placeholder="Ex: MacBook Air, iPad, Canon EOS R5..." required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de equipamento *</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="tipo_equipamento" value="fixo" required class="mr-3 w-4 h-4 text-indigo-600 focus:ring-2 focus:ring-indigo-500">
+                                    <span>Equipamento fixo</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="tipo_equipamento" value="remoto" required class="mr-3 w-4 h-4 text-indigo-600 focus:ring-2 focus:ring-indigo-500">
+                                    <span>Equipamento remoto</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Imagem do equipamento (opcional)</label>
+                            <input type="file" name="imagem_equipamento" id="imagem_equipamento" accept="image/*"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+
+                            <!-- Preview da imagem -->
+                            <div id="preview-container" class="hidden mt-4">
+                                <p class="text-sm font-medium text-gray-700 mb-2">Preview:</p>
+                                <div class="relative inline-block">
+                                    <img id="preview-imagem" src="" alt="Preview" class="max-w-xs max-h-64 rounded-lg border-2 border-gray-300 shadow-md">
+                                    <button type="button" id="remover-imagem" class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg transition">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -156,7 +189,54 @@ require_once "../config/config.php";
                 } else if (this.value === 'equipamento') {
                     camposEquipamento.classList.remove('hidden');
                     document.querySelector('input[name="nome_equipamento"]').setAttribute('required', 'required');
+
+                    document.querySelectorAll('input[name="tipo_equipamento"]').forEach(radio => {
+                        radio.setAttribute('required', 'required');
+                    });
                 }
             });
+
+            // Preview da imagem
+            const inputImagem = document.getElementById('imagem_equipamento');
+            const previewContainer = document.getElementById('preview-container');
+            const previewImagem = document.getElementById('preview-imagem');
+            const btnRemover = document.getElementById('remover-imagem');
+
+            if (inputImagem) {
+                inputImagem.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+
+                    if (file) {
+                        // Validar se é uma imagem
+                        if (!file.type.startsWith('image/')) {
+                            alert('Por favor, selecione apenas arquivos de imagem.');
+                            this.value = '';
+                            return;
+                        }
+
+                        // Validar tamanho (máximo 5MB)
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('A imagem deve ter no máximo 5MB.');
+                            this.value = '';
+                            return;
+                        }
+
+                        // Criar URL da imagem e mostrar preview
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImagem.src = e.target.result;
+                            previewContainer.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                // Remover imagem
+                btnRemover.addEventListener('click', function() {
+                    inputImagem.value = '';
+                    previewImagem.src = '';
+                    previewContainer.classList.add('hidden');
+                });
+            }
         });
     </script>
