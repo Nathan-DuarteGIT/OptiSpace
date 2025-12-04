@@ -124,7 +124,7 @@ require_once "../config/config.php";
                                 </label>
                                 <label class="flex items-center cursor-pointer">
                                     <input type="radio" name="tipo_equipamento" value="remoto" required class="mr-3 w-4 h-4 text-indigo-600 focus:ring-2 focus:ring-indigo-500">
-                                    <span>Equipamento remoto</span>
+                                    <span>Equipamento móvel</span>
                                 </label>
                             </div>
                         </div>
@@ -139,7 +139,7 @@ require_once "../config/config.php";
                                 <p class="text-sm font-medium text-gray-700 mb-2">Preview:</p>
                                 <div class="relative inline-block">
                                     <img id="preview-imagem" src="" alt="Preview" class="max-w-xs max-h-64 rounded-lg border-2 border-gray-300 shadow-md">
-                                    <button type="button" id="remover-imagem" class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg transition">
+                                    <button type="button" id="remover-imagem" class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg transition z-10">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                         </svg>
