@@ -223,3 +223,41 @@ function buscar_utilizadores($user_id){
     }
     $db->closeConnection();
 }
+
+/**
+ * BUSCA POR EQUIPAMENTOS FIXOS DA EMPRESA
+ */
+
+function buscar_equipamentos_fixos($user_id){
+    $empresa_id = buscar_empresa($user_id);
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT id, nome, foto_path, status_equipamento FROM recursos WHERE empresa_id = :empresa_id AND tipo_recurso = 'equipamento_fixo'");
+    $stmt->bindParam(':empresa_id', $empresa_id);
+    $stmt->execute();
+
+    $equipamentos_fixos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $db->closeConnection();
+
+    return $equipamentos_fixos;
+}
+
+function render_equipamentos_fixos_formCriar($user_id){
+    $equipamentos_fixos = buscar_equipamentos_fixos($user_id);
+
+    if ($equipamentos_fixos) {
+        foreach ($equipamentos_fixos as $eq) {
+            $nome = htmlspecialchars($eq['nome']);
+            $id = htmlspecialchars($eq['id']);
+            echo <<<EQUIPAMENTO
+            <label class="flex items-center cursor-pointer">
+                <input type="checkbox" name="equipamentos_sala[]" value="$id" class="mr-3 w-4 h-4 text-indigo-600 rounded focus:ring-2 focus:ring-indigo-500">
+                <span>$nome</span>
+            </label>
+            EQUIPAMENTO;
+        }
+    }
+}
