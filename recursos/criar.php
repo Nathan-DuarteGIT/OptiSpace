@@ -202,7 +202,6 @@ require_once "../config/config.php";
                     document.querySelector('input[name="matricula"]').setAttribute('required', 'required');
                 } else if (this.value === 'equipamento') {
                     camposEquipamento.classList.remove('hidden');
-                    document.querySelector('input[name="nome_equipamento"]').setAttribute('required', 'required');
                     document.querySelectorAll('input[name="tipo_equipamento"]').forEach(radio => {
                         radio.setAttribute('required', 'required');
                     });
