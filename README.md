@@ -18,16 +18,10 @@ O Optispace é uma plataforma web que simplifica a gestão de recursos partilhad
 - Andréa Rego
 
 ## Objetivo
-Desenvolvido como projeto académico para a disciplina *Projeto de Tecnologias e Programação de Sistemas de Informação*. O Optispace visa demonstrar a aplicação de tecnologias web para resolver problemas reais de gestão de recursos, promovendo colaboração e produtividade em contextos empresariais.
+Desenvolvido como projeto académico para as disciplinas *Projeto de Tecnologias e Programação de Sistemas de Informação* e *Programação para a Web* do terceiro semestre do Curso Superior de Tecnologias e Programação de Sistemas de Informação. O Optispace visa demonstrar a aplicação de tecnologias web para resolver problemas reais de gestão de recursos, promovendo colaboração e produtividade em contextos empresariais.
 
 ## Como Executar
-1. Clone o repositório: `git clone <URL-do-repositório>`
-2. Configure um servidor local com PHP e MySQL (ex.: XAMPP).
-3. Importe a base de dados via phpMyAdmin (ficheiro SQL disponível em `/database`).
-4. Copie os ficheiros para o diretório do servidor (ex.: `htdocs`).
-5. Instale as dependencias de node.js: npm install
-6. Crie o ficheiro de output.css através do comando: npm run watch
-7. Aceda à aplicação através de `http://localhost/optispace`.
+Aceda à aplicação através de `https://andnat.antrob.eu/index.php`.
 
 ## Licença
 Este projeto é exclusivamente para fins académicos e não possui licença de distribuição comercial.
