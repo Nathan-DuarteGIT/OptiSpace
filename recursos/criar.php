@@ -64,7 +64,7 @@ require_once "../config/config.php";
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Equipamentos (opcional)</label>
                             <div class="space-y-3">
-                                <?php render_equipamentos_fixos_formCriar($_SESSION['user_id'])?>
+                                <?php //render_equipamentos_fixos_formCriar($_SESSION['user_id'])?>
                                 <label class="flex items-center cursor-pointer">
                                     <input type="checkbox" name="equipamentos_sala[]" value="computador" class="mr-3 w-4 h-4 text-indigo-600 rounded focus:ring-2 focus:ring-indigo-500">
                                     <span>Computador</span>
