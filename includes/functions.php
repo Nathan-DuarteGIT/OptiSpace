@@ -145,7 +145,7 @@ function upload_imagem($file, $pasta)
     
     // Sanitiza $pasta para prevenir Path Traversal (../../)
     // Permite apenas caracteres alfanuméricos, hífens e underscores.
-    $pasta_segura = preg_replace('/[^a-zA-Z0-9_\-]/', '', $pasta);
+    $pasta_segura = $pasta;
     if (empty($pasta_segura)) {
         $pasta_segura = 'default'; // Usa um diretório padrão seguro se $pasta for inválida
     }
