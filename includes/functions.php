@@ -94,37 +94,86 @@ function isActive($folder)
  */
 function upload_imagem($file, $pasta)
 {
-    // Verifica se houve upload
+    // --- 1. Verificação de Configuração (Opcional, mas recomendado) ---
+    if (!defined('MAX_FILE_SIZE') || !defined('ALLOWED_EXTENSIONS') || !defined('UPLOAD_PATH')) {
+        return ['sucesso' => false, 'mensagem' => 'Erro de configuração: Constantes de upload (MAX_FILE_SIZE, ALLOWED_EXTENSIONS, UPLOAD_PATH) em falta.'];
+    }
+    
+    // --- 2. Validação Inicial de Upload ---
+    
+    // Verifica se houve upload e se foi bem-sucedido
     if (!isset($file['error']) || $file['error'] !== UPLOAD_ERR_OK) {
-        return ['sucesso' => false, 'mensagem' => 'Erro no upload'];
+        // Pode-se expandir o tratamento para códigos de erro específicos aqui.
+        return ['sucesso' => false, 'mensagem' => 'Erro no upload ou ficheiro não enviado.'];
     }
 
-    // Verifica tamanho (5MB)
+    // --- 3. Validação de Tamanho ---
     if ($file['size'] > MAX_FILE_SIZE) {
-        return ['sucesso' => false, 'mensagem' => 'Ficheiro muito grande (máx 5MB)'];
+        // Converte o tamanho máximo para MB para a mensagem
+        $max_mb = round(MAX_FILE_SIZE / 1024 / 1024, 0); 
+        return ['sucesso' => false, 'mensagem' => "Ficheiro muito grande (máx {$max_mb}MB)"];
     }
 
-    // Verifica extensão
+    // --- 4. Validação do Tipo MIME Real (SEGURANÇA ESSENCIAL) ---
+    
+    // Lista de tipos MIME aceites
+    $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif'];
+
+    // Verifica se a extensão finfo está disponível
+    if (!extension_loaded('fileinfo')) {
+        return ['sucesso' => false, 'mensagem' => 'Erro de sistema: Extensão "fileinfo" necessária para segurança não carregada.'];
+    }
+    
+    // Abre a biblioteca de ficheiros MIME e verifica o tipo real do ficheiro temporário
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime_type = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+
+    if (!in_array($mime_type, $allowed_mime_types)) {
+        return ['sucesso' => false, 'mensagem' => 'Tipo de ficheiro não permitido pelo seu conteúdo real.'];
+    }
+
+    // --- 5. Validação de Extensão (Verificação Rápida) ---
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     if (!in_array($ext, ALLOWED_EXTENSIONS)) {
-        return ['sucesso' => false, 'mensagem' => 'Tipo de ficheiro não permitido (use JPG, PNG ou GIF)'];
+        // Esta verificação funciona como uma barreira rápida, embora o MIME Type seja mais seguro.
+        $ext_list = implode(', ', ALLOWED_EXTENSIONS);
+        return ['sucesso' => false, 'mensagem' => "Tipo de ficheiro não permitido (use {$ext_list})"];
     }
 
-    // Gera nome único
+    // --- 6. Sanitização e Preparação do Caminho ---
+    
+    // Sanitiza $pasta para prevenir Path Traversal (../../)
+    // Permite apenas caracteres alfanuméricos, hífens e underscores.
+    $pasta_segura = preg_replace('/[^a-zA-Z0-9_\-]/', '', $pasta);
+    if (empty($pasta_segura)) {
+        $pasta_segura = 'default'; // Usa um diretório padrão seguro se $pasta for inválida
+    }
+
+    // Gera nome único para o ficheiro
     $nome_novo = uniqid('img_', true) . '.' . $ext;
-    $destino = UPLOAD_PATH . $pasta . '/' . $nome_novo;
+    
+    // Monta o caminho de destino completo
+    $caminho_base = rtrim(UPLOAD_PATH, '/') . '/';
+    $destino = $caminho_base . $pasta_segura . '/' . $nome_novo;
 
-    // Cria pasta se não existir
-    if (!is_dir(dirname($destino))) {
-        mkdir(dirname($destino), 0777, true);
+    // --- 7. Criação da Pasta ---
+    // Cria a pasta de destino (e subpastas se necessário) com permissões 0777 (adaptar se necessário)
+    $dir_destino = dirname($destino);
+    if (!is_dir($dir_destino)) {
+        // @ silencia erros em caso de problemas de permissão
+        if (!@mkdir($dir_destino, 0777, true)) { 
+            return ['sucesso' => false, 'mensagem' => 'Erro ao criar o diretório de destino. Verifique as permissões.'];
+        }
     }
 
-    // Move ficheiro
+    // --- 8. Movimentação Final do Ficheiro ---
     if (move_uploaded_file($file['tmp_name'], $destino)) {
-        return ['sucesso' => true, 'caminho' => $pasta . '/' . $nome_novo];
+        // Retorna o caminho RELATIVO ao UPLOAD_PATH para guardar na base de dados
+        return ['sucesso' => true, 'caminho' => $pasta_segura . '/' . $nome_novo];
     }
 
-    return ['sucesso' => false, 'mensagem' => 'Erro ao guardar ficheiro'];
+    return ['sucesso' => false, 'mensagem' => 'Erro desconhecido ao guardar ficheiro no destino final.'];
 }
 
 
