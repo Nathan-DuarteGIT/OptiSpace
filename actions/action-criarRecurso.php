@@ -19,7 +19,7 @@
 
                 if(isset($_FILES['imagem_equipamento'])) {
                     $upload_result = upload_imagem($_FILES['imagem_equipamento'], '../uploads');
-                    if($upload_result['success']) {
+                    if($upload_result['successo']) {
                         $caminho_imagem = $upload_result['caminho'];
                     } else {
                         header("Location: " . BASE_URL . "recursos/criar.php?erro_upload=" . urlencode($upload_result['mensagem']));
