@@ -294,6 +294,31 @@ function buscar_equipamentos_fixos($user_id){
     return $equipamentos_fixos;
 }
 
+/**
+ * BUSCA POR EQUIPAMENTOS PORTATIL DA EMPRESA
+ */
+
+function buscar_equipamentos_portatil($user_id){
+    $empresa_id = buscar_empresa($user_id);
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT id, nome, foto_path, status_equipamento FROM equipamentos WHERE empresa_id = :empresa_id AND tipoEquipamento = 'portatil'");
+    $stmt->bindParam(':empresa_id', $empresa_id);
+    $stmt->execute();
+
+    $equipamentos_portatil = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $db->closeConnection();
+
+    return $equipamentos_portatil;
+}
+
+/**
+ * RENDARIZAR OS EQUIPAMENTOS FIXOS DA EMPRESA NO FORMCRIAR 
+ */
+
 function render_equipamentos_fixos_formCriar($user_id){
     $equipamentos_fixos = buscar_equipamentos_fixos($user_id);
 
@@ -311,11 +336,38 @@ function render_equipamentos_fixos_formCriar($user_id){
     }
 }
 
+/**
+ * RENDARIZAR OS EQUIPAMENTOS FIXOS DA EMPRESA EM CARD 
+ */
+
 function render_equipamentos_fixos_card($user_id){
     $equipamentos_fixos = buscar_equipamentos_fixos($user_id);
 
     if ($equipamentos_fixos) {
         foreach ($equipamentos_fixos as $eq) {
+            $nome = htmlspecialchars($eq['nome']);
+            $foto_path = $eq['foto_path'] ?: "../uploads/equipamento-default.png";
+            echo <<<EQUIPAMENTO
+            <div class="card-dashboard card-item hidden" data-category="equipamentos">
+                        <div class="leading-tight flex flex-col items-center">
+                            <h4 class="text-base font-semibold text-gray-800 mb-3">$nome</h4>
+                            <img src="$foto_path" alt="$nome" class="w-20 h-20 object-contain">
+                        </div>
+                    </div>
+            EQUIPAMENTO;
+        }
+    }
+}
+
+/**
+ * RENDARIZAR OS EQUIPAMENTOS PORTATIL DA EMPRESA EM CARD 
+ */
+
+function render_equipamentos_portatil_card($user_id){
+    $equipamentos_portatil = buscar_equipamentos_portatil($user_id);
+
+    if ($equipamentos_portatil) {
+        foreach ($equipamentos_portatil as $eq) {
             $nome = htmlspecialchars($eq['nome']);
             $foto_path = $eq['foto_path'] ?: "../uploads/equipamento-default.png";
             echo <<<EQUIPAMENTO

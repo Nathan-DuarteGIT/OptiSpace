@@ -75,6 +75,7 @@ require_once "../config/config.php";
                     </div>
 
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
+                     <?php render_equipamentos_portatil_card($_SESSION['user_id'])?>
                     <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
 
                     <!-- Cards de Viaturas (inicialmente ocultos) -->
