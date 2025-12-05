@@ -17,7 +17,7 @@
             }else if($tipo_recurso === 'equipamento'){
                 $caminho_imagem = "../uploads/recurso-default.png";
 
-                if(isset($_FILES['imagem_equipamento'])) {
+                if(isset($_FILES['imagem_equipamento']) && $_FILES['imagem_equipamento']['error'] !== UPLOAD_ERR_NO_FILE) {
                     $upload_result = upload_imagem($_FILES['imagem_equipamento'], '../uploads');
                     if($upload_result['sucesso']) {
                         $caminho_imagem = $upload_result['caminho'];
@@ -53,7 +53,7 @@
             }else if($tipo_recurso === 'viatura'){
                 $caminho_imagem = "../uploads/viatura-default.png";
 
-                if(isset($_FILES['imagem_viatura'])) {
+                if(isset($_FILES['imagem_viatura']) && $_FILES['imagem_equipamento']['error'] !== UPLOAD_ERR_NO_FILE) {
                     $upload_result = upload_imagem($_FILES['imagem_viatura'], '../uploads');
                     if($upload_result['sucesso']) {
                         $caminho_imagem = $upload_result['caminho'];
