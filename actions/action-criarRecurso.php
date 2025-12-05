@@ -31,7 +31,7 @@
                     $tipo_equipamento = $_POST['tipo_equipamento'];
                     $empresa_id = buscar_empresa($_SESSION['user_id']);
 
-                    $stmt = $pdo->prepare("INSERT INTO equipamentos (empresa_id, nome, foto_path, tipoEquipamento) VALUES (:empresa_id, :nome, :caminho, :tipo)");
+                    $stmt = $conn->prepare("INSERT INTO equipamentos (empresa_id, nome, foto_path, tipoEquipamento) VALUES (:empresa_id, :nome, :caminho, :tipo)");
                     $stmt->bindParam(':empresa_id', $empresa_id);
                     $stmt->bindParam(':nome', $nome_recurso);
                     $stmt->bindParam(':caminho', $caminho_imagem);
