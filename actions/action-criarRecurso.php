@@ -69,7 +69,7 @@
                     $matricula = $_POST['matricula'];
                     $empresa_id = buscar_empresa($_SESSION['user_id']);
 
-                    $stmt = $conn->prepare("INSERT INTO equipamentos (empresa_id, nome, matricula, modelo, marca, foto_path) VALUES (:empresa_id, :nome, :matricula, :modelo, :marca, :caminho)");
+                    $stmt = $conn->prepare("INSERT INTO viaturas (empresa_id, nome, matricula, modelo, marca, foto_path) VALUES (:empresa_id, :nome, :matricula, :modelo, :marca, :caminho)");
                     $stmt->bindParam(':empresa_id', $empresa_id);
                     $stmt->bindParam(':nome', $nome_recurso);
                     $stmt->bindParam(':matricula', $matricula);
