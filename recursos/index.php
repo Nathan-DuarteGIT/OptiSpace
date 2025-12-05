@@ -48,7 +48,7 @@ require_once "../config/config.php";
                 </div>
 
                 <!-- Container dos cards -->
-                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8 flex-wrap bg-red-300">
+                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8 flex-wrap">
                     <!-- Cards de Salas -->
                     <div class="card-dashboard card-item" data-category="salas">
                         <div class="leading-tight">
