@@ -283,7 +283,7 @@ function buscar_equipamentos_fixos($user_id){
     $db = new Database();
     $conn = $db->getConnection();
 
-    $stmt = $conn->prepare("SELECT id, nome, foto_path, status_equipamento FROM equipamentos WHERE empresa_id = :empresa_id AND tipoEquipamento = 'equipamento_fixo'");
+    $stmt = $conn->prepare("SELECT id, nome, foto_path, status_equipamento FROM equipamentos WHERE empresa_id = :empresa_id AND tipoEquipamento = 'fixo'");
     $stmt->bindParam(':empresa_id', $empresa_id);
     $stmt->execute();
 
