@@ -316,6 +316,27 @@ function buscar_equipamentos_portatil($user_id){
 }
 
 /**
+ * BUSCA POR VIATURAS DA EMPRESA
+ */
+
+function buscar_viaturas($user_id){
+    $empresa_id = buscar_empresa($user_id);
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT id, nome, foto_path, status_viaturas FROM viaturas WHERE empresa_id = :empresa_id");
+    $stmt->bindParam(':empresa_id', $empresa_id);
+    $stmt->execute();
+
+    $equipamentos_portatil = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $db->closeConnection();
+
+    return $equipamentos_portatil;
+}
+
+/**
  * RENDARIZAR OS EQUIPAMENTOS FIXOS DA EMPRESA NO FORMCRIAR 
  */
 
@@ -378,6 +399,29 @@ function render_equipamentos_portatil_card($user_id){
                         </div>
                     </div>
             EQUIPAMENTO;
+        }
+    }
+}
+
+/**
+ * RENDARIZAR AS VIATURAS DA EMPRESA EM CARD 
+ */
+
+function render_viaturas_card($user_id){
+    $viaturas = buscar_viaturas($user_id);
+
+    if ($viaturas) {
+        foreach ($viaturas as $v) {
+            $nome = htmlspecialchars($v['nome']);
+            $foto_path = $v['foto_path'] ?: "../uploads/equipamento-default.png";
+            echo <<<VIATURA
+            <div class="card-dashboard card-item hidden" data-category="equipamentos">
+                        <div class="leading-tight flex flex-col items-center">
+                            <h4 class="text-base font-semibold text-gray-800 mb-3">$nome</h4>
+                            <img src="$foto_path" alt="$nome" class="w-20 h-20 object-contain">
+                        </div>
+                    </div>
+            VIATURA;
         }
     }
 }

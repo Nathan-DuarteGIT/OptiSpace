@@ -79,6 +79,7 @@ require_once "../config/config.php";
                     <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
 
                     <!-- Cards de Viaturas (inicialmente ocultos) -->
+                     <?php render_viaturas_card($_SESSION['user_id']) ?>
                     <div class="card-dashboard card-item hidden" data-category="viaturas">
                         <div class="leading-tight flex flex-col items-center">
                             <h4 class="text-base font-semibold text-gray-800 mb-3">BMW Série 5</h4>
