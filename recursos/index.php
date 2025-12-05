@@ -75,12 +75,14 @@ require_once "../config/config.php";
                     </div>
 
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
+                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
                      <?php render_equipamentos_portatil_card($_SESSION['user_id'])?>
                     <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
-
+                    </div>
                     <!-- Cards de Viaturas (inicialmente ocultos) -->
-                     <?php render_viaturas_card($_SESSION['user_id']) ?>
+                     
                     <div class="card-dashboard card-item hidden" data-category="viaturas">
+                        <?php render_viaturas_card($_SESSION['user_id']) ?>
                         <div class="leading-tight flex flex-col items-center">
                             <h4 class="text-base font-semibold text-gray-800 mb-3">BMW Série 5</h4>
                             <img src="../assets/images/carro.png" alt="BMW Série 5" class="w-20 h-20 object-contain">

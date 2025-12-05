@@ -369,12 +369,10 @@ function render_equipamentos_fixos_card($user_id){
             $nome = htmlspecialchars($eq['nome']);
             $foto_path = $eq['foto_path'] ?: "../uploads/equipamento-default.png";
             echo <<<EQUIPAMENTO
-            <div class="card-dashboard card-item hidden" data-category="equipamentos">
                         <div class="leading-tight flex flex-col items-center">
                             <h4 class="text-base font-semibold text-gray-800 mb-3">$nome</h4>
                             <img src="$foto_path" alt="$nome" class="w-20 h-20 object-contain">
                         </div>
-                    </div>
             EQUIPAMENTO;
         }
     }
@@ -392,12 +390,10 @@ function render_equipamentos_portatil_card($user_id){
             $nome = htmlspecialchars($eq['nome']);
             $foto_path = $eq['foto_path'] ?: "../uploads/equipamento-default.png";
             echo <<<EQUIPAMENTO
-            <div class="card-dashboard card-item hidden" data-category="equipamentos">
                         <div class="leading-tight flex flex-col items-center">
                             <h4 class="text-base font-semibold text-gray-800 mb-3">$nome</h4>
                             <img src="$foto_path" alt="$nome" class="w-20 h-20 object-contain">
                         </div>
-                    </div>
             EQUIPAMENTO;
         }
     }
@@ -415,12 +411,10 @@ function render_viaturas_card($user_id){
             $nome = htmlspecialchars($v['nome']);
             $foto_path = $v['foto_path'] ?: "../uploads/equipamento-default.png";
             echo <<<VIATURA
-            <div class="card-dashboard card-item hidden" data-category="equipamentos">
                         <div class="leading-tight flex flex-col items-center">
                             <h4 class="text-base font-semibold text-gray-800 mb-3">$nome</h4>
                             <img src="$foto_path" alt="$nome" class="w-20 h-20 object-contain">
                         </div>
-                    </div>
             VIATURA;
         }
     }
