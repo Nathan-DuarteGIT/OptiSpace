@@ -76,26 +76,6 @@ require_once "../config/config.php";
 
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
                     <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
-                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">MacBook Air</h4>
-                            <img src="../assets/images/mackbook_air.png" alt="MacBook Air" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">iPad</h4>
-                            <img src="../assets/images/iPad.png" alt="iPad" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">Canon Eos R5</h4>
-                            <img src="../assets/images/canon_eos.png" alt="Canon Eos R5" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
 
                     <!-- Cards de Viaturas (inicialmente ocultos) -->
                     <div class="card-dashboard card-item hidden" data-category="viaturas">
