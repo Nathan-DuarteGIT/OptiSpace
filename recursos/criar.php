@@ -27,7 +27,7 @@ require_once "../config/config.php";
         <main class="flex-1 p-8">
             <div class="w-full max-w-md">
                 <h3 class="text-2xl font-semibold mb-6 text-black">Novo Recurso</h3>
-                <form action="../actions/action-criarRecurso.php" method="post" class="space-y-6">
+                <form action="../actions/action-criarRecurso.php" method="post" class="space-y-6" enctype="multipart/form-data">
                     <!-- Card do formulário -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Nome do recurso</label>
