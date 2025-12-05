@@ -48,7 +48,7 @@ require_once "../config/config.php";
                 </div>
 
                 <!-- Container dos cards -->
-                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8 flex-warp">
+                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8 flex-wrap">
                     <!-- Cards de Salas -->
                     <div class="card-dashboard card-item" data-category="salas">
                         <div class="leading-tight">
@@ -84,36 +84,37 @@ require_once "../config/config.php";
                 </div>
             </section>
         </main>
+    </div>
 
+    <script>
+        // Script para filtrar os cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const cards = document.querySelectorAll('.card-item');
 
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
 
-        <script>
-            // Script para filtrar os cards
-            document.addEventListener('DOMContentLoaded', function() {
-                const tabButtons = document.querySelectorAll('.tab-btn');
-                const cards = document.querySelectorAll('.card-item');
+                    // Atualizar aba ativa
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('bg-primary-dark', 'text-white');
+                        btn.classList.add('bg-transparent', 'text-primary-dark');
+                    });
+                    this.classList.remove('bg-transparent', 'text-primary-dark');
+                    this.classList.add('bg-primary-dark', 'text-white');
 
-                tabButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const filter = this.getAttribute('data-filter');
-
-                        // Atualizar aba ativa
-                        tabButtons.forEach(btn => {
-                            btn.classList.remove('bg-primary-dark', 'text-white');
-                            btn.classList.add('bg-transparent', 'text-primary-dark');
-                        });
-                        this.classList.remove('bg-transparent', 'text-primary-dark');
-                        this.classList.add('bg-primary-dark', 'text-white');
-
-                        // Filtrar cards
-                        cards.forEach(card => {
-                            if (card.getAttribute('data-category') === filter) {
-                                card.classList.remove('hidden');
-                            } else {
-                                card.classList.add('hidden');
-                            }
-                        });
+                    // Filtrar cards
+                    cards.forEach(card => {
+                        if (card.getAttribute('data-category') === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
                     });
                 });
             });
-        </script>
+        });
+    </script>
+
+</body>
