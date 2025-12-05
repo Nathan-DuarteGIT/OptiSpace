@@ -310,3 +310,22 @@ function render_equipamentos_fixos_formCriar($user_id){
         }
     }
 }
+
+function render_equipamentos_fixos_card($user_id){
+    $equipamentos_fixos = buscar_equipamentos_fixos($user_id);
+
+    if ($equipamentos_fixos) {
+        foreach ($equipamentos_fixos as $eq) {
+            $nome = htmlspecialchars($eq['nome']);
+            $foto_path = $eq['foto_path'] ?: "../uploads/equipamento-default.png";
+            echo <<<EQUIPAMENTO
+            <div class="card-dashboard card-item hidden" data-category="equipamentos">
+                        <div class="leading-tight flex flex-col items-center">
+                            <h4 class="text-base font-semibold text-gray-800 mb-3">$nome</h4>
+                            <img src="$foto_path" alt="$nome" class="w-20 h-20 object-contain">
+                        </div>
+                    </div>
+            EQUIPAMENTO;
+        }
+    }
+}

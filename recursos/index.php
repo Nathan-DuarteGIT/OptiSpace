@@ -75,6 +75,7 @@ require_once "../config/config.php";
                     </div>
 
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
+                    <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
                     <div class="card-dashboard card-item hidden" data-category="equipamentos">
                         <div class="leading-tight flex flex-col items-center">
                             <h4 class="text-base font-semibold text-gray-800 mb-3">MacBook Air</h4>
