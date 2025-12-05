@@ -22,7 +22,7 @@
                     if($upload_result['success']) {
                         $caminho_imagem = $upload_result['caminho'];
                     } else {
-                        header("Location: " . BASE_URL . "recursos/criar.php?erro_upload=" . urlencode($upload_result['error']));
+                        header("Location: " . BASE_URL . "recursos/criar.php?erro_upload=" . urlencode($upload_result['mensagem']));
                         exit();
                     }
                 }
