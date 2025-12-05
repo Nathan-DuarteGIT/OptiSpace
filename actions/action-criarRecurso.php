@@ -8,6 +8,9 @@
             $nome_recurso = $_POST['nome_recurso'];
             $tipo_recurso = $_POST['tipo_recurso'];
 
+            $db = new Database();
+            $conn = $db->getConnection();
+
             if($tipo_recurso === 'sala'){
                 
 
@@ -50,10 +53,15 @@
             }else if($tipo_recurso === 'viatura'){
 
             }
+
+            $db->closeConnection();
+
         } else {
             header("Location: " . BASE_URL . "recursos/criar.php?erro_campos=" . urlencode("Por favor, preencha todos os campos obrigatórios."));
             exit();
         }
+
+        
     } else {
         header("Location: " . BASE_URL . "recursos/criar.php");
         exit();
