@@ -48,7 +48,7 @@ require_once "../config/config.php";
                 </div>
 
                 <!-- Container dos cards -->
-                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8">
+                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8 flex-warp">
                     <!-- Cards de Salas -->
                     <div class="card-dashboard card-item" data-category="salas">
                         <div class="leading-tight">
@@ -77,30 +77,10 @@ require_once "../config/config.php";
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
                      <?php render_equipamentos_portatil_card($_SESSION['user_id'])?>
                     <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
+                    
                     <!-- Cards de Viaturas (inicialmente ocultos) -->
-                     
-                    <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <?php render_viaturas_card($_SESSION['user_id']) ?>
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">BMW Série 5</h4>
-                            <img src="../assets/images/carro.png" alt="BMW Série 5" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">Peugeot e-208</h4>
-                            <img src="../assets/images/carro.png" alt="Peugeot e-208" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-1">Renault Kangoo Van</h4>
-                            <img src="../assets/images/van.png" alt="Renault Kangoo Van" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
+                     <?php render_viaturas_card($_SESSION['user_id']) ?>
+                    
                 </div>
             </section>
         </main>
