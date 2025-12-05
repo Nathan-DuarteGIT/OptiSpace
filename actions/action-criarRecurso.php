@@ -17,8 +17,8 @@
             }else if($tipo_recurso === 'equipamento'){
                 $caminho_imagem = "../uploads/recurso_default.png";
 
-                if(isset($_FILES['imagem_recurso'])) {
-                    $upload_result = upload_imagem($_FILES['imagem_recurso'], '../uploads');
+                if(isset($_FILES['imagem_equipamento'])) {
+                    $upload_result = upload_imagem($_FILES['imagem_equipamento'], '../uploads');
                     if($upload_result['success']) {
                         $caminho_imagem = $upload_result['caminho'];
                     } else {
