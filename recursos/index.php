@@ -75,10 +75,8 @@ require_once "../config/config.php";
                     </div>
 
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
-                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
                      <?php render_equipamentos_portatil_card($_SESSION['user_id'])?>
                     <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
-                    </div>
                     <!-- Cards de Viaturas (inicialmente ocultos) -->
                      
                     <div class="card-dashboard card-item hidden" data-category="viaturas">
