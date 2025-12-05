@@ -137,7 +137,7 @@ require_once "../config/config.php";
                                     <span>Equipamento fixo</span>
                                 </label>
                                 <label class="flex items-center cursor-pointer">
-                                    <input type="radio" name="tipo_equipamento" value="remoto" required class="mr-3 w-4 h-4 text-indigo-600 focus:ring-2 focus:ring-indigo-500">
+                                    <input type="radio" name="tipo_equipamento" value="portatil" required class="mr-3 w-4 h-4 text-indigo-600 focus:ring-2 focus:ring-indigo-500">
                                     <span>Equipamento móvel</span>
                                 </label>
                             </div>

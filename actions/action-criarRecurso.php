@@ -11,7 +11,25 @@
                 
 
             }else if($tipo_recurso === 'equipamento'){
-
+                if(isset($_POST['tipo_equipamento'])) {
+                    $tipo_equipamento = $_POST['tipo_equipamento'];
+                    
+                    $stmt = $pdo->prepare("INSERT INTO recursos (nome, tipo, sub_tipo) VALUES (:nome, :tipo, :sub_tipo)");
+                    $stmt->bindParam(':nome', $nome_recurso);
+                    $stmt->bindParam(':tipo', $tipo_recurso);
+                    $stmt->bindParam(':sub_tipo', $tipo_equipamento);
+                    
+                    if($stmt->execute()) {
+                        header("Location: " . BASE_URL . "recursos/index.php?sucesso=" . urlencode("Recurso criado com sucesso."));
+                        exit();
+                    } else {
+                        header("Location: " . BASE_URL . "recursos/criar.php?erro_db=" . urlencode("Erro ao criar recurso. Tente novamente."));
+                        exit();
+                    }
+                } else {
+                    header("Location: " . BASE_URL . "recursos/criar.php?erro_campos=" . urlencode("Por favor, selecione o tipo de equipamento."));
+                    exit();
+                }
             }else if($tipo_recurso === 'viatura'){
 
             }
