@@ -68,11 +68,6 @@ require_once "../config/config.php";
                             </div>
                         </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Outro equipamento (opcional)</label>
-                            <input type="text" name="outro_equipamento" placeholder="Especifique outro equipamento"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
-                        </div>
                     </div>
 
                     <!-- Campos condicionais para VIATURA -->
