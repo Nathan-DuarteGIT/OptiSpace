@@ -30,7 +30,7 @@ require_once "../config/config.php";
                 <form action="../actions/action-criarRecurso.php" method="post" class="space-y-6" enctype="multipart/form-data">
                     <!-- Card do formulário -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Nome do recurso</label>
+                        <label for="nome_recurso" class="block text-sm font-medium text-gray-700 mb-2">Nome do recurso</label>
                         <input type="text" name="nome_recurso" placeholder="Nome do recurso" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
                     </div>
@@ -56,19 +56,19 @@ require_once "../config/config.php";
                     <!-- Campos condicionais para SALA -->
                     <div id="campos-sala" class="hidden space-y-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Capacidade máxima</label>
+                            <label for="capacidade" class="block text-sm font-medium text-gray-700 mb-2">Capacidade máxima</label>
                             <input type="number" name="capacidade" min="1" placeholder="Digite o número de participantes" required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Equipamentos (opcional)</label>
+                            <label for="equipamentos[]" class="block text-sm font-medium text-gray-700 mb-2">Equipamentos (opcional)</label>
                             <div class="space-y-3">
                                 <?php render_equipamentos_fixos_formCriar($_SESSION['user_id'])?>
                             </div>
                         </div>
                          <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Localização</label>
+                            <label for="localizacao" class="block text-sm font-medium text-gray-700 mb-2">Localização</label>
                             <input type="text" name="localizacao" placeholder="Localização" required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
                         </div>
@@ -77,25 +77,25 @@ require_once "../config/config.php";
                     <!-- Campos condicionais para VIATURA -->
                     <div id="campos-viatura" class="hidden space-y-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Marca *</label>
+                            <label for="marca" class="block text-sm font-medium text-gray-700 mb-2">Marca *</label>
                             <input type="text" name="marca" placeholder="Ex: BMW, Peugeot, Renault..." required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Modelo *</label>
+                            <label for="modelo" class="block text-sm font-medium text-gray-700 mb-2">Modelo *</label>
                             <input type="text" name="modelo" placeholder="Ex: 320i, 208, Clio..." required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Matrícula *</label>
+                            <label for="matricula" class="block text-sm font-medium text-gray-700 mb-2">Matrícula *</label>
                             <input type="text" name="matricula" placeholder="Ex: AA-00-BB" required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Imagem da viatura (opcional)</label>
+                            <label for="imagem_viatura" class="block text-sm font-medium text-gray-700 mb-2">Imagem da viatura (opcional)</label>
                             <input type="file" name="imagem_viatura" id="imagem_viatura" accept="image/*"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
 
@@ -117,7 +117,7 @@ require_once "../config/config.php";
                     <!-- Campos condicionais para EQUIPAMENTO -->
                     <div id="campos-equipamento" class="hidden space-y-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de equipamento *</label>
+                            <label for="tipo_equipamento" class="block text-sm font-medium text-gray-700 mb-2">Tipo de equipamento *</label>
                             <div class="space-y-3">
                                 <label class="flex items-center cursor-pointer">
                                     <input type="radio" name="tipo_equipamento" value="fixo" required class="mr-3 w-4 h-4 text-indigo-600 focus:ring-2 focus:ring-indigo-500">
@@ -131,7 +131,7 @@ require_once "../config/config.php";
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Imagem do equipamento (opcional)</label>
+                            <label for="imagem_equipamento" class="block text-sm font-medium text-gray-700 mb-2">Imagem do equipamento (opcional)</label>
                             <input type="file" name="imagem_equipamento" id="imagem_equipamento" accept="image/*"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
 
