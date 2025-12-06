@@ -12,7 +12,47 @@
             $conn = $db->getConnection();
 
             if($tipo_recurso === 'sala'){
-                
+                if(isset($_POST['capacidade'])) {
+                    $capacidade = $_POST['capacidade'];
+                    if(isset($_POST['equipamentos'])){
+                        $equipamentos = $_POST['equipamentos'];
+                    } else {
+                        $equipamentos = "";
+                    }
+                    $empresa_id = buscar_empresa($_SESSION['user_id']);
+                    if(isset($_POST['localizacao'])){
+                        $localizacao = $_POST['localizacao'];
+                    } else {
+                        $localizacao = "";
+                    }
+
+                    $stmt = $conn->prepare("INSERT INTO sala (empresa_id, nome, capacidade_max, localizacao) VALUES (:empresa_id, :nome, :capacidade, :localizacao)");
+                    $stmt->bindParam(':empresa_id', $empresa_id);
+                    $stmt->bindParam(':nome', $nome_recurso);
+                    $stmt->bindParam(':capacidade', $capacidade);
+                    $stmt->bindParam(':localizacao', $localizacao);
+                    
+                    
+                    if($stmt->execute()) {
+                        if(!empty($equipamentos)){
+                            $sala_id = $conn->lastInsertId();
+                            foreach($equipamentos as $equipamento){
+                                $stmt_equip = $conn->prepare("INSERT INTO equipamentos_sala (sala_id, equipamento_id) VALUES (:sala_id, :equipamento)");
+                                $stmt_equip->bindParam(':sala_id', $sala_id);
+                                $stmt_equip->bindParam(':equipamento', $equipamento);
+                                $stmt_equip->execute();
+                            }
+                        }
+                        header("Location: " . BASE_URL . "recursos/index.php?sucesso=" . urlencode("Recurso criado com sucesso."));
+                        exit();
+                    } else {
+                        header("Location: " . BASE_URL . "recursos/criar.php?erro_db=" . urlencode("Erro ao criar recurso. Tente novamente."));
+                        exit();
+                    }
+                } else {
+                    header("Location: " . BASE_URL . "recursos/criar.php?erro_campos=" . urlencode("Por favor, preencha todos os campos obrigatórios."));
+                    exit();
+                }
 
             }else if($tipo_recurso === 'equipamento'){
                 $caminho_imagem = "../uploads/recurso-default.png";
