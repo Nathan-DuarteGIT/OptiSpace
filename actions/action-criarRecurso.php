@@ -14,8 +14,8 @@
             if($tipo_recurso === 'sala'){
                 if(isset($_POST['capacidade'])) {
                     $capacidade = $_POST['capacidade'];
-                    if(isset($_POST['equipamentos'])){
-                        $equipamentos = $_POST['equipamentos'];
+                    if(isset($_POST['equipamentos_sala'])){
+                        $equipamentos = $_POST['equipamentos_sala'];
                     } else {
                         $equipamentos = "";
                     }
