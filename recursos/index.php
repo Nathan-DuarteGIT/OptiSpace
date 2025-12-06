@@ -50,6 +50,7 @@ require_once "../config/config.php";
                 <!-- Container dos cards -->
                 <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8 flex-wrap">
                     <!-- Cards de Salas -->
+                     <?php render_salas_card($_SESSION['user_id'])?>
                     <div class="card-dashboard card-item" data-category="salas">
                         <div class="leading-tight">
                             <h4 class="text-base font-semibold text-black-800 mb-1">Sala 1</h4>

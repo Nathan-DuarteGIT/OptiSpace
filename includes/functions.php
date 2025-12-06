@@ -399,6 +399,46 @@ function buscar_viaturas($user_id){
 }
 
 /**
+ * BUSCA POR SALAS DA EMPRESA
+ */
+
+function buscar_salas($user_id){
+    $empresa_id = buscar_empresa($user_id);
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT id, nome, capacidade, localizacao, status_sala FROM sala WHERE empresa_id = :empresa_id");
+    $stmt->bindParam(':empresa_id', $empresa_id);
+    $stmt->execute();
+
+    $salas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $db->closeConnection();
+
+    return $salas;
+}
+
+/**
+ * BUSCA POR EQUIPAMENTOS ASSOCIADOS Á SALA DA EMPRESA
+ */
+
+function buscar_equipamentos_sala($sala_id){
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT e.nome FROM equipamentos_sala es JOIN equipamentos e ON es.equipamento_id = e.id WHERE es.sala_id = :sala_id");
+    $stmt->bindParam(':sala_id', $sala_id);
+    $stmt->execute();
+
+    $equipamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $db->closeConnection();
+
+    return $equipamentos;
+}
+
+/**
  * RENDARIZAR OS EQUIPAMENTOS FIXOS DA EMPRESA NO FORMCRIAR 
  */
 
@@ -484,6 +524,37 @@ function render_viaturas_card($user_id){
                         </div>
                     </div>
             VIATURA;
+        }
+    }
+}
+
+/**
+ * RENDARIZAR AS SALAS DA EMPRESA EM CARD  
+ */
+
+function render_salas_card($user_id){
+    $salas = buscar_salas($user_id);
+
+    if ($salas) {
+        foreach ($salas as $s) {
+            $nome = htmlspecialchars($s['nome']);
+            $capacidade = htmlspecialchars($s['capacidade']);
+            $localizacao = htmlspecialchars($s['localizacao']);
+            $equipamentos = buscar_equipamentos_sala($s['id']);
+            $equipamentos_list = array_map(function($e) {
+                return htmlspecialchars($e['nome']);
+            }, $equipamentos);
+            $equipamentos_str = implode(', ', $equipamentos_list);
+
+            echo <<<SALA
+                    <div class="card-dashboard card-item" data-category="salas">
+                        <div class="leading-tight">
+                            <h4 class="text-base font-semibold text-gray-800 mb-1">$nome</h4>
+                            <p class="text-base font-semibold text-gray-600 mb-2">Capacidade: $capacidade lugares</p>
+                            <p class="text-base font-semibold text-gray-500">Equipamentos: $equipamentos_str</p>
+                        </div>
+                    </div>
+            SALA;
         }
     }
 }
