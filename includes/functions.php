@@ -408,7 +408,7 @@ function buscar_salas($user_id){
     $db = new Database();
     $conn = $db->getConnection();
 
-    $stmt = $conn->prepare("SELECT id, nome, capacidade, localizacao, status_sala FROM sala WHERE empresa_id = :empresa_id");
+    $stmt = $conn->prepare("SELECT id, nome, capacidade_max, localizacao, status_sala FROM sala WHERE empresa_id = :empresa_id");
     $stmt->bindParam(':empresa_id', $empresa_id);
     $stmt->execute();
 
