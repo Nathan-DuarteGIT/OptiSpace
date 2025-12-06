@@ -550,8 +550,8 @@ function render_salas_card($user_id){
                     <div class="card-dashboard card-item" data-category="salas">
                         <div class="leading-tight">
                             <h4 class="text-base font-semibold text-gray-800 mb-1">$nome</h4>
-                            <p class="text-base font-semibold text-gray-600 mb-2">Capacidade: $capacidade lugares</p>
-                            <p class="text-base font-semibold text-gray-500">Equipamentos: $equipamentos_str</p>
+                            <p class="text-base font-semibold text-gray-600 mb-2">$capacidade lugares</p>
+                            <p class="text-base font-semibold text-gray-500">$equipamentos_str</p>
                         </div>
                     </div>
             SALA;

@@ -51,30 +51,7 @@ require_once "../config/config.php";
                 <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8 flex-wrap">
                     <!-- Cards de Salas -->
                      <?php render_salas_card($_SESSION['user_id'])?>
-                    <div class="card-dashboard card-item" data-category="salas">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 1</h4>
-                            <p class="text-base font-semibold text-black-600 mb-2">12 lugares</p>
-                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item" data-category="salas">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 2</h4>
-                            <p class="text-base font-semibold text-black-600 mb-2">10 lugares</p>
-                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item" data-category="salas">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 3</h4>
-                            <p class="text-base font-semibold text-black-600 mb-2">6 lugares</p>
-                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
-                        </div>
-                    </div>
-
+                     
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
                      <?php render_equipamentos_portatil_card($_SESSION['user_id'])?>
                     <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
