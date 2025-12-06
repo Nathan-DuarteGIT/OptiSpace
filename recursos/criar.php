@@ -37,10 +37,11 @@ require_once "../config/config.php";
 
                     <!-- Tipo de Recurso -->
                     <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de recurso</label>
                         <div class="relative">
                             <select name="tipo_recurso" id="tipo_recurso" required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
-                                <option value="" disabled selected>Recurso</option>
+                                <option value="" disabled selected>Selecione uma opção</option>
                                 <option value="sala">Sala</option>
                                 <option value="viatura">Viatura</option>
                                 <option value="equipamento">Equipamento</option>
