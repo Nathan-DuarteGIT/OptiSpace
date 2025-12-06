@@ -274,6 +274,68 @@ function buscar_utilizadores($user_id){
 }
 
 /**
+ * CONTAR EQUIPAMENTOS DA EMPRESA
+ */
+
+function contar_equipamentos($user_id){
+    $empresa_id = buscar_empresa($user_id);
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM equipamentos WHERE empresa_id = :empresa_id");
+    $stmt->bindParam(':empresa_id', $empresa_id);
+    $stmt->execute();
+
+    $total_equipamentos = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+    $db->closeConnection();
+
+    return $total_equipamentos;
+}
+
+/**
+ * CONTAR SALAS DA EMPRESA
+ */
+
+function contar_salas($user_id){
+    $empresa_id = buscar_empresa($user_id);
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM sala WHERE empresa_id = :empresa_id");
+    $stmt->bindParam(':empresa_id', $empresa_id);
+    $stmt->execute();
+
+    $total_salas = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+    $db->closeConnection();
+
+    return $total_salas;
+}
+/**
+ * CONTAR VIATURAS DA EMPRESA
+ */
+
+function contar_viaturas($user_id){
+    $empresa_id = buscar_empresa($user_id);
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM viaturas WHERE empresa_id = :empresa_id");
+    $stmt->bindParam(':empresa_id', $empresa_id);
+    $stmt->execute();
+
+    $total_viaturas = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+    $db->closeConnection();
+
+    return $total_viaturas;
+}
+
+/**
  * BUSCA POR EQUIPAMENTOS FIXOS DA EMPRESA
  */
 
