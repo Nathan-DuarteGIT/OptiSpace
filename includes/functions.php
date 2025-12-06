@@ -538,7 +538,7 @@ function render_salas_card($user_id){
     if ($salas) {
         foreach ($salas as $s) {
             $nome = htmlspecialchars($s['nome']);
-            $capacidade = htmlspecialchars($s['capacidade']);
+            $capacidade = htmlspecialchars($s['capacidade_max']);
             $localizacao = htmlspecialchars($s['localizacao']);
             $equipamentos = buscar_equipamentos_sala($s['id']);
             $equipamentos_list = array_map(function($e) {
