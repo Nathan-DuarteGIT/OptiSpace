@@ -29,7 +29,7 @@ require_once "../config/config.php";
                 <h3 class="text-2xl font-semibold mb-6 text-black">Criar Utilizador</h3>
                 <!-- Card do formulário -->
                 <div class="rounded-2xl px-8 py-10">
-                    <form action="" method="post" class="space-y-8">
+                    <form action="../actions/action-criarUtilizador.php" method="POST" class="space-y-8">
                         <!-- Nome -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Utilizador</label>

@@ -8,6 +8,6 @@ $_SESSION = array();
 session_destroy();
 
 // Redireciona para a página de login
-header('Location: ' . BASE_URL . ' index.php');
+header('Location: ' . BASE_URL . 'index.php');
 exit;
 ?>

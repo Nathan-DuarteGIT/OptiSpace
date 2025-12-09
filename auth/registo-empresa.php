@@ -1,16 +1,20 @@
 <?php
 require_once "../config/config.php";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Location: ativacao.php');
-    exit();
+
+$erro = '';
+if (isset($_SESSION['erro_registo'])) {
+    $erro = htmlspecialchars($_SESSION['erro_registo']);
+    unset($_SESSION['erro_registo']);
 }
 
-if (isset($_GET['erro_credenciais'])) {
-    $erro_credenciais = htmlspecialchars($_GET['erro_credenciais']);
-    echo "<script>alert('$erro_credenciais');</script>";
-} else if (isset($_GET['conta_inativa'])) {
-    $conta_inativa = htmlspecialchars($_GET['conta_inativa']);
-    echo "<script>alert('$conta_inativa');</script>";
+$name_admin = '';
+$name_empresa = '';
+$email = '';
+if (isset($_SESSION['form_data'])) {
+    $name_admin = htmlspecialchars($_SESSION['form_data']['name_admin'] ?? '');
+    $name_empresa = htmlspecialchars($_SESSION['form_data']['name_empresa'] ?? '');
+    $email = htmlspecialchars($_SESSION['form_data']['email'] ?? '');
+    unset($_SESSION['form_data']);
 }
 ?>
 
@@ -44,33 +48,56 @@ if (isset($_GET['erro_credenciais'])) {
         </div>
 
         <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <form method="POST" action="../actions/action-register.php" class="space-y-6">
+            <form method="POST" action="../actions/action-register.php" class="space-y-6" id="registerForm">
                 <div class="text-left mb-6">
                     <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
                     <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Entrar</h2>
                 </div>
 
+                <?php if (!empty($erro)): ?>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4 text-left" role="alert">
+                        <strong class="font-bold">Erro: </strong>
+                        <span class="block sm:inline"><?php echo $erro; ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Primeiro e Último Nome do Admin</label>
-                    <input type="text" name="name_admin" required placeholder="Primeiro e Último Nome"
+                    <input type="text"
+                        name="name_admin"
+                        required
+                        placeholder="Primeiro e Último Nome"
+                        value="<?php echo $name_admin; ?>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nome da Empresa</label>
-                    <input type="text" name="name_empresa" required placeholder="Nome da Empresa"
+                    <input type="text"
+                        name="name_empresa"
+                        required
+                        placeholder="Nome da Empresa"
+                        value="<?php echo $name_empresa; ?>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira o Email do Admin</label>
-                    <input type="email" name="email" required placeholder="Email"
+                    <input type="email"
+                        name="email"
+                        required
+                        placeholder="exemplo@email.com"
+                        value="<?php echo $email; ?>"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira a sua Palavra-passe</label>
-                    <input type="password" name="password" required placeholder="Palavra-passe"
+                    <input type="password"
+                        name="password"
+                        required
+                        placeholder="Mínimo 6 caracteres"
+                        minlength="6"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
 
@@ -83,6 +110,80 @@ if (isset($_GET['erro_credenciais'])) {
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            const hasError = <?php echo !empty($erro) ? 'true' : 'false'; ?>;
+
+            // Se houver erro, focar no primeiro campo
+            if (hasError) {
+                const firstInput = form.querySelector('input');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }
+
+            form.addEventListener('submit', function(e) {
+                const nameAdmin = document.querySelector('input[name="name_admin"]').value.trim();
+                const nameEmpresa = document.querySelector('input[name="name_empresa"]').value.trim();
+                const email = document.querySelector('input[name="email"]').value.trim();
+                const password = document.querySelector('input[name="password"]').value;
+
+                // Validar campos vazios
+                if (!nameAdmin || !nameEmpresa || !email || !password) {
+                    e.preventDefault();
+                    showError('Por favor, preencha todos os campos.');
+                    return false;
+                }
+
+                // Validar nome completo (pelo menos 2 palavras)
+                if (nameAdmin.split(' ').filter(n => n.length > 0).length < 2) {
+                    e.preventDefault();
+                    showError('Por favor, insira o primeiro e último nome.');
+                    return false;
+                }
+
+                // Validar email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    e.preventDefault();
+                    showError('Por favor, insira um email válido.');
+                    return false;
+                }
+
+                // Validar palavra-passe (mínimo 6 caracteres)
+                if (password.length < 6) {
+                    e.preventDefault();
+                    showError('A palavra-passe deve ter no mínimo 6 caracteres.');
+                    return false;
+                }
+            });
+
+            function showError(message) {
+                // Remover erro anterior se existir
+                const oldError = document.querySelector('.error-message-js');
+                if (oldError) {
+                    oldError.remove();
+                }
+
+                // Criar nova mensagem de erro
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message-js bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4 text-left';
+                errorDiv.innerHTML = '<strong class="font-bold">Erro: </strong><span class="block sm:inline">' + message + '</span>';
+
+                // Inserir antes do primeiro campo
+                const firstDiv = form.querySelector('div');
+                firstDiv.parentNode.insertBefore(errorDiv, firstDiv.nextSibling);
+
+                // Scroll para o erro
+                errorDiv.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

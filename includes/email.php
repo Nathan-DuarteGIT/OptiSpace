@@ -34,3 +34,55 @@ function enviarCodigoAtivacao($destinatario, $codigo_ativacao)
         return false;
     }
 }
+
+
+function enviarEmailRecuperacao($destinatario){
+
+    global $mail;
+
+    try {
+        $mail->setFrom($mail->Username, 'OptiSpace');
+        $mail->addAddress($destinatario);
+
+        $mail->Subject = 'Redefinição da Sua Palavra-passe';
+        $mail->Body    = "Recebemos um pedido para recuperar o acesso à sua conta. \n" . "Para continuar, clique no link abaixo e siga as instruções: \n" .
+                         BASE_URL . 'auth/mudar-passe.php?email=' . $destinatario . "\n \n" .
+                         'Se você não solicitou essa alteração, por favor ignore este email.';
+
+        if ($mail->send()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        echo "Erro ao enviar email: {$mail->ErrorInfo}";
+        return false;
+    }
+    
+}
+
+function enviarEmailBoasVindas($destinatario, $nome, $codigo_ativacao) {
+    global $mail;
+
+    try {
+        $mail->setFrom($mail->Username, 'OptiSpace');
+        $mail->addAddress($destinatario);
+
+        $mail->Subject = 'Bem-vindo à OptiSpace!';
+        $mail->Body    = "Olá $nome,\n\n" .
+                         "Bem-vindo à OptiSpace! Estamos entusiasmados por tê-lo a bordo.\n\n" .
+                         "Para ativar a sua conta, utilize o seguinte código de ativação: $codigo_ativacao no seguinte link: " . BASE_URL . 'auth/ativacao.php?email=' . $destinatario . " \n\n" .
+                         "Se tiver alguma dúvida, não hesite em contactar-nos.\n\n" .
+                         "Atenciosamente,\n" .
+                         "A Equipa OptiSpace";
+
+        if ($mail->send()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        echo "Erro ao enviar email: {$mail->ErrorInfo}";
+        return false;
+    }
+}

@@ -39,7 +39,7 @@ require_once "../config/config.php";
                         <div class="card-dashboard">
                             <div class="leading-tight">
                                 <h4 class="text-base font-medium text-gray-700">Salas</h4>
-                                <p id="salas" class="text-xl font-black text-gray-900 mt-1">0</p>
+                                <p id="salas" class="text-xl font-black text-gray-900 mt-1"><?php echo contar_salas($_SESSION['user_id']) ?></p>
                             </div>
                             <img src="../assets/images/salas.png" alt="Salas" class="w-10 h-auto ml-2">
                         </div>
@@ -48,7 +48,7 @@ require_once "../config/config.php";
                         <div class="card-dashboard">
                             <div class="leading-tight">
                                 <h4 class="text-base font-medium text-gray-700">Equipamentos</h4>
-                                <p id="equipamentos" class="text-xl font-black text-gray-900 mt-1">0</p>
+                                <p id="equipamentos" class="text-xl font-black text-gray-900 mt-1"><?php echo contar_equipamentos($_SESSION['user_id']) ?></p>
                             </div>
                             <img src="../assets/images/equipamentos.png" alt="Equipamentos" class="w-10 h-auto ml-2">
                         </div>
@@ -57,7 +57,7 @@ require_once "../config/config.php";
                         <div class="card-dashboard ">
                             <div class="leading-tight">
                                 <h4 class="text-base font-medium text-gray-700">Viaturas</h4>
-                                <p id="viaturas" class="text-xl font-black text-gray-900 mt-1">0</p>
+                                <p id="viaturas" class="text-xl font-black text-gray-900 mt-1"><?php echo contar_viaturas($_SESSION['user_id']) ?></p>
                             </div>
                             <img src="../assets/images/viaturas.png" alt="Viaturas" class="w-10 h-auto ml-2">
                         </div>
@@ -67,7 +67,7 @@ require_once "../config/config.php";
             </main>
         </div><!-- Conteúdo principal ocupa o resto -->
     </body>
-<!--CORPO DA PAGINA UTILIZADOR-->
+<!--CORPO DA PAGINA UTILIZADOR (reformular a area do utilizador)-->
 <?php else: ?>
     <body class="bg-primary font-sans text-gray-900 min-h-screen flex">
         <!-- Sidebar fixa à esquerda -->

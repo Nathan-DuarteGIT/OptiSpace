@@ -48,109 +48,51 @@ require_once "../config/config.php";
                 </div>
 
                 <!-- Container dos cards -->
-                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8">
+                <div id="cardsContainer" class="flex flex-col sm:flex-row justify-start gap-8 flex-wrap">
                     <!-- Cards de Salas -->
-                    <div class="card-dashboard card-item" data-category="salas">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 1</h4>
-                            <p class="text-base font-semibold text-black-600 mb-2">12 lugares</p>
-                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item" data-category="salas">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 2</h4>
-                            <p class="text-base font-semibold text-black-600 mb-2">10 lugares</p>
-                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item" data-category="salas">
-                        <div class="leading-tight">
-                            <h4 class="text-base font-semibold text-black-800 mb-1">Sala 3</h4>
-                            <p class="text-base font-semibold text-black-600 mb-2">6 lugares</p>
-                            <p class="text-base font-semibold text-black-500">Projetor, computador</p>
-                        </div>
-                    </div>
-
+                     <?php render_salas_card($_SESSION['user_id'])?>
+                     
                     <!-- Cards de Equipamentos (inicialmente ocultos) -->
-                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">MacBook Air</h4>
-                            <img src="../assets/images/mackbook_air.png" alt="MacBook Air" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">iPad</h4>
-                            <img src="../assets/images/iPad.png" alt="iPad" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item hidden" data-category="equipamentos">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">Canon Eos R5</h4>
-                            <img src="../assets/images/canon_eos.png" alt="Canon Eos R5" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
+                     <?php render_equipamentos_portatil_card($_SESSION['user_id'])?>
+                    <?php render_equipamentos_fixos_card($_SESSION['user_id'])?>
+                    
                     <!-- Cards de Viaturas (inicialmente ocultos) -->
-                    <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">BMW Série 5</h4>
-                            <img src="../assets/images/carro.png" alt="BMW Série 5" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-3">Peugeot e-208</h4>
-                            <img src="../assets/images/carro.png" alt="Peugeot e-208" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard card-item hidden" data-category="viaturas">
-                        <div class="leading-tight flex flex-col items-center">
-                            <h4 class="text-base font-semibold text-gray-800 mb-1">Renault Kangoo Van</h4>
-                            <img src="../assets/images/van.png" alt="Renault Kangoo Van" class="w-20 h-20 object-contain">
-                        </div>
-                    </div>
-
+                     <?php render_viaturas_card($_SESSION['user_id']) ?>
+                    
                 </div>
             </section>
         </main>
+    </div>
 
+    <script>
+        // Script para filtrar os cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const cards = document.querySelectorAll('.card-item');
 
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
 
-        <script>
-            // Script para filtrar os cards
-            document.addEventListener('DOMContentLoaded', function() {
-                const tabButtons = document.querySelectorAll('.tab-btn');
-                const cards = document.querySelectorAll('.card-item');
+                    // Atualizar aba ativa
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('bg-primary-dark', 'text-white');
+                        btn.classList.add('bg-transparent', 'text-primary-dark');
+                    });
+                    this.classList.remove('bg-transparent', 'text-primary-dark');
+                    this.classList.add('bg-primary-dark', 'text-white');
 
-                tabButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const filter = this.getAttribute('data-filter');
-
-                        // Atualizar aba ativa
-                        tabButtons.forEach(btn => {
-                            btn.classList.remove('bg-primary-dark', 'text-white');
-                            btn.classList.add('bg-transparent', 'text-primary-dark');
-                        });
-                        this.classList.remove('bg-transparent', 'text-primary-dark');
-                        this.classList.add('bg-primary-dark', 'text-white');
-
-                        // Filtrar cards
-                        cards.forEach(card => {
-                            if (card.getAttribute('data-category') === filter) {
-                                card.classList.remove('hidden');
-                            } else {
-                                card.classList.add('hidden');
-                            }
-                        });
+                    // Filtrar cards
+                    cards.forEach(card => {
+                        if (card.getAttribute('data-category') === filter) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
                     });
                 });
             });
-        </script>
+        });
+    </script>
+
+</body>

@@ -46,7 +46,7 @@ if (isset($_GET['erro_credenciais'])) {
     </div>
 
     <div class="form-container w-[90%] md:w-full max-w-md bg-white p-8 rounded-2xl shadow-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        <form method="POST" action="../actions/action-login.php" class="space-y-6">
+        <form method="POST" action="../actions/action-mudarPasse.php" class="space-y-6">
             <div class="flex justify-between text-left mb-6">
                 <h1 class="text-lg md:text-xl text-dark">Bem-vindo à OptiSpace</h1>
                 <div class="absolute top-3 md:top-6 right-3 md:right-6 text-xs md:text-sm text-gray-600 bg-white/80 backdrop-blur-sm px-2 md:px-3 py-1 rounded-md">
@@ -55,7 +55,11 @@ if (isset($_GET['erro_credenciais'])) {
                 </div>
             </div>
             <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Alterar palavra-passe</h2>
-
+            <?php 
+                if(isset($_GET['email'])) {
+                    echo '<input type="hidden" name="email" value="' . htmlspecialchars($_GET['email']) . '">';
+                }
+            ?>
             <div class="space-y-6 mb-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira a nova palavra-passe</label>
@@ -65,7 +69,7 @@ if (isset($_GET['erro_credenciais'])) {
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Confirme a nova palavra-passe</label>
-                    <input type="password" name="password" required placeholder="Confirme a nova palavra-passe"
+                    <input type="password" name="ConfirmPassword" required placeholder="Confirme a nova palavra-passe"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
                 </div>
             </div>
