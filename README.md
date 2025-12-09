@@ -23,5 +23,8 @@ Desenvolvido como projeto académico para as disciplinas *Projeto de Tecnologias
 ## Como Executar
 Aceda à aplicação através de `https://andnat.antrob.eu/index.php`.
 
+## Aceda rapidamente com o QR Code:
+[![QR Code para a aplicação Optispace](assets/images/Optispace-qrcode.png)](https://andnat.antrob.eu/index.php)
+
 ## Licença
 Este projeto é exclusivamente para fins académicos e não possui licença de distribuição comercial.
