@@ -154,6 +154,9 @@ require_once "../config/config.php";
 </html>
 
 <script>
+    const inputData = document.querySelector('input[name="data"]');
+    const inputHoraInicio = document.querySelector('input[name="hora_inicio"]');
+    const inputHoraFim = document.querySelector('input[name="hora_fim"]');
     const tipoRecurso = document.getElementById('tipo_recurso');
     const camposSala = document.getElementById('campos-sala');
     const camposViatura = document.getElementById('campos-viatura');
@@ -172,6 +175,17 @@ require_once "../config/config.php";
             camposEquipamento.classList.remove('hidden');
         }
     }
+
+    function resetarTipoRecurso() {
+        // Redefine o valor do select "Tipo de recurso" para a opção inicial (disabled selected)
+        tipoRecurso.value = ''; 
+        // Chama a função para ocultar os campos condicionais e limpar os seus valores
+        atualizarCampos(); 
+    }
+    
+    inputData.addEventListener('change', resetarTipoRecurso);
+    inputHoraInicio.addEventListener('change', resetarTipoRecurso);
+    inputHoraFim.addEventListener('change', resetarTipoRecurso);
 
     tipoRecurso.addEventListener('change', atualizarCampos);
     document.addEventListener('DOMContentLoaded', atualizarCampos);
