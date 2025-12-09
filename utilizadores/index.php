@@ -36,17 +36,6 @@ require_once "../config/config.php";
                 </a>
             </div>
 
-            <!-- Campo de pesquisa -->
-            <div class="mb-6 flex items-center justify-between">
-                <div class="relative flex-1 max-w-md">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-gray-300 text-xs pointer-events-none"></i>
-                    <input
-                        type="text"
-                        placeholder="Busque utilizadores por nome ou email"
-                        class="w-full pl-11 pr-4 py-3 text-sm border border-gray-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark_green focus:border-transparent bg-white shadow-sm">
-                </div>
-            </div>
-
             <!-- Container principal -->
             <div class="bg rounded-lg shadow-sm">
                 <!-- Tabela de utilizadores -->
