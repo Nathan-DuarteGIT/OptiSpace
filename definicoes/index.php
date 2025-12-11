@@ -80,7 +80,7 @@ require_once "../config/config.php";
         <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md mx-4">
             <h4 class="text-xl font-semibold mb-6 text-gray-900">Alterar Senha</h4>
 
-            <form method="post" action="actions/action-alterarSenha.php" class="space-y-4" id="formAlterarSenha">
+            <form method="post" action="../actions/action-alterarSenha.php" class="space-y-4" id="formAlterarSenha">
                 <!-- Nova senha -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">
