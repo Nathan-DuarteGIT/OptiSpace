@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn = $db->getConnection();
 
         // Buscar a senha atual do usuário na base de dados
-        $stmt = $conn->prepare("SELECT password FROM users WHERE id = :user_id");
+        $stmt = $conn->prepare("SELECT password FROM utilizadores WHERE id = :user_id");
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
 
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nova_senha_hash = password_hash($nova_senha, PASSWORD_DEFAULT);
 
         // Atualizar a senha na base de dados
-        $stmt_update = $conn->prepare("UPDATE users SET password = :nova_senha WHERE id = :user_id");
+        $stmt_update = $conn->prepare("UPDATE utilizadores SET password = :nova_senha WHERE id = :user_id");
         $stmt_update->bindParam(':nova_senha', $nova_senha_hash);
         $stmt_update->bindParam(':user_id', $user_id);
 
