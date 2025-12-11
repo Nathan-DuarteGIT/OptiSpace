@@ -48,6 +48,26 @@ require_once "../config/config.php";
                     </div>
                 <?php endif; ?>
 
+                <!-- Mensagem de Sucesso - Foto -->
+                <?php if (isset($_GET['sucesso_foto'])): ?>
+                    <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded" role="alert">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span><?php echo htmlspecialchars($_GET['sucesso_foto']); ?></span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Mensagem de Erro - Foto -->
+                <?php if (isset($_GET['erro_foto'])): ?>
+                    <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-circle mr-2"></i>
+                            <span><?php echo htmlspecialchars($_GET['erro_foto']); ?></span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Botões de Definições -->
                 <div class="space-y-4">
                     <!-- Botão Alterar senha -->
@@ -80,7 +100,7 @@ require_once "../config/config.php";
         <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md mx-4">
             <h4 class="text-xl font-semibold mb-6 text-gray-900">Alterar Senha</h4>
 
-            <form method="post" action="../actions/action-alterarSenha.php" class="space-y-4" id="formAlterarSenha">
+            <form method="post" action="<?php echo BASE_URL; ?>../actions/action-alterarSenha.php" class="space-y-4" id="formAlterarSenha">
                 <!-- Nova senha -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -156,7 +176,7 @@ require_once "../config/config.php";
         <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md mx-4">
             <h4 class="text-xl font-semibold mb-6 text-gray-900">Alterar Foto do Perfil</h4>
 
-            <form method="post" enctype="multipart/form-data" class="space-y-4">
+            <form method="post" action="../actions/action-alterarFoto.php" enctype="multipart/form-data" class="space-y-4" id="formAlterarFoto">
                 <!-- Upload de foto -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Selecionar Foto</label>
@@ -210,6 +230,11 @@ require_once "../config/config.php";
             if (modalId === 'modalSenha') {
                 document.getElementById('erro_validacao').classList.add('hidden');
                 document.getElementById('formAlterarSenha').reset();
+            }
+
+            if (modalId === 'modalFoto') {
+                document.getElementById('formAlterarFoto').reset();
+                document.getElementById('imagePreview').classList.add('hidden');
             }
         }
 
