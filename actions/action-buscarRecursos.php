@@ -56,28 +56,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $ids_reservados = $stmt_reservados->fetchAll(PDO::FETCH_COLUMN);
 
-        // Converte a lista de IDs reservados para uma string para a cláusula NOT IN
-        $placeholders = empty($ids_reservados) ? 'NULL' : implode(',', array_fill(0, count($ids_reservados), '?'));
-        
-        // Encontra todos os recursos disponíveis (excluindo os reservados e filtrando por tipo)
-        //alterar esta query para servir para cada tabela dependendo do tipo de recurso!!!
+        $tabela_recursos = '';
+        switch ($tipo_recurso) {
+            case 'sala':
+                $tabela_recursos = 'sala';
+                break;
+            case 'viatura':
+                $tabela_recursos = 'viaturas';
+                break;
+            case 'equipamento':
+                $tabela_recursos = 'equipamentos';
+                break;
+            default:
+                // Se o tipo de recurso for inválido, devolve um erro 400
+                http_response_code(400 );
+                echo json_encode(['success' => false, 'error' => 'Tipo de recurso inválido.']);
+                exit;
+        }
+
+        // 2. Preparar a cláusula NOT IN
+        // Se a lista de IDs reservados estiver vazia, usamos um ID que nunca existirá (e.g., 0)
+        // para evitar erro de sintaxe na query.
+        $placeholders = empty($ids_reservados) ? '0' : implode(',', array_fill(0, count($ids_reservados), '?'));
+
+        // 3. Encontra todos os recursos disponíveis (excluindo os reservados)
+        // Nota: Removemos a condição 'tipo = ?' da query, pois a tabela já está filtrada.
         $sql_disponiveis = "
-            SELECT id, nome FROM recursos 
+            SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
-                tipo = ? 
-                AND id NOT IN ({$placeholders})
+                id NOT IN ({$placeholders})
         ";
 
         $stmt_disponiveis = $pdo->prepare($sql_disponiveis);
-        
-        // Parâmetros para o tipo de recurso e os IDs reservados
-        $params = array_merge([$tipo_recurso], $ids_reservados);
+
+        // 4. Prepara os parâmetros para a execução
+        // A lista de parâmetros é apenas os IDs reservados (se existirem).
+        $params = $ids_reservados;
 
         $stmt_disponiveis->execute($params);
         $recursos_disponiveis = $stmt_disponiveis->fetchAll(PDO::FETCH_ASSOC);
 
-        // 3. Devolver os resultados em JSON
+        // 5. Devolver os resultados em JSON
         echo json_encode(['success' => true, 'recursos' => $recursos_disponiveis]);
+
         
     } catch (PDOException $e) {
         http_response_code(500);
