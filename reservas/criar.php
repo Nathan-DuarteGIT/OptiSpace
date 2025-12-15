@@ -33,11 +33,22 @@ require_once "../config/config.php";
 
                     <form action="" method="post" class="space-y-8">
 
-                        <!-- Data -->
+                        <!-- Data inicio -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Data</label>
                             <div class="relative">
-                                <input type="date" name="data" required
+                                <input type="date" name="data_inicio" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-calendar-alt text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Data fim -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Data</label>
+                            <div class="relative">
+                                <input type="date" name="data_fim" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <i class="fas fa-calendar-alt text-gray-400"></i>
@@ -153,40 +164,4 @@ require_once "../config/config.php";
 
 </html>
 
-<script>
-    const inputData = document.querySelector('input[name="data"]');
-    const inputHoraInicio = document.querySelector('input[name="hora_inicio"]');
-    const inputHoraFim = document.querySelector('input[name="hora_fim"]');
-    const tipoRecurso = document.getElementById('tipo_recurso');
-    const camposSala = document.getElementById('campos-sala');
-    const camposViatura = document.getElementById('campos-viatura');
-    const camposEquipamento = document.getElementById('campos-equipamento');
-
-    function atualizarCampos() {
-        camposSala.classList.add('hidden');
-        camposViatura.classList.add('hidden');
-        camposEquipamento.classList.add('hidden');
-
-        if (tipoRecurso.value === 'sala') {
-            camposSala.classList.remove('hidden');
-        } else if (tipoRecurso.value === 'viatura') {
-            camposViatura.classList.remove('hidden');
-        } else if (tipoRecurso.value === 'equipamento') {
-            camposEquipamento.classList.remove('hidden');
-        }
-    }
-
-    function resetarTipoRecurso() {
-        // Redefine o valor do select "Tipo de recurso" para a opção inicial (disabled selected)
-        tipoRecurso.value = ''; 
-        // Chama a função para ocultar os campos condicionais e limpar os seus valores
-        atualizarCampos(); 
-    }
-    
-    inputData.addEventListener('change', resetarTipoRecurso);
-    inputHoraInicio.addEventListener('change', resetarTipoRecurso);
-    inputHoraFim.addEventListener('change', resetarTipoRecurso);
-
-    tipoRecurso.addEventListener('change', atualizarCampos);
-    document.addEventListener('DOMContentLoaded', atualizarCampos);
-</script>
+<script src="../assets/js/reservas.js"></script>

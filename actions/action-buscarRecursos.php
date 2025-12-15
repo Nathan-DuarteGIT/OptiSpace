@@ -9,23 +9,19 @@ header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 1. Receber e validar os dados de entrada
     $tipo_recurso = $_POST['tipo_recurso'] ?? null;
-    $data_reserva = $_POST['data'] ?? null;
+    $data_inicio = $_POST['data_inicio'] ?? null;
+    $data_fim = $_POST['data_fim'] ?? null;
     $hora_inicio = $_POST['hora_inicio'] ?? null;
     $hora_fim = $_POST['hora_fim'] ?? null;
 
-    if (!$tipo_recurso || !$data_reserva || !$hora_inicio || !$hora_fim) {
+    if (!$tipo_recurso || !$data_inicio || !$data_fim || !$hora_inicio || !$hora_fim) {
         http_response_code(400);
         echo json_encode(['error' => 'Dados de reserva incompletos.']);
         exit;
     }
 
-    // 2. Definir a consulta (exemplo genérico)
-    // ESTA É A LÓGICA MAIS IMPORTANTE:
-    // Devemos encontrar todos os recursos de um determinado tipo QUE NÃO tenham reservas
-    // que se sobreponham (overlap) com o intervalo de tempo desejado.
-    
-    // Supondo que você tem uma tabela `recursos` e uma tabela `reservas`.
-    // E `reservas` tem campos: `id_recurso`, `data`, `hora_inicio`, `hora_fim`.
+    $db = new Database();
+    $pdo = $db->getConnection();
 
     try {
         //falta ajustar os campos da query conforme sua base de dados
@@ -33,7 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             SELECT DISTINCT recurso_id FROM reservas
             WHERE 
                 tipo = :tipo_recurso AND
-                data = :data_reserva AND
+                (
+                    (:data_inicio < data_fim AND :data_fim > data_inicio) 
+                ) AND
                 (
                     (:hora_inicio < hora_fim AND :hora_fim > hora_inicio)
                 )
