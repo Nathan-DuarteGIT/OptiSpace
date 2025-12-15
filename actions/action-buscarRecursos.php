@@ -28,12 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fim_reserva = $data_fim . ' ' . $hora_fim . ':00';
 
     // 3. Validação de ordem: O fim deve ser ESTRICTAMENTE posterior ao início
-    if (strtotime($data_inicio_full) >= strtotime($data_fim_full)) {
-        http_response_code(400);
-        echo json_encode(['error' => 'A data/hora de fim deve ser posterior à data/hora de início.']);
+    if (strtotime($inicio_reserva) >= strtotime($fim_reserva)) {
+        http_response_code(400 );
+        echo json_encode(['success' => false, 'error' => 'A data/hora de fim deve ser posterior à data/hora de início.']);
         exit;
     }
-
     $db = new Database();
     $pdo = $db->getConnection();
 
