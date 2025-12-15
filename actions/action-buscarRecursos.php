@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 tipo_recurso = :tipo_recurso AND
                 status_reserva NOT IN ('cancelada', 'concluida') AND 
                 (
-                    (:fim_reserva > data_inicio AND :incio_reserva < data_fim) 
+                    (:fim_reserva > data_inicio AND :inicio_reserva < data_fim) 
                 )
         ";
         
