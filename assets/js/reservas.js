@@ -4,8 +4,6 @@
     const inputHoraFim = document.querySelector('input[name="hora_fim"]');
     const tipoRecurso = document.getElementById('tipo_recurso');
     const camposSala = document.getElementById('campos-sala');
-    const camposViatura = document.getElementById('campos-viatura');
-    const camposEquipamento = document.getElementById('campos-equipamento');
     const campoRecursoEspecificoDiv = document.getElementById('campo-recurso-especifico');
     const selectRecursoEspecifico = document.getElementById('id_recurso_selecionado');
 
@@ -82,8 +80,6 @@
     function atualizarCampos() {
         // Limpeza e ocultação de todos os campos condicionais e do select de recursos
         camposSala.classList.add('hidden');
-        camposViatura.classList.add('hidden');
-        camposEquipamento.classList.add('hidden');
         
         // Limpar os campos internos para evitar submissão de dados antigos
         // ... (adicione aqui a lógica de limpeza de participantes, viaturas, etc., se não estiver noutro lado) ...
@@ -91,15 +87,6 @@
         const tipoSelecionado = tipoRecurso.value;
 
         if (tipoSelecionado) {
-            // 1. Mostrar campos condicionais (A sua lógica de IFs)
-            if (tipoSelecionado === 'sala') {
-                camposSala.classList.remove('hidden');
-            } else if (tipoSelecionado === 'viatura') {
-                camposViatura.classList.remove('hidden');
-            } else if (tipoSelecionado === 'equipamento') {
-                camposEquipamento.classList.remove('hidden');
-            }
-            
             // 2. LIGAÇÃO: Se um tipo está selecionado, busca os recursos para as datas/horas atuais.
             buscarRecursosDisponiveis();
 
