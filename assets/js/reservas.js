@@ -78,16 +78,20 @@
 
     // A função principal de gestão do estado
     function atualizarCampos() {
-        // Limpeza e ocultação de todos os campos condicionais e do select de recursos
+       // Limpeza e ocultação de todos os campos condicionais e do select de recursos
+    // Use IF para verificar a existência do elemento:
+    if (camposSala) {
         camposSala.classList.add('hidden');
-        
-        // Limpar os campos internos para evitar submissão de dados antigos
-        // ... (adicione aqui a lógica de limpeza de participantes, viaturas, etc., se não estiver noutro lado) ...
+    }
+    
+    // ... (Limpeza dos campos internos) ...
 
-        const tipoSelecionado = tipoRecurso.value;
+    const tipoSelecionado = tipoRecurso.value;
 
         if (tipoSelecionado) {
-            // 2. LIGAÇÃO: Se um tipo está selecionado, busca os recursos para as datas/horas atuais.
+            if (camposSala && tipoSelecionado === 'sala') {
+                camposSala.classList.remove('hidden');
+            }
             buscarRecursosDisponiveis();
 
         } else {
