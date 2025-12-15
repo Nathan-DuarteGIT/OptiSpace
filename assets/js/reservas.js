@@ -36,7 +36,7 @@
         campoRecursoEspecificoDiv.classList.remove('hidden');
 
         try {
-            const response = await fetch('buscar_recursos.php', {
+            const response = await fetch('../actions/action-buscarRecursos.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
