@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             FROM reservas r
             JOIN utilizadores u ON r.utilizador_id = u.id 
             WHERE 
-                u.id_empresa = :id_empresa AND
+                u.empresa_id = :id_empresa AND
                 r.tipo_recurso = :tipo_recurso AND
                 r.status_reserva NOT IN ('cancelada', 'concluida') AND 
                 (
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        $sql_disponiveis = "
             SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
-                id_empresa = ? AND
+                empresa_id = ? AND
                 id NOT IN ({$placeholders})
         ";
 
