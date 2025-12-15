@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $placeholders = empty($ids_reservados) ? 'NULL' : implode(',', array_fill(0, count($ids_reservados), '?'));
         
         // Encontra todos os recursos disponíveis (excluindo os reservados e filtrando por tipo)
+        //alterar esta query para servir para cada tabela dependendo do tipo de recurso!!!
         $sql_disponiveis = "
             SELECT id, nome FROM recursos 
             WHERE 
