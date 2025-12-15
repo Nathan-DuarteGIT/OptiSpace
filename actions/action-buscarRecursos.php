@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data_fim = $_POST['data_fim'] ?? null;
     $hora_inicio = $_POST['hora_inicio'] ?? null;
     $hora_fim = $_POST['hora_fim'] ?? null;
+    $id_empresa = buscar_empresa($_SESSION['user_id']);
 
     if (!$tipo_recurso || !$data_inicio || !$data_fim || !$hora_inicio || !$hora_fim) {
         http_response_code(400);
@@ -37,18 +38,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdo = $db->getConnection();
 
     try {
+       // ** 4. BUSCA DE IDs RESERVADOS (Filtrado por Empresa via JOIN) **
         $sql_reservados = "
-            SELECT DISTINCT recurso_id FROM reservas
+            SELECT DISTINCT r.recurso_id 
+            FROM reservas r
+            JOIN utilizadores u ON r.utilizador_id = u.id 
             WHERE 
-                tipo_recurso = :tipo_recurso AND
-                status_reserva NOT IN ('cancelada', 'concluida') AND 
+                u.id_empresa = :id_empresa AND
+                r.tipo_recurso = :tipo_recurso AND
+                r.status_reserva NOT IN ('cancelada', 'concluida') AND 
                 (
-                    (:fim_reserva > data_inicio AND :inicio_reserva < data_fim) 
+                    (:fim_reserva > r.data_inicio AND :inicio_reserva < r.data_fim) 
                 )
         ";
-        
+    
         $stmt_reservados = $pdo->prepare($sql_reservados);
         $stmt_reservados->execute([
+            ':id_empresa' => $id_empresa, // NOVO PARÂMETRO
             ':tipo_recurso' => $tipo_recurso,
             ':inicio_reserva' => $inicio_reserva,
             ':fim_reserva' => $fim_reserva
@@ -81,13 +87,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // 3. Encontra todos os recursos disponíveis (excluindo os reservados)
         // Nota: Removemos a condição 'tipo = ?' da query, pois a tabela já está filtrada.
-        $sql_disponiveis = "
+       $sql_disponiveis = "
             SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
+                id_empresa = ? AND
                 id NOT IN ({$placeholders})
         ";
 
         $stmt_disponiveis = $pdo->prepare($sql_disponiveis);
+
+        // Prepara os parâmetros: [id_empresa, id_reservado_1, id_reservado_2, ...]
+        $params = array_merge([$id_empresa], $ids_reservados);
 
         // 4. Prepara os parâmetros para a execução
         // A lista de parâmetros é apenas os IDs reservados (se existirem).
