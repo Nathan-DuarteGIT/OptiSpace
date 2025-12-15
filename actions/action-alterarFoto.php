@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Fazer upload da imagem usando a função existente
-        $upload_result = upload_imagem($_FILES['foto_perfil'], 'perfil');
+        $upload_result = upload_imagem($_FILES['foto_perfil'], '../uploads');
         
         if (!$upload_result['sucesso']) {
             // Se o upload falhou, redireciona com a mensagem de erro
