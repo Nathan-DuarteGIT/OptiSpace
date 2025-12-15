@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$tipo_recurso || !$data_inicio || !$data_fim || !$hora_inicio || !$hora_fim) {
         http_response_code(400);
-        echo json_encode(['error' => 'Dados de reserva incompletos.']);
+        echo json_encode(['success' => false, 'error' => 'Por favor, preencha todos os campos de Data/Hora e Tipo de Recurso.']);
         exit;
     }
 
