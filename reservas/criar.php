@@ -129,23 +129,16 @@ require_once "../config/config.php";
                             </div>
                         </div>
 
-                        <!-- Campos condicionais para VIATURA -->
-                        <div id="campos-viatura" class="hidden">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Viatura</label>
-                            <div class="space-y-3">
-                                <label class="flex items-center"><input type="radio" name="viatura" value="bmw" class="mr-3"> BMW Série 5</label>
-                                <label class="flex items-center"><input type="radio" name="viatura" value="peugeot" class="mr-3"> Peugeot e-208</label>
-                                <label class="flex items-center"><input type="radio" name="viatura" value="renault" class="mr-3"> Renault Kangoo Van</label>
-                            </div>
-                        </div>
-
-                        <!-- Campos condicionais para EQUIPAMENTO -->
-                        <div id="campos-equipamento" class="hidden">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Equipamento</label>
-                            <div class="space-y-3">
-                                <label class="flex items-center"><input type="radio" name="equipamento" value="macbook" class="mr-3"> MacBook Air</label>
-                                <label class="flex items-center"><input type="radio" name="equipamento" value="ipad" class="mr-3"> iPad</label>
-                                <label class="flex items-center"><input type="radio" name="equipamento" value="canon" class="mr-3"> Canon EOS R5</label>
+                        <div id="campo-recurso-especifico" class="hidden">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Recurso disponível</label>
+                            <div class="relative">
+                                <select name="id_recurso_selecionado" id="id_recurso_selecionado" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                                <option value="" disabled selected>Selecione um recurso disponível</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-chevron-down text-gray-400"></i>
+                                </div>
                             </div>
                         </div>
 

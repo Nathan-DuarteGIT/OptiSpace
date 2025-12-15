@@ -20,29 +20,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // 2. CONCATENAR DATA E HORA no PHP para obter os timestamps completos
+    $inicio_reserva = $data_inicio . ' ' . $hora_inicio . ':00';
+    $fim_reserva = $data_fim . ' ' . $hora_fim . ':00';
+
+    // 3. Validação de ordem: O fim deve ser ESTRICTAMENTE posterior ao início
+    if (strtotime($data_inicio_full) >= strtotime($data_fim_full)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'A data/hora de fim deve ser posterior à data/hora de início.']);
+        exit;
+    }
+
     $db = new Database();
     $pdo = $db->getConnection();
 
     try {
-        //falta ajustar os campos da query conforme sua base de dados
         $sql_reservados = "
             SELECT DISTINCT recurso_id FROM reservas
             WHERE 
-                tipo = :tipo_recurso AND
+                tipo_recurso = :tipo_recurso AND
+                status_reserva NOT IN ('cancelada', 'concluida') AND 
                 (
-                    (:data_inicio < data_fim AND :data_fim > data_inicio) 
-                ) AND
-                (
-                    (:hora_inicio < hora_fim AND :hora_fim > hora_inicio)
+                    (:fim_reserva > data_inicio AND :incio_reserva < data_fim) 
                 )
         ";
         
         $stmt_reservados = $pdo->prepare($sql_reservados);
         $stmt_reservados->execute([
             ':tipo_recurso' => $tipo_recurso,
-            ':data_reserva' => $data_reserva,
-            ':hora_inicio' => $hora_inicio,
-            ':hora_fim' => $hora_fim
+            ':inicio_reserva' => $inicio_reserva,
+            ':fim_reserva' => $fim_reserva
         ]);
 
         $ids_reservados = $stmt_reservados->fetchAll(PDO::FETCH_COLUMN);
