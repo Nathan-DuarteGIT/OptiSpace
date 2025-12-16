@@ -77,24 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
         }
 
-        // 6. Preparar a cláusula NOT IN (CORREÇÃO FINAL PARA HY093)
-        if (empty($ids_reservados)) {
-            // Se não houver IDs reservados, a cláusula NOT IN é ignorada
-            $in_clause = '1=1'; // Condição sempre verdadeira
-            $params_reservados = [];
-        } else {
-            // Cria uma string de placeholders (?) para o PDO
-            $placeholders_in = implode(',', array_fill(0, count($ids_reservados), '?'));
-            $in_clause = "id NOT IN ({$placeholders_in})";
-            $params_reservados = $ids_reservados;
-        }
-
-        // 7. BUSCA DE RECURSOS DISPONÍVEIS (Filtrado por Empresa)
+         $placeholders = empty($ids_reservados) ? 'NULL' : implode(',', array_fill(0, count($ids_reservados), '?'));
+        
+        // 7. BUSCA DE RECURSOS DISPONÍVEIS (VERSÃO ORIGINAL SEM FILTRO DE EMPRESA)
         $sql_disponiveis = "
             SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
-                empresa_id = ? AND  // Ajustado para 'empresa_id' com base na sua query de reservas
-                {$in_clause}
+                id NOT IN ({$placeholders})
         ";
 
         $stmt_disponiveis = $pdo->prepare($sql_disponiveis);
