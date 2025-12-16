@@ -40,25 +40,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
        // ** 4. BUSCA DE IDs RESERVADOS (Filtrado por Empresa via JOIN) **
         $sql_reservados = "
-            SELECT DISTINCT r.recurso_id 
-            FROM reservas r
-            JOIN utilizadores u ON r.utilizador_id = u.id 
+            SELECT DISTINCT recurso_id FROM reservas
             WHERE 
-                u.empresa_id = :id_empresa AND
-                r.tipo_recurso = :tipo_recurso AND
-                r.status_reserva NOT IN ('cancelada', 'concluida') AND 
+                tipo_recurso = :tipo_recurso AND
+                status_reserva NOT IN ('cancelada', 'concluida') AND 
                 (
-                    (:fim_reserva > r.data_inicio AND :inicio_reserva < r.data_fim) 
+                    (:fim_reserva > data_inicio AND :inicio_reserva < data_fim) 
                 )
         ";
-    
+        
         $stmt_reservados = $pdo->prepare($sql_reservados);
         $stmt_reservados->execute([
-            ':id_empresa' => $id_empresa, // NOVO PARÂMETRO
             ':tipo_recurso' => $tipo_recurso,
             ':inicio_reserva' => $inicio_reserva,
             ':fim_reserva' => $fim_reserva
         ]);
+
 
         $ids_reservados = $stmt_reservados->fetchAll(PDO::FETCH_COLUMN);
 
