@@ -88,7 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql_disponiveis = "
             SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
-                empresa_id = ? AND
                 id NOT IN ({$placeholders})
         ";
 
