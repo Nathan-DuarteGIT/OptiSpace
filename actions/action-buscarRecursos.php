@@ -85,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // 3. Encontra todos os recursos disponíveis (excluindo os reservados)
         // Nota: Removemos a condição 'tipo = ?' da query, pois a tabela já está filtrada.
-
         $sql_disponiveis = "
             SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
