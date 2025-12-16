@@ -964,10 +964,6 @@ body{
   height: 8rem;
 }
 
-.h-36{
-  height: 9rem;
-}
-
 .h-4{
   height: 1rem;
 }
@@ -978,6 +974,10 @@ body{
 
 .h-8{
   height: 2rem;
+}
+
+.h-\[200px\]{
+  height: 200px;
 }
 
 .h-\[2px\]{
@@ -998,30 +998,6 @@ body{
 
 .h-screen{
   height: 100vh;
-}
-
-.h-\[36\]{
-  height: 36;
-}
-
-.h-\[2\]{
-  height: 2;
-}
-
-.h-\[20\]{
-  height: 20;
-}
-
-.h-\[200\]{
-  height: 200;
-}
-
-.h-\[200p\]{
-  height: 200p;
-}
-
-.h-\[200px\]{
-  height: 200px;
 }
 
 .max-h-64{
