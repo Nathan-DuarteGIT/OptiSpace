@@ -631,7 +631,7 @@ function render_reservas_empresa_cards($user_id) {
                     $corStatus = 'bg-green-100 text-green-800 border border-green-200'; 
                     break;
                 case 'pendente':   
-                    $corStatus = 'bg-yellow-100 text-yellow-800 border border-yellow-200'; 
+                    $corStatus = 'bg-yellow-500 text-yellow-800 border border-yellow-200'; 
                     break;
                 case 'cancelada':  
                     $corStatus = 'bg-red-100 text-red-800 border border-red-200'; 
