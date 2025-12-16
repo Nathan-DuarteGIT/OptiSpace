@@ -625,12 +625,23 @@ function render_reservas_empresa_cards($user_id) {
             $status = htmlspecialchars($r['status_reserva']);
 
             // Definição de cores dinâmicas para o Status
-            $corStatus = 'bg-gray-200 text-gray-800'; 
+            // Definição de cores dinâmicas para o Status
             switch($r['status_reserva']) {
-                case 'confirmada': $corStatus = 'bg-green-200 text-green-800'; break;
-                case 'pendente':   $corStatus = 'bg-yellow-200 text-yellow-800'; break;
-                case 'cancelada':  $corStatus = 'bg-red-200 text-red-800'; break;
-                case 'concluida':  $corStatus = 'bg-blue-200 text-blue-800'; break;
+                case 'confirmada': 
+                    $corStatus = 'bg-green-100 text-green-800 border border-green-200'; 
+                    break;
+                case 'pendente':   
+                    $corStatus = 'bg-yellow-100 text-yellow-800 border border-yellow-200'; 
+                    break;
+                case 'cancelada':  
+                    $corStatus = 'bg-red-100 text-red-800 border border-red-200'; 
+                    break;
+                case 'concluida':  
+                    $corStatus = 'bg-blue-100 text-blue-800 border border-blue-200'; 
+                    break;
+                default:           
+                    $corStatus = 'bg-gray-100 text-gray-800 border border-gray-200'; 
+                    break;
             }
 
             echo <<<INICIO
