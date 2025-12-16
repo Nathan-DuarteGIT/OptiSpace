@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $ids_reservados = $stmt_reservados->fetchAll(PDO::FETCH_COLUMN);
 
+        // 1. Determinar a tabela de recursos a usar
         $tabela_recursos = '';
         switch ($tipo_recurso) {
             case 'sala':
@@ -77,9 +78,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
         }
 
-         $placeholders = empty($ids_reservados) ? 'NULL' : implode(',', array_fill(0, count($ids_reservados), '?'));
-        
-        // 7. BUSCA DE RECURSOS DISPONÍVEIS (VERSÃO ORIGINAL SEM FILTRO DE EMPRESA)
+        // 2. Preparar a cláusula NOT IN
+        // Se a lista de IDs reservados estiver vazia, usamos um ID que nunca existirá (e.g., 0)
+        // para evitar erro de sintaxe na query.
+        $placeholders = empty($ids_reservados) ? '0' : implode(',', array_fill(0, count($ids_reservados), '?'));
+
+        // 3. Encontra todos os recursos disponíveis (excluindo os reservados)
+        // Nota: Removemos a condição 'tipo = ?' da query, pois a tabela já está filtrada.
         $sql_disponiveis = "
             SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
@@ -87,9 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ";
 
         $stmt_disponiveis = $pdo->prepare($sql_disponiveis);
-
-        // Prepara os parâmetros: [id_empresa, id_reservado_1, id_reservado_2, ...]
-        $params = $ids_reservados;
 
         // 4. Prepara os parâmetros para a execução
         // A lista de parâmetros é apenas os IDs reservados (se existirem).
