@@ -107,8 +107,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $recursos_disponiveis = $stmt_disponiveis->fetchAll(PDO::FETCH_ASSOC);
 
         // 5. Devolver os resultados em JSON
-        echo json_encode(['success' => true, 'recursos' => $recursos_disponiveis]);
-
+        //echo json_encode(['success' => true, 'recursos' => $recursos_disponiveis]);
+        echo json_encode([
+    'success' => true, 
+    'recursos' => $recursos_disponiveis,
+    'debug_ids_reservados' => $ids_reservados, // Adiciona os IDs reservados para depuração
+    'debug_tabela' => $tabela_recursos, // Adiciona a tabela usada
+    'debug_id_empresa' => $id_empresa // Adiciona o ID da empresa usado
+]);
         
     } catch (PDOException $e) {
         http_response_code(500);
