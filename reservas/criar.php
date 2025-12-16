@@ -154,7 +154,7 @@ require_once "../config/config.php";
         </main>
     </div>
 
-    <script src="../assets/js/reservas.js"></script>
+    <script src="../assets/js/reservas.js?v=20251216"></script>
 </body>
 
 </html>
