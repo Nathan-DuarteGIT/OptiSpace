@@ -38,35 +38,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdo = $db->getConnection();
 
      try {
-        // 4. BUSCA DE IDs RESERVADOS (Filtrado por Empresa via JOIN)
+       // ** 4. BUSCA DE IDs RESERVADOS (Filtrado por Empresa via JOIN) **
         $sql_reservados = "
-            SELECT DISTINCT r.recurso_id 
-            FROM reservas r
-            JOIN utilizadores u ON r.utilizador_id = u.id // <--- AJUSTAR ESTA LINHA (r.coluna_user = u.coluna_id)
+            SELECT DISTINCT recurso_id FROM reservas
             WHERE 
-                u.empresa_id = :id_empresa AND
-                r.tipo_recurso = :tipo_recurso AND
-                r.status_reserva NOT IN ('cancelada', 'concluida') AND 
+                tipo_recurso = :tipo_recurso AND
+                status_reserva NOT IN ('cancelada', 'concluida') AND 
                 (
-                    (:fim_reserva > r.data_inicio AND :inicio_reserva < r.data_fim) 
+                    (:fim_reserva > data_inicio AND :inicio_reserva < data_fim) 
                 )
         ";
         
         $stmt_reservados = $pdo->prepare($sql_reservados);
         $stmt_reservados->execute([
-            ':id_empresa' => $id_empresa,
             ':tipo_recurso' => $tipo_recurso,
             ':inicio_reserva' => $inicio_reserva,
             ':fim_reserva' => $fim_reserva
         ]);
 
+
         $ids_reservados = $stmt_reservados->fetchAll(PDO::FETCH_COLUMN);
 
-        // 5. Determinar a tabela de recursos a usar
+        // 1. Determinar a tabela de recursos a usar
         $tabela_recursos = '';
         switch ($tipo_recurso) {
             case 'sala':
-                $tabela_recursos = 'salas';
+                $tabela_recursos = 'sala';
                 break;
             case 'viatura':
                 $tabela_recursos = 'viaturas';
@@ -75,11 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $tabela_recursos = 'equipamentos';
                 break;
             default:
+                // Se o tipo de recurso for inválido, devolve um erro 400
                 http_response_code(400 );
                 echo json_encode(['success' => false, 'error' => 'Tipo de recurso inválido.']);
                 exit;
         }
 
+        // 2. Preparar a cláusula NOT IN
         // Se a lista de IDs reservados estiver vazia, usamos um ID que nunca existirá (e.g., 0)
         // para evitar erro de sintaxe na query.
         $placeholders = empty($ids_reservados) ? '0' : implode(',', array_fill(0, count($ids_reservados), '?'));
@@ -102,13 +101,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_disponiveis->execute($params);
         $recursos_disponiveis = $stmt_disponiveis->fetchAll(PDO::FETCH_ASSOC);
 
-
-        // 8. Devolver os resultados em JSON
+        // 5. Devolver os resultados em JSON
         echo json_encode(['success' => true, 'recursos' => $recursos_disponiveis]);
         
     } catch (PDOException $e) {
-        http_response_code(500 );
-        echo json_encode(['success' => false, 'error' => 'Erro na base de dados: ' . $e->getMessage()]);
+        http_response_code(500);
+        echo json_encode(['error' => 'Erro na base de dados: ' . $e->getMessage()]);
     }
     
 } else {
