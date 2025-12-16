@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         switch ($tipo_recurso) {
             case 'sala':
-                $tabela_recursos = 'salas';
+                $tabela_recursos = 'sala';
                 
                 // Filtros de Sala
                 $participantes = $_POST['participantes'] ?? null;
