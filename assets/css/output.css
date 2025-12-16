@@ -1287,11 +1287,6 @@ body{
   border-width: 2px;
 }
 
-.border-y{
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-}
-
 .border-b{
   border-bottom-width: 1px;
 }

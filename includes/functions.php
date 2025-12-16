@@ -640,7 +640,7 @@ function render_reservas_empresa_cards($user_id) {
                     $corStatus = 'bg-blue-100 text-blue-800 border border-blue-200'; 
                     break;
                 default:           
-                    $corStatus = 'bg-gray-100 text-gray-800 border border-gray-200'; 
+                    $corStatus = 'bg-blue-100 text-gray-800 border border-gray-200'; 
                     break;
             }
 
