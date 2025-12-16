@@ -636,7 +636,7 @@ function render_reservas_empresa_cards($user_id) {
             }
 
             echo <<<INICIO
-            <div class="card-dashboard">
+            <div class="card-dashboard py-12">
                 <div class="leading-tight w-full">
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> $data_inicio</p>
             INICIO;
