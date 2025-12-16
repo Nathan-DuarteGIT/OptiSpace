@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql_disponiveis = "
             SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
+                empresa_id = ? AND
                 id NOT IN ({$placeholders})
         ";
 
@@ -95,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // 4. Prepara os parâmetros para a execução
         // A lista de parâmetros é apenas os IDs reservados (se existirem).
-        $params = $ids_reservados;
+        $params = array_merge([$id_empresa], $params_reservados);
 
         $stmt_disponiveis->execute($params);
         $recursos_disponiveis = $stmt_disponiveis->fetchAll(PDO::FETCH_ASSOC);
