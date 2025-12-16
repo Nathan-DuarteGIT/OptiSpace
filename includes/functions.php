@@ -606,16 +606,13 @@ function render_salas_card($user_id){
  * RENDERIZAR AS RESERVAS DA EMPRESA EM FORMATO DE CARD
  */
 function render_reservas_empresa_cards($user_id) {
-    // 1. Obtém as reservas usando a função de busca
     $reservas = buscar_reservas_empresa($user_id);
 
     if ($reservas) {
         foreach ($reservas as $r) {
-            // Conversão dos timestamps para objetos de tempo
             $timestamp_inicio = strtotime($r['data_inicio']);
             $timestamp_fim = strtotime($r['data_fim']);
 
-            // Formatação de datas e horas
             $data_inicio = date('d/m/Y', $timestamp_inicio);
             $data_fim    = date('d/m/Y', $timestamp_fim);
             $hora_inicio = date('H:i', $timestamp_inicio);
@@ -624,50 +621,45 @@ function render_reservas_empresa_cards($user_id) {
             $recurso = htmlspecialchars($r['nome_recurso']);
             $status = htmlspecialchars($r['status_reserva']);
 
-            // Definição de cores dinâmicas para o Status
-            // Definição de cores dinâmicas para o Status
+            // Definimos as cores hexadecimais diretamente para garantir que funcionam
             switch($r['status_reserva']) {
                 case 'confirmada': 
-                    $corStatus = 'bg-green-100 text-green-800 border border-green-200'; 
-                    break;
+                    $bgColor = '#bbf7d0'; $textColor = '#166534'; break; // Green 200/800
                 case 'pendente':   
-                    $corStatus = 'bg-yellow-500 text-yellow-800 border border-yellow-200'; 
-                    break;
+                    $bgColor = '#fef08a'; $textColor = '#854d0e'; break; // Yellow 200/800
                 case 'cancelada':  
-                    $corStatus = 'bg-red-100 text-red-800 border border-red-200'; 
-                    break;
+                    $bgColor = '#fecaca'; $textColor = '#991b1b'; break; // Red 200/800
                 case 'concluida':  
-                    $corStatus = 'bg-blue-100 text-blue-800 border border-blue-200'; 
-                    break;
+                    $bgColor = '#bfdbfe'; $textColor = '#1e40af'; break; // Blue 200/800
                 default:           
-                    $corStatus = 'bg-blue-800 text-gray-800 border border-gray-200'; 
-                    break;
+                    $bgColor = '#e5e7eb'; $textColor = '#1f2937'; break; // Gray 200/800
             }
 
-            echo <<<INICIO
+            echo <<<HTML
             <div class="card-dashboard">
-                <div class="leading-tight">
+                <div class="leading-tight w-full">
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> $data_inicio</p>
-            INICIO;
+            HTML;
 
-            // Só exibe a "Data de fim" se for diferente da "Data de início"
             if ($data_inicio !== $data_fim) {
-                echo <<<DATAFIM
-                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data de fim:</span> $data_fim</p>
-                DATAFIM;
+                echo "<p class='text-xs text-black leading-relaxed'><span class='font-semibold'>Data de fim:</span> $data_fim</p>";
             }
-            echo <<<INFORMATION
+
+            echo <<<HTML
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> $hora_inicio</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> $hora_fim</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> $recurso</p>
 
-                    <div class="flex items-center gap-3 mt-2">
-                        <span class="font-medium text-sm text-black">Status:</span>
-                        <span class="inline-block $corStatus text-xs font-medium px-3 py-1 rounded-full">$status</span>
+                    <div class="flex items-center gap-3 mt-3">
+                        <span class="font-semibold text-xs text-black">Status:</span>
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-medium" 
+                              style="background-color: $bgColor; color: $textColor;">
+                            $status
+                        </span>
                     </div>
                 </div>
             </div>
-            INFORMATION;
+            HTML;
         }
     } else {
         echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para a sua empresa.</p>";

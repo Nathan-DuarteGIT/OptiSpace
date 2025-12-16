@@ -920,6 +920,10 @@ body{
   margin-top: 2rem;
 }
 
+.mt-3{
+  margin-top: 0.75rem;
+}
+
 .block{
   display: block;
 }
@@ -1465,11 +1469,6 @@ body{
 
 .bg-white\/80{
   background-color: rgb(255 255 255 / 0.8);
-}
-
-.bg-yellow-100{
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 249 195 / var(--tw-bg-opacity, 1));
 }
 
 .bg-yellow-50{
