@@ -976,10 +976,6 @@ body{
   height: 2rem;
 }
 
-.h-\[200px\]{
-  height: 200px;
-}
-
 .h-\[2px\]{
   height: 2px;
 }
@@ -1550,8 +1546,8 @@ body{
   padding-bottom: 2rem;
 }
 
-.pb-4{
-  padding-bottom: 1rem;
+.pb-2{
+  padding-bottom: 0.5rem;
 }
 
 .pl-0{

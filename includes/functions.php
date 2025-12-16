@@ -650,8 +650,8 @@ function render_reservas_empresa_cards($user_id) {
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> $hora_fim</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> $recurso</p>
                     <div class="flex items-center gap-3 mt-2">
-                        <span class="font-medium text-sm text-black pb-4">Status:</span>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-medium" 
+                        <span class="font-medium text-sm text-black">Status:</span>
+                        <span class="inline-block px-3 mb-2 rounded-full text-xs font-medium" 
                               style="background-color: $bgColor; color: $textColor;">
                             $status
                         </span>
