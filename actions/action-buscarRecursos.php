@@ -80,18 +80,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
         }
 
-        // 2. Preparar a cláusula NOT IN
-        // Se a lista de IDs reservados estiver vazia, usamos um ID que nunca existirá (e.g., 0)
-        // para evitar erro de sintaxe na query.
-        $placeholders = empty($ids_reservados) ? '0' : implode(',', array_fill(0, count($ids_reservados), '?'));
+        // 6. Preparar a cláusula NOT IN (CORREÇÃO FINAL PARA HY093)
+        if (empty($ids_reservados)) {
+            // Se não houver IDs reservados, a cláusula NOT IN é ignorada
+            $in_clause = '1=1'; // Condição sempre verdadeira
+            $params_reservados = [];
+        } else {
+            // Cria uma string de placeholders (?) para o PDO
+            $placeholders_in = implode(',', array_fill(0, count($ids_reservados), '?'));
+            $in_clause = "id NOT IN ({$placeholders_in})";
+            $params_reservados = $ids_reservados;
+        }
 
-        // 3. Encontra todos os recursos disponíveis (excluindo os reservados)
-        // Nota: Removemos a condição 'tipo = ?' da query, pois a tabela já está filtrada.
-       $sql_disponiveis = "
+        // 7. BUSCA DE RECURSOS DISPONÍVEIS (Filtrado por Empresa)
+        $sql_disponiveis = "
             SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
-                empresa_id = ? AND
-                id NOT IN ({$placeholders})
+                empresa_id = ? AND  // Ajustado para 'empresa_id' com base na sua query de reservas
+                {$in_clause}
         ";
 
         $stmt_disponiveis = $pdo->prepare($sql_disponiveis);
