@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data_fim = $_POST['data_fim'] ?? null;
     $hora_inicio = $_POST['hora_inicio'] ?? null;
     $hora_fim = $_POST['hora_fim'] ?? null;
-    $id_empresa = buscar_empresa($_SESSION['user_id']);
+    $id_empresa = 1;
 
     if (!$tipo_recurso || !$data_inicio || !$data_fim || !$hora_inicio || !$hora_fim) {
         http_response_code(400);
