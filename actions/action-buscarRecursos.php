@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data_fim = $_POST['data_fim'] ?? null;
     $hora_inicio = $_POST['hora_inicio'] ?? null;
     $hora_fim = $_POST['hora_fim'] ?? null;
+    $id_empresa = buscar_empresa($_SESSION['user_id']);
 
     if (!$tipo_recurso || !$data_inicio || !$data_fim || !$hora_inicio || !$hora_fim) {
         http_response_code(400);
@@ -36,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = new Database();
     $pdo = $db->getConnection();
 
-    try {
+     try {
+       // ** 4. BUSCA DE IDs RESERVADOS (Filtrado por Empresa via JOIN) **
         $sql_reservados = "
             SELECT DISTINCT recurso_id FROM reservas
             WHERE 
@@ -54,41 +56,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':fim_reserva' => $fim_reserva
         ]);
 
+
         $ids_reservados = $stmt_reservados->fetchAll(PDO::FETCH_COLUMN);
 
-        // Converte a lista de IDs reservados para uma string para a cláusula NOT IN
-        if (empty($ids_reservados)) {
-            $ids_reservados_str = '0'; 
-        } else {
-            // Cria uma string de placeholders (?) para o PDO
-            $placeholders = implode(',', array_fill(0, count($ids_reservados), '?'));
-            $ids_reservados_str = $placeholders;
+        // 1. Determinar a tabela de recursos a usar
+        $tabela_recursos = '';
+        switch ($tipo_recurso) {
+            case 'sala':
+                $tabela_recursos = 'sala';
+                break;
+            case 'viatura':
+                $tabela_recursos = 'viaturas';
+                break;
+            case 'equipamento':
+                $tabela_recursos = 'equipamentos';
+                break;
+            default:
+                // Se o tipo de recurso for inválido, devolve um erro 400
+                http_response_code(400 );
+                echo json_encode(['success' => false, 'error' => 'Tipo de recurso inválido.']);
+                exit;
         }
-        
-        // Encontra todos os recursos disponíveis (excluindo os reservados e filtrando por tipo)
+
+        // 2. Preparar a cláusula NOT IN
+        // Se a lista de IDs reservados estiver vazia, usamos um ID que nunca existirá (e.g., 0)
+        // para evitar erro de sintaxe na query.
+        $placeholders = empty($ids_reservados) ? '0' : implode(',', array_fill(0, count($ids_reservados), '?'));
+
+        // 3. Encontra todos os recursos disponíveis (excluindo os reservados)
+        // Nota: Removemos a condição 'tipo = ?' da query, pois a tabela já está filtrada.
+
         $sql_disponiveis = "
-            SELECT id, nome FROM recursos 
+            SELECT id, nome FROM {$tabela_recursos} 
             WHERE 
-                tipo = ? 
-                AND id NOT IN ({$placeholders})
+                empresa_id = ? AND
+                id NOT IN ({$placeholders})
         ";
 
         $stmt_disponiveis = $pdo->prepare($sql_disponiveis);
-        
-        // Parâmetros para o tipo de recurso e os IDs reservados
-        $params = array_merge([$tipo_recurso], $ids_reservados);
+
+        // 4. Prepara os parâmetros para a execução
+        // A lista de parâmetros é apenas os IDs reservados (se existirem).
+        $params = array_merge([$id_empresa], $ids_reservados); 
 
         $stmt_disponiveis->execute($params);
         $recursos_disponiveis = $stmt_disponiveis->fetchAll(PDO::FETCH_ASSOC);
 
-        // 3. Devolver os resultados em JSON
+        // 5. Devolver os resultados em JSON
         echo json_encode(['success' => true, 'recursos' => $recursos_disponiveis]);
         
     } catch (PDOException $e) {
         http_response_code(500);
         echo json_encode(['error' => 'Erro na base de dados: ' . $e->getMessage()]);
     }
-
+    
 } else {
     http_response_code(405);
     echo json_encode(['error' => 'Método não permitido.']);
