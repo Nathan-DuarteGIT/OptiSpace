@@ -38,47 +38,6 @@ require_once "../config/config.php";
                     </a>
 
                     <?php render_reservas_empresa_cards($_SESSION['user_id']) ?>
-
-                    <div class="card-dashboard">
-                        <div class="leading-tight">
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> 11/10/2025</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> 10:00</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> 14:00</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> Sala 2</p>
-
-                            <div class="flex items-center gap-3">
-                                <span class="font-medium text-sm text-black">Status:</span>
-                                <span class="inline-block bg-green-200 text-green-800 text-xs font-medium px-3 py-1 rounded-full">confirmada</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard ">
-                        <div class="leading-tight">
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> 10/10/2025</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> 09:30</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> 17:30</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> Sala 4</p>
-
-                            <div class="flex items-center gap-3">
-                                <span class="font-medium text-sm text-black">Status:</span>
-                                <span class="inline-block bg-green-200 text-green-800 text-xs font-medium px-3 py-1 rounded-full">confirmada</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-dashboard">
-                        <div class="leading-tight">
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> 05/10/2025</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> 8:20</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> 10:20</p>
-                            <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> sala 3</p>
-                            <div class="flex items-center gap-3">
-                                <span class="font-medium text-sm text-black">Status:</span>
-                                <span class="inline-block bg-red-200 text-red-800 text-xs font-medium px-3 py-1 rounded-full">Concluída</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
         </main>

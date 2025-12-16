@@ -633,20 +633,19 @@ function render_reservas_empresa_cards($user_id) {
                 case 'concluida':  $corStatus = 'bg-blue-200 text-blue-800'; break;
             }
 
-            echo <<<HTML
+            echo <<<INICIO
             <div class="card-dashboard">
                 <div class="leading-tight">
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> $data_inicio</p>
-            HTML;
+            INICIO;
 
             // Só exibe a "Data de fim" se for diferente da "Data de início"
             if ($data_inicio !== $data_fim) {
-                echo <<<HTML
+                echo <<<DATAFIM
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data de fim:</span> $data_fim</p>
-                HTML;
+                DATAFIM;
             }
-
-            echo <<<HTML
+            echo <<<INFORMATION
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> $hora_inicio</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> $hora_fim</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> $recurso</p>
@@ -657,7 +656,7 @@ function render_reservas_empresa_cards($user_id) {
                     </div>
                 </div>
             </div>
-            HTML;
+            INFORMATION;
         }
     } else {
         echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para a sua empresa.</p>";
