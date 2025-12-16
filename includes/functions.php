@@ -663,7 +663,7 @@ function render_reservas_empresa_cards($user_id) {
 
                     <div class="flex items-center gap-3 mt-2">
                         <span class="font-medium text-sm text-black">Status:</span>
-                        <span class="inline-block $corStatus text-xs font-medium px-3 py-1 rounded-full">$status</span>
+                        <span class="inline-block $corStatus text-[10px] font-medium px-3 py-1 rounded-full">$status</span>
                     </div>
                 </div>
             </div>

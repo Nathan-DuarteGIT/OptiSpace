@@ -1657,6 +1657,10 @@ body{
   line-height: 1rem;
 }
 
+.text-\[10px\]{
+  font-size: 10px;
+}
+
 .font-black{
   font-weight: 900;
 }
