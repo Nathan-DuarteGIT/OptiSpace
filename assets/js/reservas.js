@@ -7,6 +7,10 @@
     const campoRecursoEspecificoDiv = document.getElementById('campo-recurso-especifico');
     const selectRecursoEspecifico = document.getElementById('id_recurso_selecionado');
 
+    // NOVOS ELEMENTOS PARA FILTRAGEM DE SALA
+    const inputParticipantes = document.querySelector('select[name="participantes"]');
+    const checkboxEquipamentos = document.querySelectorAll('input[name="equipamentos_sala[]"]');
+
     /**
  * Envia um pedido AJAX para o PHP para buscar recursos disponíveis.
  */
@@ -17,9 +21,7 @@
         const hora_inicio = inputHoraInicio.value;
         const hora_fim = inputHoraFim.value;
         const tipo_recurso = tipoRecurso.value;
-        // NOVOS ELEMENTOS PARA FILTRAGEM DE SALA
-        const inputParticipantes = document.querySelector('select[name="participantes"]');
-        const checkboxEquipamentos = document.querySelectorAll('input[name="equipamentos_sala[]"]');
+        
 
         // A união para DATETIME COMPLETO será feita AGORA no PHP.
 
