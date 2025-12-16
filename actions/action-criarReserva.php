@@ -5,7 +5,7 @@
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         // 2. VERIFICAÇÃO DE DADOS POST
-        if(isset($_POST['data_inicio'], $_POST['data_fim'], $_POST['hora_inicio'], $_POST['hora_fim'], $_POST['recurso_id'], $_POST['tipo_recurso'])) {
+        if(isset($_POST['data_inicio'], $_POST['data_fim'], $_POST['hora_inicio'], $_POST['hora_fim'], $_POST['id_recurso_selecionado'], $_POST['tipo_recurso'])) {
             
             // 3. VERIFICAÇÃO DE UTILIZADOR (CRÍTICO)
             if (!isset($_SESSION['user_id'])) {
@@ -18,7 +18,7 @@
             $data_fim = $_POST['data_fim'];
             $hora_inicio = $_POST['hora_inicio'];
             $hora_fim = $_POST['hora_fim'];
-            $recurso_id = $_POST['recurso_id'];
+            $recurso_id = $_POST['id_recurso_selecionado'];
             $tipo_recurso = $_POST['tipo_recurso'];
             $utilizador_id = $_SESSION['user_id'];
             
