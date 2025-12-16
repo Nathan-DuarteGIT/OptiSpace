@@ -621,22 +621,8 @@ function render_reservas_empresa_cards($user_id) {
             $recurso = htmlspecialchars($r['nome_recurso']);
             $status = htmlspecialchars($r['status_reserva']);
 
-            // Definimos as cores hexadecimais diretamente para garantir que funcionam
-            switch($r['status_reserva']) {
-                case 'confirmada': 
-                    $bgColor = '#bbf7d0'; $textColor = '#166534'; break; // Green 200/800
-                case 'pendente':   
-                    $bgColor = '#fef08a'; $textColor = '#854d0e'; break; // Yellow 200/800
-                case 'cancelada':  
-                    $bgColor = '#fecaca'; $textColor = '#991b1b'; break; // Red 200/800
-                case 'concluida':  
-                    $bgColor = '#bfdbfe'; $textColor = '#1e40af'; break; // Blue 200/800
-                default:           
-                    $bgColor = '#e5e7eb'; $textColor = '#1f2937'; break; // Gray 200/800
-            }
-
             echo <<<INICIO
-            <div class="card-dashboard py-12">
+            <div class="">
                 <div class="leading-tight w-full">
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> $data_inicio</p>
             INICIO;
@@ -645,21 +631,34 @@ function render_reservas_empresa_cards($user_id) {
                 echo "<p class='text-xs text-black leading-relaxed'><span class='font-semibold'>Data de fim:</span> $data_fim</p>";
             }
 
-            echo <<<INFORMACAO
+            // Mapeamento de cores hexadecimais para garantir a renderização
+            $colors = [
+                'confirmada' => ['bg' => '#bbf7d0', 'text' => '#166534'], // Green 200/800
+                'pendente'   => ['bg' => '#fef08a', 'text' => '#854d0e'], // Yellow 200/800
+                'cancelada'  => ['bg' => '#fecaca', 'text' => '#991b1b'], // Red 200/800
+                'concluida'  => ['bg' => '#bfdbfe', 'text' => '#1e40af'], // Blue 200/800
+                'default'    => ['bg' => '#e5e7eb', 'text' => '#1f2937']  // Gray 200/800
+            ];
+
+            $status_key = isset($colors[$r['status_reserva']]) ? $r['status_reserva'] : 'default';
+            $bgColor = $colors[$status_key]['bg'];
+            $textColor = $colors[$status_key]['text'];
+
+            echo <<<INFORMATION
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> $hora_inicio</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> $hora_fim</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> $recurso</p>
 
-                    <div class="flex items-center gap-3 mt-3">
-                        <span class="font-semibold text-xs text-black">Status:</span>
-                        <span class="inline-block px-3 py-1 rounded-full text-xs font-medium" 
-                              style="background-color: $bgColor; color: $textColor;">
+                    <div class="flex items-center gap-3 mt-4">
+                        <span class="font-semibold text-xs text-black uppercase tracking-wider">Status:</span>
+                        <span class="inline-flex items-center justify-center px-3 py-1 text-[10px] font-bold rounded-full" 
+                              style="background-color: {$bgColor}; color: {$textColor}; min-width: 80px;">
                             $status
                         </span>
                     </div>
                 </div>
             </div>
-            INFORMACAO;
+            INFORMATION;
         }
     } else {
         echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para a sua empresa.</p>";
