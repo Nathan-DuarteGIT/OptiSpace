@@ -622,7 +622,7 @@ function render_reservas_empresa_cards($user_id) {
             $status = htmlspecialchars($r['status_reserva']);
 
             echo <<<INICIO
-            <div class="">
+            <div class="card-dashboard">
                 <div class="leading-tight w-full">
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> $data_inicio</p>
             INICIO;
