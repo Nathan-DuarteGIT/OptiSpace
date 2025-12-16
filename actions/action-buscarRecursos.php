@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hora_inicio = $_POST['hora_inicio'] ?? null;
     $hora_fim = $_POST['hora_fim'] ?? null;
     
-    // Filtros de Sala
     $participantes = $_POST['participantes'] ?? null;
     $equipamentos_sala = $_POST['equipamentos_sala'] ?? []; 
 
@@ -41,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdo = $db->getConnection();
 
     try {
-        // 1. BUSCA DE IDs RESERVADOS
+        // 1. IDs RESERVADOS
         $sql_reservados = "
             SELECT DISTINCT recurso_id FROM reservas
             WHERE 
@@ -58,24 +57,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
         $ids_reservados = $stmt_reservados->fetchAll(PDO::FETCH_COLUMN);
 
-        // 2. Configuração de tabelas e cláusulas
+        // 2. Configuração de cláusulas
         $tabela_recursos = '';
         $clausulas_extras = "";
         $params_extras = [];
 
         if ($tipo_recurso === 'sala') {
             $tabela_recursos = 'sala';
-            
-            // Filtro de Capacidade (ajustado para capacidade_max conforme seu SQL)
             if (!empty($participantes)) {
                 $clausulas_extras .= " AND s.capacidade_max >= ?";
                 $params_extras[] = $participantes;
             }
-
-            // Filtro de Equipamentos via tabela de ligação 'equipamentos_sala'
             if (!empty($equipamentos_sala) && is_array($equipamentos_sala)) {
                 foreach ($equipamentos_sala as $id_equip) {
-                    // Garante que a sala possua o equipamento específico
                     $clausulas_extras .= " AND EXISTS (
                         SELECT 1 FROM equipamentos_sala es 
                         WHERE es.sala_id = s.id AND es.equipamento_id = ?
@@ -87,17 +81,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $tabela_recursos = 'viaturas';
         } elseif ($tipo_recurso === 'equipamento') {
             $tabela_recursos = 'equipamentos';
+            // --- NOVA CLÁUSULA: APENAS PORTÁTEIS ---
+            $clausulas_extras .= " AND s.tipoEquipamento = 'portatil'";
         } else {
             http_response_code(400);
             echo json_encode(['success' => false, 'error' => 'Tipo inválido.']);
             exit;
         }
 
-        // 3. Preparar placeholders para o NOT IN
+        // 3. Preparar placeholders
         $placeholders = empty($ids_reservados) ? '0' : implode(',', array_fill(0, count($ids_reservados), '?'));
 
         // 4. Query Final
-        // Usamos o alias 's' para a tabela para facilitar as cláusulas extras
         $sql_disponiveis = "
             SELECT s.id, s.nome FROM {$tabela_recursos} s
             WHERE 
@@ -115,13 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => true, 'recursos' => $recursos_disponiveis]);
         
     } catch (PDOException $e) {
-        http_response_code(500 );
-        echo json_encode(['success' => false, 'error' => 'Erro na base de dados: ' . $e->getMessage()]);
+        http_response_code(500);
+        echo json_encode(['success' => false, 'error' => 'Erro na BD: ' . $e->getMessage()]);
     }
-
 } else {
-    http_response_code(405 );
+    http_response_code(405);
     echo json_encode(['success' => false, 'error' => 'Método não permitido.']);
 }
 ?>
-
