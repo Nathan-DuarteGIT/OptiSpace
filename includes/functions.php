@@ -621,12 +621,18 @@ function render_reservas_empresa_cards($user_id) {
             $recurso = htmlspecialchars($r['nome_recurso']);
             $status = htmlspecialchars($r['status_reserva']);
             // Definição de cores dinâmicas para o Status
-            $corStatus = 'bg-gray-200 text-gray-800';
+            // Definimos as cores hexadecimais diretamente para garantir que funcionam
             switch($r['status_reserva']) {
-                case 'confirmada': $corStatus = 'bg-green-200 text-green-800'; break;
-                case 'pendente':   $corStatus = 'bg-yellow-200 text-yellow-800'; break;
-                case 'cancelada':  $corStatus = 'bg-red-200 text-red-800'; break;
-                case 'concluida':  $corStatus = 'bg-blue-200 text-blue-800'; break;
+                case 'confirmada': 
+                    $bgColor = '#bbf7d0'; $textColor = '#166534'; break; // Green 200/800
+                case 'pendente':   
+                    $bgColor = '#fef08a'; $textColor = '#854d0e'; break; // Yellow 200/800
+                case 'cancelada':  
+                    $bgColor = '#fecaca'; $textColor = '#991b1b'; break; // Red 200/800
+                case 'concluida':  
+                    $bgColor = '#bfdbfe'; $textColor = '#1e40af'; break; // Blue 200/800
+                default:           
+                    $bgColor = '#e5e7eb'; $textColor = '#1f2937'; break; // Gray 200/800
             }
             echo <<<INICIO
             <div class="card-dashboard">
@@ -645,7 +651,10 @@ function render_reservas_empresa_cards($user_id) {
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> $recurso</p>
                     <div class="flex items-center gap-3 mt-2">
                         <span class="font-medium text-sm text-black">Status:</span>
-                        <span class="inline-block $corStatus text-xs font-medium px-3 py-1 rounded-full">$status</span>
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-medium" 
+                              style="background-color: $bgColor; color: $textColor;">
+                            $status
+                        </span>
                     </div>
                 </div>
             </div>
