@@ -988,6 +988,11 @@ body{
   height: auto;
 }
 
+.h-fit{
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .h-full{
   height: 100%;
 }
@@ -996,9 +1001,8 @@ body{
   height: 100vh;
 }
 
-.h-fit{
-  height: -moz-fit-content;
-  height: fit-content;
+.h-3{
+  height: 0.75rem;
 }
 
 .max-h-64{
