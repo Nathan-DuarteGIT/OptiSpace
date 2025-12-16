@@ -31,7 +31,7 @@ require_once "../config/config.php";
                 <!-- Card do formulário -->
                 <div class="rounded-2xl px-8 py-10">
 
-                    <form action="" method="post" class="space-y-8">
+                    <form action="../actions/action-criarReserva.php" method="post" class="space-y-8">
 
                         <!-- Data inicio -->
                         <div>
