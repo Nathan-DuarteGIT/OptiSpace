@@ -17,6 +17,9 @@
         const hora_inicio = inputHoraInicio.value;
         const hora_fim = inputHoraFim.value;
         const tipo_recurso = tipoRecurso.value;
+        // NOVOS ELEMENTOS PARA FILTRAGEM DE SALA
+        const inputParticipantes = document.querySelector('select[name="participantes"]');
+        const checkboxEquipamentos = document.querySelectorAll('input[name="equipamentos_sala[]"]');
 
         // A união para DATETIME COMPLETO será feita AGORA no PHP.
 
@@ -107,4 +110,13 @@
     inputDataFim.addEventListener('change', atualizarCampos);
     inputHoraInicio.addEventListener('change', atualizarCampos);
     inputHoraFim.addEventListener('change', atualizarCampos);
+
+    // NOVOS LISTENERS PARA OS CAMPOS DE SALA
+    if (inputParticipantes) {
+        inputParticipantes.addEventListener('change', atualizarCampos);
+    }
+    checkboxEquipamentos.forEach(checkbox => {
+        checkbox.addEventListener('change', atualizarCampos);
+    });
+
     document.addEventListener('DOMContentLoaded', atualizarCampos);

@@ -1,6 +1,8 @@
 <?php
 include_once '../includes/functions.php';
 require_once "../config/config.php";
+$file_path = '../assets/js/reservas.js';
+$version = filemtime($file_path);
 ?>
 
 <!DOCTYPE html>
@@ -122,9 +124,7 @@ require_once "../config/config.php";
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Equipamentos adicionais (opcional)</label>
                                 <div class="space-y-2">
-                                    <label class="flex items-center"><input type="checkbox" name="equipamentos_sala[]" value="projetor" class="mr-3"> Projetor</label>
-                                    <label class="flex items-center"><input type="checkbox" name="equipamentos_sala[]" value="tv" class="mr-3"> TV</label>
-                                    <label class="flex items-center"><input type="checkbox" name="equipamentos_sala[]" value="teleconferencia" class="mr-3"> Videoconferência</label>
+                                    <?php render_equipamentos_fixos_formCriar($_SESSION['user_id']); ?>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,7 @@ require_once "../config/config.php";
         </main>
     </div>
 
-    <script src="../assets/js/reservas.js?v=20251216"></script>
+    <script src="<?= $file_path ?>?v=<?= $version ?>"></script>
 </body>
 
 </html>
