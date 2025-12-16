@@ -637,7 +637,7 @@ function render_reservas_empresa_cards($user_id) {
             echo <<<INICIO
             <div class="card-dashboard">
                 <div class="leading-tight">
-                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> $data_inicio</p>
+                    <p class="text-xs text-black leading-relaxed pt-4"><span class="font-semibold">Data:</span> $data_inicio</p>
             INICIO;
             // Só exibe a "Data de fim" se for diferente da "Data de início"
             if ($data_inicio !== $data_fim) {
@@ -650,7 +650,7 @@ function render_reservas_empresa_cards($user_id) {
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> $hora_fim</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> $recurso</p>
                     <div class="flex items-center gap-3 mt-2">
-                        <span class="font-medium text-sm text-black">Status:</span>
+                        <span class="font-medium text-sm text-black pb-4">Status:</span>
                         <span class="inline-block px-3 py-1 rounded-full text-xs font-medium" 
                               style="background-color: $bgColor; color: $textColor;">
                             $status
