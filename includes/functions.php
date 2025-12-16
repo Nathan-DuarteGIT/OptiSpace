@@ -439,6 +439,49 @@ function buscar_equipamentos_sala($sala_id){
 }
 
 /**
+ * BUSCA POR TODAS AS RESERVAS DA EMPRESA DO UTILIZADOR
+ */
+function buscar_reservas_empresa($user_id) {
+    // 1. Identifica a empresa do utilizador logado usando a sua função existente
+    $empresa_id = buscar_empresa($user_id);
+
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    // 2. Query que busca detalhes da reserva, nome do colaborador e nome do recurso
+    // Fazemos JOIN com utilizadores para filtrar pela empresa_id
+    $sql = "
+        SELECT 
+            r.*, 
+            u.nome as nome_utilizador,
+            CASE 
+                WHEN r.tipo_recurso = 'sala' THEN (SELECT nome FROM sala WHERE id = r.recurso_id)
+                WHEN r.tipo_recurso = 'viatura' THEN (SELECT nome FROM viaturas WHERE id = r.recurso_id)
+                WHEN r.tipo_recurso = 'equipamento' THEN (SELECT nome FROM equipamentos WHERE id = r.recurso_id)
+            END as nome_recurso
+        FROM reservas r
+        JOIN utilizadores u ON r.utilizador_id = u.id
+        WHERE u.empresa_id = :empresa_id
+        ORDER BY r.data_inicio DESC
+    ";
+
+    try {
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':empresa_id', $empresa_id);
+        $stmt->execute();
+        
+        $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $db->closeConnection();
+        
+        return $reservas;
+
+    } catch (PDOException $e) {
+        $db->closeConnection();
+        return []; // Retorna array vazio em caso de erro
+    }
+}
+
+/**
  * RENDARIZAR OS EQUIPAMENTOS FIXOS DA EMPRESA NO FORMCRIAR 
  */
 
@@ -556,5 +599,67 @@ function render_salas_card($user_id){
                     </div>
             SALA;
         }
+    }
+}
+
+/**
+ * RENDERIZAR AS RESERVAS DA EMPRESA EM FORMATO DE CARD
+ */
+function render_reservas_empresa_cards($user_id) {
+    // 1. Obtém as reservas usando a função de busca
+    $reservas = buscar_reservas_empresa($user_id);
+
+    if ($reservas) {
+        foreach ($reservas as $r) {
+            // Conversão dos timestamps para objetos de tempo
+            $timestamp_inicio = strtotime($r['data_inicio']);
+            $timestamp_fim = strtotime($r['data_fim']);
+
+            // Formatação de datas e horas
+            $data_inicio = date('d/m/Y', $timestamp_inicio);
+            $data_fim    = date('d/m/Y', $timestamp_fim);
+            $hora_inicio = date('H:i', $timestamp_inicio);
+            $hora_fim    = date('H:i', $timestamp_fim);
+            
+            $recurso = htmlspecialchars($r['nome_recurso']);
+            $status = htmlspecialchars($r['status_reserva']);
+
+            // Definição de cores dinâmicas para o Status
+            $corStatus = 'bg-gray-200 text-gray-800'; 
+            switch($r['status_reserva']) {
+                case 'confirmada': $corStatus = 'bg-green-200 text-green-800'; break;
+                case 'pendente':   $corStatus = 'bg-yellow-200 text-yellow-800'; break;
+                case 'cancelada':  $corStatus = 'bg-red-200 text-red-800'; break;
+                case 'concluida':  $corStatus = 'bg-blue-200 text-blue-800'; break;
+            }
+
+            echo <<<HTML
+            <div class="card-dashboard">
+                <div class="leading-tight">
+                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> $data_inicio</p>
+            HTML;
+
+            // Só exibe a "Data de fim" se for diferente da "Data de início"
+            if ($data_inicio !== $data_fim) {
+                echo <<<HTML
+                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data de fim:</span> $data_fim</p>
+                HTML;
+            }
+
+            echo <<<HTML
+                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> $hora_inicio</p>
+                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> $hora_fim</p>
+                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Recurso:</span> $recurso</p>
+
+                    <div class="flex items-center gap-3 mt-2">
+                        <span class="font-medium text-sm text-black">Status:</span>
+                        <span class="inline-block $corStatus text-xs font-medium px-3 py-1 rounded-full">$status</span>
+                    </div>
+                </div>
+            </div>
+            HTML;
+        }
+    } else {
+        echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para a sua empresa.</p>";
     }
 }

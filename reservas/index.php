@@ -37,6 +37,8 @@ require_once "../config/config.php";
                         <h4 class="text-lg font-bold text-black group-hover:text-indigo-600 transition-colors">Criar Reserva</h4>
                     </a>
 
+                    <?php render_reservas_empresa_cards($_SESSION['user_id']) ?>
+
                     <div class="card-dashboard">
                         <div class="leading-tight">
                             <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data:</span> 11/10/2025</p>
