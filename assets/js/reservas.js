@@ -15,71 +15,76 @@
  * Envia um pedido AJAX para o PHP para buscar recursos disponíveis.
  */
     async function buscarRecursosDisponiveis() {
-        // Agora usando os quatro campos de entrada separados
-        const data_inicio = inputDataInicio.value;
-        const data_fim = inputDataFim.value;
-        const hora_inicio = inputHoraInicio.value;
-        const hora_fim = inputHoraFim.value;
-        const tipo_recurso = tipoRecurso.value;
-        
+    const data_inicio = inputDataInicio.value;
+    const data_fim = inputDataFim.value;
+    const hora_inicio = inputHoraInicio.value;
+    const hora_fim = inputHoraFim.value;
+    const tipo_recurso = tipoRecurso.value;
 
-        // A união para DATETIME COMPLETO será feita AGORA no PHP.
+    // Se faltarem dados básicos, não fazemos a busca
+    if (!data_inicio || !data_fim || !hora_inicio || !hora_fim || !tipo_recurso) {
+        selectRecursoEspecifico.innerHTML = '<option value="" disabled selected>Preencha Data e Horários.</option>';
+        campoRecursoEspecificoDiv.classList.add('hidden');
+        return;
+    }
 
-        // Se faltarem dados, não fazemos a busca
-        if (!data_inicio || !data_fim || !hora_inicio || !hora_fim || !tipo_recurso) {
-            selectRecursoEspecifico.innerHTML = '<option value="" disabled selected>Preencha Data e Horários.</option>';
-            campoRecursoEspecificoDiv.classList.add('hidden');
-            return;
-        }
-    
-        // Validação de ordem (Fim deve ser posterior ao Início) - A validação completa 
-        // deve ser feita no PHP após a concatenação, mas um cheque básico pode ser útil aqui.
-        // Deixamos a validação de DATETIME completo para o PHP, que é mais robusto.
+    // Feedback de carregamento
+    selectRecursoEspecifico.innerHTML = '<option value="" disabled selected>A carregar recursos...</option>';
+    campoRecursoEspecificoDiv.classList.remove('hidden');
 
-        // Mostrar feedback de carregamento
-        selectRecursoEspecifico.innerHTML = '<option value="" disabled selected>A carregar recursos...</option>';
-        campoRecursoEspecificoDiv.classList.remove('hidden');
+    try {
+        // --- PREPARAÇÃO DOS PARÂMETROS ---
+        const params = new URLSearchParams();
+        params.append('data_inicio', data_inicio);
+        params.append('data_fim', data_fim);
+        params.append('hora_inicio', hora_inicio);
+        params.append('hora_fim', hora_fim);
+        params.append('tipo_recurso', tipo_recurso);
 
-        try {
-            const response = await fetch('../actions/action-buscarRecursos.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({
-                    // ENVIAR OS QUATRO CAMPOS SEPARADOS PARA O PHP
-                    data_inicio: data_inicio, 
-                    data_fim: data_fim, 
-                    hora_inicio: hora_inicio,
-                    hora_fim: hora_fim,
-                    tipo_recurso: tipo_recurso
-                })
-            });
-        
-            // ... (resto da lógica de processamento da resposta JSON) ...
-            const dataJson = await response.json();
-
-            selectRecursoEspecifico.innerHTML = '';
-        
-            if (dataJson.success && dataJson.recursos && dataJson.recursos.length > 0) {
-                let options = '<option value="" disabled selected>Selecione um recurso disponível</option>';
-            
-                dataJson.recursos.forEach(recurso => {
-                    options += `<option value="${recurso.id}">${recurso.nome}</option>`;
-                });
-
-                selectRecursoEspecifico.innerHTML = options;
-
-            } else {
-                selectRecursoEspecifico.innerHTML = '<option value="" disabled selected>Nenhum recurso disponível.</option>';
-                campoRecursoEspecificoDiv.classList.remove('hidden');
+        // Se for uma sala, adicionamos os filtros específicos
+        if (tipo_recurso === 'sala') {
+            // 1. Participantes
+            if (inputParticipantes && inputParticipantes.value) {
+                params.append('participantes', inputParticipantes.value);
             }
 
-        } catch (error) {
-            console.error('Erro na busca de recursos:', error);
-            selectRecursoEspecifico.innerHTML = '<option value="" disabled selected>Erro ao comunicar com o servidor.</option>';
+            // 2. Equipamentos (Checkboxes)
+            // Pegamos apenas os que estão marcados
+            checkboxEquipamentos.forEach(checkbox => {
+                if (checkbox.checked) {
+                    // Importante usar o nome com [] para o PHP receber como array
+                    params.append('equipamentos_sala[]', checkbox.value);
+                }
+            });
         }
+
+        const response = await fetch('../actions/action-buscarRecursos.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: params // Enviamos o objeto params completo
+        });
+
+        const dataJson = await response.json();
+
+        selectRecursoEspecifico.innerHTML = '';
+
+        if (dataJson.success && dataJson.recursos && dataJson.recursos.length > 0) {
+            let options = '<option value="" disabled selected>Selecione um recurso disponível</option>';
+            dataJson.recursos.forEach(recurso => {
+                options += `<option value="${recurso.id}">${recurso.nome}</option>`;
+            });
+            selectRecursoEspecifico.innerHTML = options;
+        } else {
+            selectRecursoEspecifico.innerHTML = '<option value="" disabled selected>Nenhum recurso disponível com esses filtros.</option>';
+        }
+
+    } catch (error) {
+        console.error('Erro na busca de recursos:', error);
+        selectRecursoEspecifico.innerHTML = '<option value="" disabled selected>Erro ao comunicar com o servidor.</option>';
     }
+}
 
     // A função principal de gestão do estado
     function atualizarCampos() {
