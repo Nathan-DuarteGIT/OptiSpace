@@ -57,7 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ids_reservados = $stmt_reservados->fetchAll(PDO::FETCH_COLUMN);
 
         // Converte a lista de IDs reservados para uma string para a cláusula NOT IN
-        $placeholders = empty($ids_reservados) ? 'NULL' : implode(',', array_fill(0, count($ids_reservados), '?'));
+        if (empty($ids_reservados)) {
+            $ids_reservados_str = '0'; 
+        } else {
+            // Cria uma string de placeholders (?) para o PDO
+            $placeholders = implode(',', array_fill(0, count($ids_reservados), '?'));
+            $ids_reservados_str = $placeholders;
+        }
         
         // Encontra todos os recursos disponíveis (excluindo os reservados e filtrando por tipo)
         $sql_disponiveis = "
