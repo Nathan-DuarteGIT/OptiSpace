@@ -42,7 +42,7 @@
     }
 
     .card-dashboard {
-        @apply bg-white w-64 h-32 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12;
+        @apply bg-white w-72 h-32 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12;
     }
 
     /* Sidebar Item */

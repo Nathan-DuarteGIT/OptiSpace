@@ -699,7 +699,7 @@ body{
 .card-dashboard{
   display: flex;
   height: 8rem;
-  width: 16rem;
+  width: 18rem;
   align-items: center;
   justify-content: center;
   gap: 3rem;
@@ -1542,6 +1542,10 @@ body{
   padding-bottom: 2rem;
 }
 
+.pb-4{
+  padding-bottom: 1rem;
+}
+
 .pl-0{
   padding-left: 0px;
 }
@@ -1564,10 +1568,6 @@ body{
 
 .pt-6{
   padding-top: 1.5rem;
-}
-
-.pb-4{
-  padding-bottom: 1rem;
 }
 
 .text-left{
