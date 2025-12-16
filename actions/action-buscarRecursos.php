@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_disponiveis = $pdo->prepare($sql_disponiveis);
 
         // Prepara os parâmetros: [id_empresa, id_reservado_1, id_reservado_2, ...]
-        $params = array_merge([$id_empresa], $ids_reservados);
+        $params = $ids_reservados;
 
         // 4. Prepara os parâmetros para a execução
         // A lista de parâmetros é apenas os IDs reservados (se existirem).
