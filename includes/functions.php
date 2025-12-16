@@ -635,7 +635,7 @@ function render_reservas_empresa_cards($user_id) {
                     $bgColor = '#e5e7eb'; $textColor = '#1f2937'; break; // Gray 200/800
             }
             echo <<<INICIO
-            <div style="height:200px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
+            <div style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
                 <div class="leading-tight">
                     <p class="text-xs text-black leading-relaxed pt-4"><span class="font-semibold">Data:</span> $data_inicio</p>
             INICIO;
