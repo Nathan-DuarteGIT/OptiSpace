@@ -656,6 +656,10 @@ function render_reservas_empresa_cards($user_id) {
                             $status
                         </span>
                     </div>
+                    <div class="flex gap-2">
+                        <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs">Confirmar</button>
+                        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs">Cancelar</button>
+                    </div>
                 </div>
             </div>
             INFORMATION;
