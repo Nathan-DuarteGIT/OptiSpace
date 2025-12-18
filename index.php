@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/config/config.php';
-$file_css = '../assets/css/output.css';
+$file_css = 'assets/css/output.css';
 $versioncss = filemtime($file_css);
 ?>
 <!DOCTYPE html>
