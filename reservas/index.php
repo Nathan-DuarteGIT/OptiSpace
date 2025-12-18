@@ -1,7 +1,6 @@
 <?php
 include_once '../includes/functions.php';
 require_once "../config/config.php";
-$versioncss = filemtime($file_css);
 ?>
 
 <!DOCTYPE html>
