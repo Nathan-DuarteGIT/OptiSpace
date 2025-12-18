@@ -656,6 +656,10 @@ function render_reservas_empresa_cards($user_id) {
                             $status
                         </span>
                     </div>
+                    <div>
+                        <button>Confirmar</button>
+                        <button>Cancelar</button>
+                    </div>
                 </div>
             </div>
             INFORMATION;
