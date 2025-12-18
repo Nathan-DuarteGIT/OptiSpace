@@ -93,7 +93,7 @@
             }else if($tipo_recurso === 'viatura'){
                 $caminho_imagem = "../uploads/viatura-default.png";
 
-                if(isset($_FILES['imagem_viatura']) && $_FILES['imagem_equipamento']['error'] !== UPLOAD_ERR_NO_FILE) {
+                if(isset($_FILES['imagem_viatura']) && $_FILES['imagem_viatura']['error'] !== UPLOAD_ERR_NO_FILE) {
                     $upload_result = upload_imagem($_FILES['imagem_viatura'], '../uploads');
                     if($upload_result['sucesso']) {
                         $caminho_imagem = $upload_result['caminho'];
