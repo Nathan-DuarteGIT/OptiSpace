@@ -40,22 +40,10 @@ require_once "../config/config.php";
                     <?php render_reservas_empresa_cards($_SESSION['user_id']) ?>
                 </div>
             </section>
-            
-            <div class="space-y-4">
-                    <!-- Botão Confirmar Reserva -->
-                    <button
-                        onclick="openModal('modalConfirmar')"
-                        class="w-full bg-white hover:bg-gray-50 text-left px-6 py-4 rounded-lg shadow-sm transition-colors duration-200 font-medium text-gray-900">
-                        Confirmar 
-                    </button>
 
-                    <!-- Botão Cancelar Reserva -->
-                    <button
-                        onclick="openModal('modalCancelar')"
-                        class="w-full bg-white hover:bg-gray-50 text-left px-6 py-4 rounded-lg shadow-sm transition-colors duration-200 font-medium text-gray-900">
-                        Cancelar
-                    </button>
-                </div>
+            <div class="space-y-4">
+                    
+            </div>
         </main>
     </div>
 </body>
