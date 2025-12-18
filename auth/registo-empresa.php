@@ -1,5 +1,7 @@
 <?php
 require_once "../config/config.php";
+$file_css = '../assets/css/output.css';
+$versioncss = filemtime($file_css);
 
 $erro = '';
 if (isset($_SESSION['erro_registo'])) {
@@ -25,7 +27,7 @@ if (isset($_SESSION['form_data'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/output.css">
+    <link rel="stylesheet" href="../assets/css/output.css?v=<?= $versioncss ?>">
     <link rel="shortcut icon" href="../assets/images/logo_optispace.ico" type="image/x-icon">
     <title>Registo Empresa</title>
 </head>
