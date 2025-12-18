@@ -5,7 +5,8 @@ require_once "../config/config.php";
 // FUNÇÕES DE SEGURANÇA
 // ============================================
 
-function showvar($var) {
+function showvar($var)
+{
     echo $var;
 }
 
@@ -98,9 +99,9 @@ function upload_imagem($file, $pasta)
     if (!defined('MAX_FILE_SIZE') || !defined('ALLOWED_EXTENSIONS') || !defined('UPLOAD_PATH')) {
         return ['sucesso' => false, 'mensagem' => 'Erro de configuração: Constantes de upload (MAX_FILE_SIZE, ALLOWED_EXTENSIONS, UPLOAD_PATH) em falta.'];
     }
-    
+
     // --- 2. Validação Inicial de Upload ---
-    
+
     // Verifica se houve upload e se foi bem-sucedido
     if (!isset($file['error']) || $file['error'] !== UPLOAD_ERR_OK) {
         // Pode-se expandir o tratamento para códigos de erro específicos aqui.
@@ -110,12 +111,12 @@ function upload_imagem($file, $pasta)
     // --- 3. Validação de Tamanho ---
     if ($file['size'] > MAX_FILE_SIZE) {
         // Converte o tamanho máximo para MB para a mensagem
-        $max_mb = round(MAX_FILE_SIZE / 1024 / 1024, 0); 
+        $max_mb = round(MAX_FILE_SIZE / 1024 / 1024, 0);
         return ['sucesso' => false, 'mensagem' => "Ficheiro muito grande (máx {$max_mb}MB)"];
     }
 
     // --- 4. Validação do Tipo MIME Real (SEGURANÇA ESSENCIAL) ---
-    
+
     // Lista de tipos MIME aceites
     $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif'];
 
@@ -123,7 +124,7 @@ function upload_imagem($file, $pasta)
     if (!extension_loaded('fileinfo')) {
         return ['sucesso' => false, 'mensagem' => 'Erro de sistema: Extensão "fileinfo" necessária para segurança não carregada.'];
     }
-    
+
     // Abre a biblioteca de ficheiros MIME e verifica o tipo real do ficheiro temporário
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mime_type = finfo_file($finfo, $file['tmp_name']);
@@ -141,7 +142,7 @@ function upload_imagem($file, $pasta)
     }
 
     // --- 6. Sanitização e Preparação do Caminho ---
-    
+
     // Sanitiza $pasta para prevenir Path Traversal (../../)
     // Permite apenas caracteres alfanuméricos, hífens e underscores.
     $pasta_segura = $pasta;
@@ -151,7 +152,7 @@ function upload_imagem($file, $pasta)
 
     // Gera nome único para o ficheiro
     $nome_novo = uniqid('img_', true) . '.' . $ext;
-    
+
     // Monta o caminho de destino completo
     $caminho_base = rtrim(UPLOAD_PATH, '/') . '/';
     $destino = $caminho_base . $pasta_segura . '/' . $nome_novo;
@@ -161,7 +162,7 @@ function upload_imagem($file, $pasta)
     $dir_destino = dirname($destino);
     if (!is_dir($dir_destino)) {
         // @ silencia erros em caso de problemas de permissão
-        if (!@mkdir($dir_destino, 0777, true)) { 
+        if (!@mkdir($dir_destino, 0777, true)) {
             return ['sucesso' => false, 'mensagem' => 'Erro ao criar o diretório de destino. Verifique as permissões.'];
         }
     }
@@ -183,7 +184,8 @@ function upload_imagem($file, $pasta)
  * BUSCAR EMPRESA PELO USER_ID
  */
 
-function buscar_empresa($user_id){
+function buscar_empresa($user_id)
+{
     $db = new Database();
     $conn = $db->getConnection();
 
@@ -202,7 +204,8 @@ function buscar_empresa($user_id){
  * BUSCA POR UTILIZADORES DA EMPRESA
  */
 
-function buscar_utilizadores($user_id){
+function buscar_utilizadores($user_id)
+{
     $empresa_id = buscar_empresa($user_id);
 
     $db = new Database();
@@ -265,7 +268,6 @@ function buscar_utilizadores($user_id){
         }
 
         echo "</tbody></table>";
-
     } else {
         echo "<p class='text-center text-gray-500'>Nenhum utilizador encontrado.</p>";
     }
@@ -276,7 +278,8 @@ function buscar_utilizadores($user_id){
  * CONTAR EQUIPAMENTOS DA EMPRESA
  */
 
-function contar_equipamentos($user_id){
+function contar_equipamentos($user_id)
+{
     $empresa_id = buscar_empresa($user_id);
 
     $db = new Database();
@@ -297,7 +300,8 @@ function contar_equipamentos($user_id){
  * CONTAR SALAS DA EMPRESA
  */
 
-function contar_salas($user_id){
+function contar_salas($user_id)
+{
     $empresa_id = buscar_empresa($user_id);
 
     $db = new Database();
@@ -317,7 +321,8 @@ function contar_salas($user_id){
  * CONTAR VIATURAS DA EMPRESA
  */
 
-function contar_viaturas($user_id){
+function contar_viaturas($user_id)
+{
     $empresa_id = buscar_empresa($user_id);
 
     $db = new Database();
@@ -338,7 +343,8 @@ function contar_viaturas($user_id){
  * BUSCA POR EQUIPAMENTOS FIXOS DA EMPRESA
  */
 
-function buscar_equipamentos_fixos($user_id){
+function buscar_equipamentos_fixos($user_id)
+{
     $empresa_id = buscar_empresa($user_id);
 
     $db = new Database();
@@ -359,7 +365,8 @@ function buscar_equipamentos_fixos($user_id){
  * BUSCA POR EQUIPAMENTOS PORTATIL DA EMPRESA
  */
 
-function buscar_equipamentos_portatil($user_id){
+function buscar_equipamentos_portatil($user_id)
+{
     $empresa_id = buscar_empresa($user_id);
 
     $db = new Database();
@@ -380,7 +387,8 @@ function buscar_equipamentos_portatil($user_id){
  * BUSCA POR VIATURAS DA EMPRESA
  */
 
-function buscar_viaturas($user_id){
+function buscar_viaturas($user_id)
+{
     $empresa_id = buscar_empresa($user_id);
 
     $db = new Database();
@@ -401,7 +409,8 @@ function buscar_viaturas($user_id){
  * BUSCA POR SALAS DA EMPRESA
  */
 
-function buscar_salas($user_id){
+function buscar_salas($user_id)
+{
     $empresa_id = buscar_empresa($user_id);
 
     $db = new Database();
@@ -422,7 +431,8 @@ function buscar_salas($user_id){
  * BUSCA POR EQUIPAMENTOS ASSOCIADOS Á SALA DA EMPRESA
  */
 
-function buscar_equipamentos_sala($sala_id){
+function buscar_equipamentos_sala($sala_id)
+{
     $db = new Database();
     $conn = $db->getConnection();
 
@@ -440,7 +450,8 @@ function buscar_equipamentos_sala($sala_id){
 /**
  * BUSCA POR TODAS AS RESERVAS DA EMPRESA DO UTILIZADOR
  */
-function buscar_reservas_empresa($user_id) {
+function buscar_reservas_empresa($user_id)
+{
     // 1. Identifica a empresa do utilizador logado usando a sua função existente
     $empresa_id = buscar_empresa($user_id);
 
@@ -468,12 +479,11 @@ function buscar_reservas_empresa($user_id) {
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':empresa_id', $empresa_id);
         $stmt->execute();
-        
+
         $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $db->closeConnection();
-        
-        return $reservas;
 
+        return $reservas;
     } catch (PDOException $e) {
         $db->closeConnection();
         return []; // Retorna array vazio em caso de erro
@@ -484,7 +494,8 @@ function buscar_reservas_empresa($user_id) {
  * RENDARIZAR OS EQUIPAMENTOS FIXOS DA EMPRESA NO FORMCRIAR 
  */
 
-function render_equipamentos_fixos_formCriar($user_id){
+function render_equipamentos_fixos_formCriar($user_id)
+{
     $equipamentos_fixos = buscar_equipamentos_fixos($user_id);
 
     if ($equipamentos_fixos) {
@@ -505,7 +516,8 @@ function render_equipamentos_fixos_formCriar($user_id){
  * RENDARIZAR OS EQUIPAMENTOS FIXOS DA EMPRESA EM CARD 
  */
 
-function render_equipamentos_fixos_card($user_id){
+function render_equipamentos_fixos_card($user_id)
+{
     $equipamentos_fixos = buscar_equipamentos_fixos($user_id);
 
     if ($equipamentos_fixos) {
@@ -528,7 +540,8 @@ function render_equipamentos_fixos_card($user_id){
  * RENDARIZAR OS EQUIPAMENTOS PORTATIL DA EMPRESA EM CARD 
  */
 
-function render_equipamentos_portatil_card($user_id){
+function render_equipamentos_portatil_card($user_id)
+{
     $equipamentos_portatil = buscar_equipamentos_portatil($user_id);
 
     if ($equipamentos_portatil) {
@@ -551,7 +564,8 @@ function render_equipamentos_portatil_card($user_id){
  * RENDARIZAR AS VIATURAS DA EMPRESA EM CARD 
  */
 
-function render_viaturas_card($user_id){
+function render_viaturas_card($user_id)
+{
     $viaturas = buscar_viaturas($user_id);
 
     if ($viaturas) {
@@ -574,7 +588,8 @@ function render_viaturas_card($user_id){
  * RENDARIZAR AS SALAS DA EMPRESA EM CARD  
  */
 
-function render_salas_card($user_id){
+function render_salas_card($user_id)
+{
     $salas = buscar_salas($user_id);
 
     if ($salas) {
@@ -583,7 +598,7 @@ function render_salas_card($user_id){
             $capacidade = htmlspecialchars($s['capacidade_max']);
             $localizacao = htmlspecialchars($s['localizacao']);
             $equipamentos = buscar_equipamentos_sala($s['id']);
-            $equipamentos_list = array_map(function($e) {
+            $equipamentos_list = array_map(function ($e) {
                 return htmlspecialchars($e['nome']);
             }, $equipamentos);
             $equipamentos_str = implode(', ', $equipamentos_list);
@@ -604,7 +619,8 @@ function render_salas_card($user_id){
 /**
  * RENDERIZAR AS RESERVAS DA EMPRESA EM FORMATO DE CARD
  */
-function render_reservas_empresa_cards($user_id) {
+function render_reservas_empresa_cards($user_id)
+{
     // 1. Obtém as reservas usando a função de busca
     $reservas = buscar_reservas_empresa($user_id);
     if ($reservas) {
@@ -621,17 +637,27 @@ function render_reservas_empresa_cards($user_id) {
             $status = htmlspecialchars($r['status_reserva']);
             // Definição de cores dinâmicas para o Status
             // Definimos as cores hexadecimais diretamente para garantir que funcionam
-            switch($r['status_reserva']) {
-                case 'confirmada': 
-                    $bgColor = '#bbf7d0'; $textColor = '#166534'; break; // Green 200/800
-                case 'pendente':   
-                    $bgColor = '#fef08a'; $textColor = '#854d0e'; break; // Yellow 200/800
-                case 'cancelada':  
-                    $bgColor = '#fecaca'; $textColor = '#991b1b'; break; // Red 200/800
-                case 'concluida':  
-                    $bgColor = '#bfdbfe'; $textColor = '#1e40af'; break; // Blue 200/800
-                default:           
-                    $bgColor = '#e5e7eb'; $textColor = '#1f2937'; break; // Gray 200/800
+            switch ($r['status_reserva']) {
+                case 'confirmada':
+                    $bgColor = '#bbf7d0';
+                    $textColor = '#166534';
+                    break; // Green 200/800
+                case 'pendente':
+                    $bgColor = '#fef08a';
+                    $textColor = '#854d0e';
+                    break; // Yellow 200/800
+                case 'cancelada':
+                    $bgColor = '#fecaca';
+                    $textColor = '#991b1b';
+                    break; // Red 200/800
+                case 'concluida':
+                    $bgColor = '#bfdbfe';
+                    $textColor = '#1e40af';
+                    break; // Blue 200/800
+                default:
+                    $bgColor = '#e5e7eb';
+                    $textColor = '#1f2937';
+                    break; // Gray 200/800
             }
             echo <<<INICIO
             <div style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
@@ -656,8 +682,8 @@ function render_reservas_empresa_cards($user_id) {
                         </span>
                     </div>
                     <div class="flex gap-2">
-                        <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs">Confirmar</button>
-                        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs">Cancelar</button>
+                        <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="{$r['id']}">Confirmar</button>
+                        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="{$r['id']}">Cancelar</button>
                     </div>
                 </div>
             </div>
