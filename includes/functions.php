@@ -127,7 +127,6 @@ function upload_imagem($file, $pasta)
     // Abre a biblioteca de ficheiros MIME e verifica o tipo real do ficheiro temporário
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mime_type = finfo_file($finfo, $file['tmp_name']);
-    finfo_close($finfo);
 
     if (!in_array($mime_type, $allowed_mime_types)) {
         return ['sucesso' => false, 'mensagem' => 'Tipo de ficheiro não permitido pelo seu conteúdo real.'];
