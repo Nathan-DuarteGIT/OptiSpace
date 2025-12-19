@@ -22,6 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if($reserva['status_reserva'] === 'pendente') {
                 if($reserva['codigo'] === $pin_confirmacao) {
                     // Atualizar o status da reserva para 'confirmada'
+                    die($reserva['codigo']);
                     $update_stmt = $conn->prepare("UPDATE reservas SET status_reserva = 'confirmada' WHERE id = :id_reserva");
                     $update_stmt->bindParam(':id_reserva', $id_reserva);
                     if($update_stmt->execute()) {
