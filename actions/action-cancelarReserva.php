@@ -6,7 +6,6 @@ require_once "../includes/functions.php";
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_POST['id_reserva'])) {
         $id_reserva = $_POST['id_reserva'];
-        die("ID Reserva: " . $id_reserva);
         $db = new Database();
         $conn = $db->getConnection();
 
