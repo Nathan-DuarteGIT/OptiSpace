@@ -86,3 +86,29 @@ function enviarEmailBoasVindas($destinatario, $nome, $codigo_ativacao) {
         return false;
     }
 }
+
+function enviarEmailCodigoReserva($destinatario, $tipo_recurso, $nome_do_recurso, $codigo_reserva) {
+    global $mail;
+
+    try {
+        $mail->setFrom($mail->Username, 'OptiSpace');
+        $mail->addAddress($destinatario);
+
+        $mail->Subject = 'Código da sua reserva';
+        $mail->Body    = "Olá,\n\n" .
+                         "A sua reserva do(a) $tipo_recurso - $nome_do_recurso foi agendada.\n\n" .
+                         "Por favor confirme a mesma através do Código da reserva: $codigo_reserva\n\n" .
+                         "Se tiver alguma dúvida, não hesite em contactar-nos.\n\n" .
+                         "Atenciosamente,\n" .
+                         "A Equipa OptiSpace";
+
+        if ($mail->send()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        echo "Erro ao enviar email: {$mail->ErrorInfo}";
+        return false;
+    }
+}

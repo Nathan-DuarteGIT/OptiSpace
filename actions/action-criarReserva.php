@@ -39,6 +39,34 @@
             $stmt->bindParam(':data_fim', $data_fim_full);       // Usar a variável full
 
             if($stmt->execute()) {
+                //obeter o ID da reserva criada
+                $reserva_id = $conn->lastInsertId();
+                $stmt_reserva = $conn->prepare("SELECT codigo FROM reservas WHERE id = :reserva_id");
+                $stmt_reserva->bindParam(':reserva_id', $reserva_id);
+                $stmt_reserva->execute();
+                $reserva = $stmt_reserva->fetch(PDO::FETCH_ASSOC);
+                $tabela_recurso = '';
+                switch ($tipo_recurso) {
+                    case 'sala':
+                        $tabela_recurso = 'sala';
+                        break;
+                    case 'viatura':
+                        $tabela_recurso = 'viaturas';
+                        break;
+                    case 'equipamento':
+                        $tabela_recurso = 'equipamentos';
+                        break;
+                }
+                // Enviar email com o código da reserva
+                $stmt_recurso = $conn->prepare("SELECT nome FROM {$tabela_recurso} WHERE id = :recurso_id");
+                $stmt_recurso->bindParam(':recurso_id', $recurso_id);
+                $stmt_recurso->execute();
+                $recurso = $stmt_recurso->fetch(PDO::FETCH_ASSOC);
+
+                if ($recurso && $reserva) {
+                    enviarEmailCodigoReserva(buscar_email($_SESSION['user_id']), $tipo_recurso, $recurso['nome'], $reserva['codigo']);
+                }
+
                 // Sucesso
                 header("Location: " . BASE_URL . "reservas/index.php?sucesso_criar=" . urlencode("Reserva criada com sucesso."));
                 exit();

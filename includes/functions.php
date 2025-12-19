@@ -180,6 +180,27 @@ function upload_imagem($file, $pasta)
 // ============================================
 // FUNÇÕES DATABASE 
 // ============================================
+
+/**
+ * BUSCAR EMAIL PELO USER_ID
+ */
+function buscar_email($user_id)
+{
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT email FROM utilizadores WHERE id = :user_id");
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->execute();
+
+    $email = $stmt->fetch(PDO::FETCH_ASSOC)['email'];
+
+    $db->closeConnection();
+
+    return $email;
+}
+
+
 /**
  * BUSCAR EMPRESA PELO USER_ID
  */
