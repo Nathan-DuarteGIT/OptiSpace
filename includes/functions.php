@@ -681,18 +681,7 @@ function render_reservas_empresa_cards($user_id)
                     $textColor = '#1f2937';
                     break; // Gray 200/800
             }
-            echo <<<INICIO
-            <div style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
-                <div class="leading-tight">
-                    <input type="hidden" name="id_reserva" value="<?= $id_reserva ?>">
-                    <p class="text-xs text-black leading-relaxed pt-4"><span class="font-semibold">Data:</span> $data_inicio</p>
-            INICIO;
-            // Só exibe a "Data de fim" se for diferente da "Data de início"
-            if ($data_inicio !== $data_fim) {
-                echo <<<DATAFIM
-                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data de fim:</span> $data_fim</p>
-                DATAFIM;
-            }
+
             // --- LÓGICA DOS BOTÕES (FEITA ANTES DO ECHO) ---
             $botoes_html = '';
             
@@ -711,21 +700,18 @@ function render_reservas_empresa_cards($user_id)
             }
             // -----------------------------------------------
 
-            // INÍCIO DO OUTPUT HTML
             echo <<<INICIO
             <div style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
                 <div class="leading-tight">
-                    <input type="hidden" name="id_reserva" value="$id_reserva">
+                    <input type="hidden" name="id_reserva" value="<?= $id_reserva ?>">
                     <p class="text-xs text-black leading-relaxed pt-4"><span class="font-semibold">Data:</span> $data_inicio</p>
             INICIO;
-
+            // Só exibe a "Data de fim" se for diferente da "Data de início"
             if ($data_inicio !== $data_fim) {
                 echo <<<DATAFIM
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data de fim:</span> $data_fim</p>
                 DATAFIM;
             }
-
-            // Continuamos o HTML e inserimos a variavel $botoes_html que criamos antes
             echo <<<INFORMATION
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> $hora_inicio</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> $hora_fim</p>
@@ -737,7 +723,6 @@ function render_reservas_empresa_cards($user_id)
                             $status
                         </span>
                     </div>
-                    
                     <div class="flex gap-2">
                         $botoes_html
                     </div>
