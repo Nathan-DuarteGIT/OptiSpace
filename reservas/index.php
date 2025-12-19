@@ -50,29 +50,34 @@ $versioncss = filemtime($file_css);
                 <div class="p-8 border w-full max-w-md shadow-lg rounded-md bg-white">
                     <div class="text-center">
                         <h3 class="text-2xl font-bold text-gray-900">Confirmar Reserva</h3>
+                        
                         <p class="text-sm text-gray-500 mt-2">
                             Enviamos um PIN para o seu e-mail. Por favor, insira-o abaixo para confirmar a sua reserva.
                         </p>
 
                         <!-- Formulário de Confirmação -->
-                        <div class="mt-4">
-                            <input
-                                type="text"
-                                id="pin-input"
-                                placeholder="Digite o PIN"
-                                class="w-full px-3 py-2 border border-gray-300 rounded-md text-center"
-                                maxlength="6">
-                            <!-- Mensagem de erro -->
-                            <p id="pin-error" class="text-red-500 text-xs mt-1 hidden">PIN inválido ou expirado.</p>
-                        </div>
+                        <form action="../actions/action-confirmarReserva.php" method="post">
+                            <div class="mt-4">
+                                <input type="hidden" id="id_reserva_no_modal" name="id_reserva" value="">
+                                <input
+                                    type="text"
+                                    id="pin-input"
+                                    name="pin_confirmacao"
+                                    placeholder="Digite o PIN"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md text-center"
+                                    maxlength="6">
+                                    <!-- Mensagem de erro -->
+                                <p id="pin-error" class="text-red-500 text-xs mt-1 hidden">PIN inválido ou expirado.</p>
+                            </div>
 
-                        <div class="mt-6 flex justify-center gap-4">
-                            <button onclick="fecharModal('confirm-modal')" id="close-confirm-modal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">
-                                Fechar
-                            </button>
-                            <button id="submit-pin-btn" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
-                                Confirmar Reserva
-                            </button>
+                            <div class="mt-6 flex justify-center gap-4">
+                                <button type="button" onclick="fecharModal('confirm-modal')" id="close-confirm-modal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">
+                                    Fechar
+                                </button>
+                                <button type="submit" id="submit-pin-btn" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+                                    Confirmar Reserva
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

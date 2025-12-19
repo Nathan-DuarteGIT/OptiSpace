@@ -656,6 +656,7 @@ function render_reservas_empresa_cards($user_id)
             $hora_fim    = date('H:i', $timestamp_fim);
             $recurso = htmlspecialchars($r['nome_recurso']);
             $status = htmlspecialchars($r['status_reserva']);
+            $id_reserva = htmlspecialchars($r['id']);
             // Definição de cores dinâmicas para o Status
             // Definimos as cores hexadecimais diretamente para garantir que funcionam
             switch ($r['status_reserva']) {
@@ -683,6 +684,7 @@ function render_reservas_empresa_cards($user_id)
             echo <<<INICIO
             <div style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
                 <div class="leading-tight">
+                    <input type="hidden" name="id_reserva" value="<?= $id_reserva ?>">
                     <p class="text-xs text-black leading-relaxed pt-4"><span class="font-semibold">Data:</span> $data_inicio</p>
             INICIO;
             // Só exibe a "Data de fim" se for diferente da "Data de início"
@@ -703,8 +705,14 @@ function render_reservas_empresa_cards($user_id)
                         </span>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="mostrarModalConfirmar()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="{$r['id']}">Confirmar</button>
-                        <button onclick="mostrarModalCancelar()" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="{$r['id']}">Cancelar</button>
+                    <?php if ($status == 'pendente'): ?>
+                        <button onclick="mostrarModalConfirmar(<?php echo $id_reserva; ?>)" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="{$r['id']}">Confirmar</button>
+                        <a href="../actions/action-cancelarReserva.php?id=<?php echo $id_reserva; ?>"> <button onclick="mostrarModalCancelar()" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="{$r['id']}">Cancelar</button>
+                    <?php elseif ($status == 'confirmada'): ?>
+                        <a href="../actions/action-checkoutReserva.php?id=<?php echo $id_reserva; ?>" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
+                            Checkout / Devolver
+                        </a>
+                    <?php endif; ?>
                     </div>
                 </div>
             </div>
