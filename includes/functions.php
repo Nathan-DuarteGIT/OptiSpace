@@ -770,6 +770,10 @@ function render_reservas_empresa_cards($user_id)
             INFORMATION;
         }
     } else {
+        if($_SESSION['nivel_acesso'] === 'colaborador'){
+            echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para o seu utilizador.</p>";
+        } else {
         echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para a sua empresa.</p>";
+        }
     }
 }
