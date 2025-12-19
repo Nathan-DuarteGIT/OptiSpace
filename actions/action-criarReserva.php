@@ -2,6 +2,7 @@
     require_once "../config/database.php";
     require_once "../config/config.php";
     require_once "../includes/email.php";
+    require_once "../includes/functions.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         // 2. VERIFICAÇÃO DE DADOS POST
