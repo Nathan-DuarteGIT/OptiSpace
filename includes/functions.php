@@ -516,15 +516,34 @@ function buscar_reservas_utilizador($user_id)
     $db = new Database();
     $conn = $db->getConnection();
 
-    $stmt = $conn->prepare("SELECT * FROM reservas WHERE utilizador_id = :user_id ORDER BY data_inicio DESC");
-    $stmt->bindParam(':user_id', $user_id);
-    $stmt->execute();
+    // 2. Query que busca detalhes da reserva, nome do colaborador e nome do recurso
+    $sql = "
+        SELECT 
+            r.*, 
+            u.nome as nome_utilizador,
+            CASE 
+                WHEN r.tipo_recurso = 'sala' THEN (SELECT nome FROM sala WHERE id = r.recurso_id)
+                WHEN r.tipo_recurso = 'viatura' THEN (SELECT nome FROM viaturas WHERE id = r.recurso_id)
+                WHEN r.tipo_recurso = 'equipamento' THEN (SELECT nome FROM equipamentos WHERE id = r.recurso_id)
+            END as nome_recurso
+        FROM reservas r
+        WHERE r.utilizador_id = :user_id
+        ORDER BY r.data_inicio DESC
+    ";
 
-    $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
 
-    $db->closeConnection();
+        $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $db->closeConnection();
 
-    return $reservas;
+        return $reservas;
+    } catch (PDOException $e) {
+        $db->closeConnection();
+        return []; // Retorna array vazio em caso de erro
+    }
 }
 
 /**
