@@ -67,7 +67,7 @@ $versioncss = filemtime($file_css);
                         </div>
 
                         <div class="mt-6 flex justify-center gap-4">
-                            <button id="close-confirm-modal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">
+                            <button onclick="fecharModal('confirm-modal')" id="close-confirm-modal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">
                                 Fechar
                             </button>
                             <button id="submit-pin-btn" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
@@ -87,7 +87,7 @@ $versioncss = filemtime($file_css);
                             Tem certeza que deseja cancelar esta reserva? Esta ação não pode ser desfeita.
                         </p>
                         <div class="mt-6 flex justify-center gap-4">
-                            <button id="close-cancel-modal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">
+                            <button onclick="fecharModal('cancel-modal')" id="close-cancel-modal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">
                                 Não, manter reserva
                             </button>
                             <button id="confirm-cancel-btn" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
