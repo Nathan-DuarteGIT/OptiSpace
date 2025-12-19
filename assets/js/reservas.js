@@ -4,7 +4,7 @@ function mostrarModalConfirmar(idReserva) {
     
     // 2. Define o valor dele com o ID que veio do botão
     inputModal.value = idReserva;
-    
+
     // 1. Seleciona o elemento pelo ID
     const modal = document.getElementById('confirm-modal');
     
@@ -12,7 +12,13 @@ function mostrarModalConfirmar(idReserva) {
     modal.classList.remove('hidden');
 }
 
-function mostrarModalCancelar() {
+function mostrarModalCancelar(idReserva) {
+     // 1. Pega o input escondido DENTRO DO MODAL
+    const inputModal = document.getElementById('id_reserva_no_modal');
+    
+    // 2. Define o valor dele com o ID que veio do botão
+    inputModal.value = idReserva;
+    
     // 1. Seleciona o elemento pelo ID
     const modal = document.getElementById('cancel-modal');
     
