@@ -85,38 +85,7 @@ $versioncss = filemtime($file_css);
             <main class="flex-1 p-8">
                 <section class="mt-8">
                     <h3 class="text-2xl font-semibold mb-6">Dashboard</h3>
-
-                    <!-- Container dos cards -->
-                    <div class="flex flex-col sm:flex-row justify-start gap-8">
-
-                        <!-- Card: Salas -->
-                        <div class="card-dashboard">
-                            <div class="leading-tight">
-                                <h4 class="text-base font-medium text-gray-700">Salas</h4>
-                                <p id="salas" class="text-xl font-black text-gray-900 mt-1">0</p>
-                            </div>
-                            <img src="../assets/images/salas.png" alt="Salas" class="w-10 h-auto ml-2">
-                        </div>
-
-                        <!-- Card: Equipamentos -->
-                        <div class="card-dashboard">
-                            <div class="leading-tight">
-                                <h4 class="text-base font-medium text-gray-700">Equipamentos</h4>
-                                <p id="equipamentos" class="text-xl font-black text-gray-900 mt-1">0</p>
-                            </div>
-                            <img src="../assets/images/equipamentos.png" alt="Equipamentos" class="w-10 h-auto ml-2">
-                        </div>
-
-                        <!-- Card: Viaturas -->
-                        <div class="card-dashboard ">
-                            <div class="leading-tight">
-                                <h4 class="text-base font-medium text-gray-700">Viaturas</h4>
-                                <p id="viaturas" class="text-xl font-black text-gray-900 mt-1">0</p>
-                            </div>
-                            <img src="../assets/images/viaturas.png" alt="Viaturas" class="w-10 h-auto ml-2">
-                        </div>
-
-                    </div>
+                    <?php render_reservas_empresa_cards($_SESSION['user_id']) ?>
                 </section>
             </main>
         </div><!-- Conteúdo principal ocupa o resto -->
