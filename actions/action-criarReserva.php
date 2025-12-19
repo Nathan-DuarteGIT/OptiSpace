@@ -64,7 +64,8 @@
                 $recurso = $stmt_recurso->fetch(PDO::FETCH_ASSOC);
 
                 if ($recurso && $reserva) {
-                    enviarEmailCodigoReserva(buscar_email($_SESSION['user_id']), $tipo_recurso, $recurso['nome'], $reserva['codigo']);
+                    $email = buscar_email($_SESSION['user_id']);
+                    enviarEmailCodigoReserva($email, $tipo_recurso, $recurso['nome'], $reserva['codigo']);
                 }
 
                 // Sucesso
