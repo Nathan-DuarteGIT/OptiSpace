@@ -708,6 +708,7 @@ function render_reservas_empresa_cards($user_id)
                     <?php if ($status == 'pendente'): ?>
                         <button onclick="mostrarModalConfirmar(<?php echo $id_reserva; ?>)" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="{$r['id']}">Confirmar</button>
                         <a href="../actions/action-cancelarReserva.php?id=<?php echo $id_reserva; ?>"> <button onclick="mostrarModalCancelar()" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="{$r['id']}">Cancelar</button>
+                    </a>
                     <?php elseif ($status == 'confirmada'): ?>
                         <a href="../actions/action-checkoutReserva.php?id=<?php echo $id_reserva; ?>" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
                             Checkout / Devolver
