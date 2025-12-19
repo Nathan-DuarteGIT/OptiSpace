@@ -527,6 +527,7 @@ function buscar_reservas_utilizador($user_id)
                 WHEN r.tipo_recurso = 'equipamento' THEN (SELECT nome FROM equipamentos WHERE id = r.recurso_id)
             END as nome_recurso
         FROM reservas r
+        JOIN utilizadores u ON r.utilizador_id = u.id
         WHERE r.utilizador_id = :user_id
         ORDER BY r.data_inicio DESC
     ";
