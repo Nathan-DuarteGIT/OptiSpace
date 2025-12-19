@@ -703,8 +703,8 @@ function render_reservas_empresa_cards($user_id)
                         </span>
                     </div>
                     <div class="flex gap-2">
-                        <button class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="{$r['id']}">Confirmar</button>
-                        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="{$r['id']}">Cancelar</button>
+                        <button onclick="mostrarModalConfirmar()" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="{$r['id']}">Confirmar</button>
+                        <button onclick="mostrarModalCancelar()" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="{$r['id']}">Cancelar</button>
                     </div>
                 </div>
             </div>

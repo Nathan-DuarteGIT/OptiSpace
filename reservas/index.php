@@ -1,6 +1,8 @@
 <?php
 include_once '../includes/functions.php';
 require_once "../config/config.php";
+$file_path = '../assets/js/reservas.js';
+$version = filemtime($file_path);
 $file_css = '../assets/css/output.css';
 $versioncss = filemtime($file_css);
 ?>
@@ -98,6 +100,7 @@ $versioncss = filemtime($file_css);
 
         </main>
     </div>
+    <script src="<?= $file_path ?>?v=<?= $version ?>"></script>
 </body>
 
 </html>

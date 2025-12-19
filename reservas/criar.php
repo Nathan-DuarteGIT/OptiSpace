@@ -1,7 +1,7 @@
 <?php
 include_once '../includes/functions.php';
 require_once "../config/config.php";
-$file_path = '../assets/js/reservas.js';
+$file_path = '../assets/js/criarReservas.js';
 $version = filemtime($file_path);
 $file_css = '../assets/css/output.css';
 $versioncss = filemtime($file_css);
