@@ -511,6 +511,22 @@ function buscar_reservas_empresa($user_id)
     }
 }
 
+function buscar_reservas_utilizador($user_id)
+{
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $stmt = $conn->prepare("SELECT * FROM reservas WHERE utilizador_id = :user_id ORDER BY data_inicio DESC");
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->execute();
+
+    $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $db->closeConnection();
+
+    return $reservas;
+}
+
 /**
  * RENDARIZAR OS EQUIPAMENTOS FIXOS DA EMPRESA NO FORMCRIAR 
  */
@@ -643,7 +659,12 @@ function render_salas_card($user_id)
 function render_reservas_empresa_cards($user_id)
 {
     // 1. Obtém as reservas usando a função de busca
-    $reservas = buscar_reservas_empresa($user_id);
+    if($_SESSION['nivel_acesso'] === 'colaborador'){
+        $reservas = buscar_reservas_utilizador($user_id);
+    } else {
+        $reservas = buscar_reservas_empresa($user_id);
+    }
+    // 2. Renderiza cada reserva em formato de card
     if ($reservas) {
         foreach ($reservas as $r) {
             // Conversão dos timestamps para objetos de tempo
