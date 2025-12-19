@@ -693,6 +693,39 @@ function render_reservas_empresa_cards($user_id)
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data de fim:</span> $data_fim</p>
                 DATAFIM;
             }
+            // --- LÓGICA DOS BOTÕES (FEITA ANTES DO ECHO) ---
+            $botoes_html = '';
+            
+            if ($status == 'pendente') {
+                // Nota: Dentro de aspas simples, as variaveis não se expandem, por isso concatenei
+                $botoes_html = '
+                    <button onclick="mostrarModalConfirmar('.$id_reserva.')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="'.$id_reserva.'">Confirmar</button>
+                    <a href="../actions/action-cancelarReserva.php?id='.$id_reserva.'"> 
+                        <button onclick="mostrarModalCancelar()" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="'.$id_reserva.'">Cancelar</button>
+                    </a>';
+            } elseif ($status == 'confirmada') {
+                $botoes_html = '
+                    <a href="../actions/action-checkoutReserva.php?id='.$id_reserva.'" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
+                        Checkout / Devolver
+                    </a>';
+            }
+            // -----------------------------------------------
+
+            // INÍCIO DO OUTPUT HTML
+            echo <<<INICIO
+            <div style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
+                <div class="leading-tight">
+                    <input type="hidden" name="id_reserva" value="$id_reserva">
+                    <p class="text-xs text-black leading-relaxed pt-4"><span class="font-semibold">Data:</span> $data_inicio</p>
+            INICIO;
+
+            if ($data_inicio !== $data_fim) {
+                echo <<<DATAFIM
+                    <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Data de fim:</span> $data_fim</p>
+                DATAFIM;
+            }
+
+            // Continuamos o HTML e inserimos a variavel $botoes_html que criamos antes
             echo <<<INFORMATION
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de início:</span> $hora_inicio</p>
                     <p class="text-xs text-black leading-relaxed"><span class="font-semibold">Hora de fim:</span> $hora_fim</p>
@@ -704,16 +737,9 @@ function render_reservas_empresa_cards($user_id)
                             $status
                         </span>
                     </div>
+                    
                     <div class="flex gap-2">
-                    <?php if ($status == 'pendente'): ?>
-                        <button onclick="mostrarModalConfirmar(<?php echo $id_reserva; ?>)" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="{$r['id']}">Confirmar</button>
-                        <a href="../actions/action-cancelarReserva.php?id=<?php echo $id_reserva; ?>"> <button onclick="mostrarModalCancelar()" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="{$r['id']}">Cancelar</button>
-                    </a>
-                    <?php elseif ($status == 'confirmada'): ?>
-                        <a href="../actions/action-checkoutReserva.php?id=<?php echo $id_reserva; ?>" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
-                            Checkout / Devolver
-                        </a>
-                    <?php endif; ?>
+                        $botoes_html
                     </div>
                 </div>
             </div>
