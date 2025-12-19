@@ -3,6 +3,9 @@ include_once "../includes/functions.php";
 require_once "../config/config.php";
 require_once "../config/database.php";
 
+var_dump($_POST);
+die("CHEGUEI AQUI!");
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_POST['id_reserva'], $_POST['pin_confirmacao'])) {
         $id_reserva = $_POST['id_reserva'];
