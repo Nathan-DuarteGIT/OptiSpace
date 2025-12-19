@@ -92,7 +92,7 @@ $versioncss = filemtime($file_css);
                             Tem certeza que deseja cancelar esta reserva? Esta ação não pode ser desfeita.
                         </p>
                         <form action="../actions/action-cancelarReserva.php" method="post">
-                            <input type="hidden" id="id_reserva_no_modal" name="id_reserva" value="">
+                            <input type="hidden" id="id_reserva_cancelar" name="id_reserva" value="">
                             <div class="mt-6 flex justify-center gap-4">
                                 <button type="button" onclick="fecharModal('cancel-modal')" id="close-cancel-modal" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">
                                     Não, manter reserva
