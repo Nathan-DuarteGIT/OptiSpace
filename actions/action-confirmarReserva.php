@@ -4,8 +4,8 @@ require_once "../config/config.php";
 require_once "../config/database.php";
 
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    if(isset($_POST['id_reserva'], $_POST['pin_confirmacao'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['id_reserva'], $_POST['pin_confirmacao'])) {
         $id_reserva = $_POST['id_reserva'];
         $pin_confirmacao = $_POST['pin_confirmacao'];
 
@@ -18,13 +18,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $stmt->execute();
         $reserva = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($reserva) {
-            if($reserva['status_reserva'] === 'pendente') {
-                if($reserva['codigo'] == $pin_confirmacao) {
+        if ($reserva) {
+            if ($reserva['status_reserva'] === 'pendente') {
+                if ($reserva['codigo'] == $pin_confirmacao) {
                     // Atualizar o status da reserva para 'confirmada'
                     $update_stmt = $conn->prepare("UPDATE reservas SET status_reserva = 'confirmada' WHERE id = :id_reserva");
                     $update_stmt->bindParam(':id_reserva', $id_reserva);
-                    if($update_stmt->execute()) {
+                    if ($update_stmt->execute()) {
                         header("Location: " . BASE_URL . "reservas/index.php?sucesso=" . urlencode("Reserva confirmada com sucesso."));
                         exit();
                     } else {
@@ -51,4 +51,3 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     header("Location: " . BASE_URL . "reservas/index.php");
     exit();
 }
-?>
