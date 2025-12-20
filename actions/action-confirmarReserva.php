@@ -32,7 +32,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         exit();
                     }
                 } else {
-                    die("DB: " . $reserva['codigo'] . " | Input: " . $pin_confirmacao);
                     header("Location: " . BASE_URL . "reservas/index.php?erro_pin=" . urlencode("PIN de confirmação incorreto."));
                     exit();
                 }
