@@ -12,6 +12,7 @@ $mail->Username   = 'andnat@antrob.eu';
 $mail->Password   = '&t1Q6=njx]BK';
 $mail->SMTPSecure = 'tls';
 $mail->Port       = 587;
+$mail->CharSet = 'UTF-8';
 
 function enviarCodigoAtivacao($destinatario, $codigo_ativacao)
 {
