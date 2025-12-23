@@ -728,16 +728,19 @@ function render_reservas_empresa_cards($user_id)
 
             if ($status == 'pendente') {
                 $botoes_html = '
-                    <button onclick="mostrarModalConfirmar(' . $id_reserva . ')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="' . $id_reserva . '">Confirmar</button> 
-                    <button onclick="mostrarModalCancelar(' . $id_reserva . ')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="' . $id_reserva . '">Cancelar</button>';
+                    <div class="flex space-x-2 mt-2">
+                        <button onclick="mostrarModalConfirmar(' . $id_reserva . ')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="' . $id_reserva . '">Confirmar</button> 
+                        <button onclick="mostrarModalCancelar(' . $id_reserva . ')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="' . $id_reserva . '">Cancelar</button>
+                    </div>';
             } elseif ($status == 'confirmada') {
                 $botoes_html = '
-                    <a href="../actions/action-checkoutReserva.php?id=' . $id_reserva . '" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
-                        Checkout / Devolver
-                    </a>';
+                    <div class="mt-2">
+                        <a href="../actions/action-checkoutReserva.php?id=' . $id_reserva . '" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
+                            Checkout / Devolver
+                        </a>
+                    </div>';
             }
-            // -----------------------------------------------
-
+  
             echo <<<INICIO
             <div style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
                 <div class="leading-tight">
@@ -761,9 +764,7 @@ function render_reservas_empresa_cards($user_id)
                             $status
                         </span>
                     </div>
-                    <div class="flex gap-2">
                         $botoes_html
-                    </div>
                 </div>
             </div>
             INFORMATION;
