@@ -57,22 +57,64 @@ if (isset($_GET['erro_credenciais'])) {
                 </div>
             </div>
             <h2 class="text-2xl md:text-3xl text-dark-600 mt-1">Alterar palavra-passe</h2>
-            <?php 
-                if(isset($_GET['email'])) {
-                    echo '<input type="hidden" name="email" value="' . htmlspecialchars($_GET['email']) . '">';
-                }
+            <?php
+            if (isset($_GET['email'])) {
+                echo '<input type="hidden" name="email" value="' . htmlspecialchars($_GET['email']) . '">';
+            }
             ?>
             <div class="space-y-6 mb-6">
+                <!-- CAMPO 1: NOVA PALAVRA-PASSE -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira a nova palavra-passe</label>
-                    <input type="password" name="password" required placeholder="Nova palavra-passe"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
+                    <div class="relative">
+                        <input type="password" name="password" id="new_password" required placeholder="Nova palavra-passe"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition pr-10">
+                        <button
+                            type="button"
+                            onclick="togglePassword('new_password')"
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 p-1">
+
+                            <!-- Ícone de Olho Aberto (Visível por padrão) -->
+                            <svg id="icon_new_password_open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
+                            <!-- Ícone de Olho Fechado (Oculto por padrão) -->
+                            <svg id="icon_new_password_closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12c0 2.21.574 4.257 1.543 6.114M10.125 10.5h.008v.008h-.008v-.008Zm2.25 0h.008v.008h-.008v-.008Zm2.25 0h.008v.008h-.008v-.008Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 18.375L12 12M12 12L5.625 5.625" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
+                <!-- CAMPO 2: CONFIRMAR PALAVRA-PASSE -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Confirme a nova palavra-passe</label>
-                    <input type="password" name="ConfirmPassword" required placeholder="Confirme a nova palavra-passe"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
+                    <div class="relative">
+                        <input type="password" name="ConfirmPassword" id="confirm_password" required placeholder="Confirme a nova palavra-passe"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition pr-10">
+                        <button
+                            type="button"
+                            onclick="togglePassword('confirm_password')"
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 p-1">
+
+                            <!-- Ícone de Olho Aberto (Visível por padrão) -->
+                            <svg id="icon_confirm_password_open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
+                            <!-- Ícone de Olho Fechado (Oculto por padrão) -->
+                            <svg id="icon_confirm_password_closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12c0 2.21.574 4.257 1.543 6.114M10.125 10.5h.008v.008h-.008v-.008Zm2.25 0h.008v.008h-.008v-.008Zm2.25 0h.008v.008h-.008v-.008Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 18.375L12 12M12 12L5.625 5.625" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
             <button type="submit"
@@ -81,6 +123,24 @@ if (isset($_GET['erro_credenciais'])) {
             </button>
         </form>
     </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const iconOpen = document.getElementById('icon_' + fieldId + '_open');
+            const iconClosed = document.getElementById('icon_' + fieldId + '_closed');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                iconOpen.classList.add('hidden'); 
+                iconClosed.classList.remove('hidden'); 
+            } else {
+                passwordField.type = 'password';
+                iconOpen.classList.remove('hidden'); 
+                iconClosed.classList.add('hidden'); 
+            }
+        }
+    </script>
 </body>
 
 </html>
