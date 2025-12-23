@@ -740,9 +740,9 @@ function render_reservas_empresa_cards($user_id)
                         </a>
                     </div>';
             }
-  
+
             echo <<<INICIO
-            <div style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12">
+            <div class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex flex-col justify-between">
                 <div class="leading-tight">
                     <input type="hidden" name="id_reserva" value="<?= $id_reserva ?>">
                     <p class="text-xs text-black leading-relaxed pt-4"><span class="font-semibold">Data:</span> $data_inicio</p>
