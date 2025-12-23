@@ -66,9 +66,16 @@ if (isset($_GET['erro_credenciais'])) {
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Insira a sua Palavra-passe</label>
-                    <input type="password" name="password" required placeholder="Palavra-passe"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition">
-
+                    <div class="relative">
+                        <input type="password" name="password" id="login_password" required placeholder="Palavra-passe"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-dark focus:border-transparent transition pr-10">
+                        <button
+                            type="button"
+                            onclick="togglePassword('login_password')"
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-eye" id="icon_login_password"></i>
+                        </button>
+                    </div>
                     <div class="text-right mt-2">
                         <a href="recuperar-passe.php" class="font-semibold text-sm text-primary-dark hover:underline">Recuperar palavra-passe</a>
                     </div>
@@ -78,6 +85,24 @@ if (isset($_GET['erro_credenciais'])) {
             </form>
         </div>
     </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const icon = document.getElementById('icon_' + fieldId);
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+
 </body>
 
 </html>
