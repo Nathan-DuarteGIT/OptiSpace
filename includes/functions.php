@@ -679,7 +679,7 @@ function render_salas_card($user_id)
 function render_reservas_empresa_cards($user_id)
 {
     // 1. Obtém as reservas usando a função de busca
-    if($_SESSION['nivel_acesso'] === 'colaborador'){
+    if ($_SESSION['nivel_acesso'] === 'colaborador') {
         $reservas = buscar_reservas_utilizador($user_id);
     } else {
         $reservas = buscar_reservas_empresa($user_id);
@@ -725,21 +725,16 @@ function render_reservas_empresa_cards($user_id)
 
             // --- LÓGICA DOS BOTÕES (FEITA ANTES DO ECHO) ---
             $botoes_html = '';
-            
+
             if ($status == 'pendente') {
-                // Nota: Dentro de aspas simples, as variaveis não se expandem, por isso concatenei
                 $botoes_html = '
-                    <div class="flex space-x-2">
-                        <button onclick="mostrarModalConfirmar('.$id_reserva.')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="'.$id_reserva.'">Confirmar</button> 
-                        <button onclick="mostrarModalCancelar('.$id_reserva.')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="'.$id_reserva.'">Cancelar</button>;
-                    </div>';
+                    <button onclick="mostrarModalConfirmar(' . $id_reserva . ')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="' . $id_reserva . '">Confirmar</button> 
+                    <button onclick="mostrarModalCancelar(' . $id_reserva . ')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="' . $id_reserva . '">Cancelar</button>';
             } elseif ($status == 'confirmada') {
                 $botoes_html = '
-                <div class="flex space-x-2">
-                    <a href="../actions/action-checkoutReserva.php?id='.$id_reserva.'" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
+                    <a href="../actions/action-checkoutReserva.php?id=' . $id_reserva . '" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
                         Checkout / Devolver
-                    </a>;
-                </div>';
+                    </a>';
             }
             // -----------------------------------------------
 
@@ -774,10 +769,10 @@ function render_reservas_empresa_cards($user_id)
             INFORMATION;
         }
     } else {
-        if($_SESSION['nivel_acesso'] === 'colaborador'){
+        if ($_SESSION['nivel_acesso'] === 'colaborador') {
             echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para o seu utilizador.</p>";
         } else {
-        echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para a sua empresa.</p>";
+            echo "<p class='text-gray-500 text-sm'>Não existem reservas registadas para a sua empresa.</p>";
         }
     }
 }
