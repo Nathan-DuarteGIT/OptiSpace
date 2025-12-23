@@ -72,8 +72,20 @@ if (isset($_GET['erro_credenciais'])) {
                         <button
                             type="button"
                             onclick="togglePassword('login_password')"
-                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-eye" id="icon_login_password"></i>
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 p-1">
+
+                            <!-- Ícone de Olho Aberto -->
+                            <svg id="icon_login_password_open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
+                            <!-- Ícone de Olho Fechado -->
+                            <svg id="icon_login_password_closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12c0 2.21.574 4.257 1.543 6.114M10.125 10.5h.008v.008h-.008v-.008Zm2.25 0h.008v.008h-.008v-.008Zm2.25 0h.008v.008h-.008v-.008Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 18.375L12 12M12 12L5.625 5.625" />
+                            </svg>
                         </button>
                     </div>
                     <div class="text-right mt-2">
@@ -89,16 +101,19 @@ if (isset($_GET['erro_credenciais'])) {
     <script>
         function togglePassword(fieldId) {
             const passwordField = document.getElementById(fieldId);
-            const icon = document.getElementById('icon_' + fieldId);
+            const iconOpen = document.getElementById('icon_' + fieldId + '_open');
+            const iconClosed = document.getElementById('icon_' + fieldId + '_closed');
 
             if (passwordField.type === 'password') {
+                // Mudar para texto (mostrar senha)
                 passwordField.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
+                iconOpen.classList.add('hidden');
+                iconClosed.classList.remove('hidden');
             } else {
+                // Mudar para password (ocultar senha)
                 passwordField.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
+                iconOpen.classList.remove('hidden');
+                iconClosed.classList.add('hidden');
             }
         }
     </script>
