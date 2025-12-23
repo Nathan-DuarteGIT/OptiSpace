@@ -725,14 +725,17 @@ function render_reservas_empresa_cards($user_id)
 
             // --- LÓGICA DOS BOTÕES (FEITA ANTES DO ECHO) ---
             $botoes_html = '';
+            $card_style = ''; // Variável para o estilo condicional
 
             if ($status == 'pendente') {
+                // Encapsula os botões Confirmar e Cancelar em uma div com classes de layout
                 $botoes_html = '
                     <div class="flex space-x-2 mt-2">
                         <button onclick="mostrarModalConfirmar(' . $id_reserva . ')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#confirm-modal" data-reserva-id="' . $id_reserva . '">Confirmar</button> 
                         <button onclick="mostrarModalCancelar(' . $id_reserva . ')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn" data-modal-target="#cancel-modal" data-reserva-id="' . $id_reserva . '">Cancelar</button>
                     </div>';
             } elseif ($status == 'confirmada') {
+                // Encapsula o botão Checkout / Devolver em uma div com classes de layout
                 $botoes_html = '
                     <div class="mt-2">
                         <a href="../actions/action-checkoutReserva.php?id=' . $id_reserva . '" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-xs open-modal-btn">
@@ -741,8 +744,15 @@ function render_reservas_empresa_cards($user_id)
                     </div>';
             }
 
+            if (empty($botoes_html)) {
+                $card_style = 'style="height:150px" class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex items-center justify-center gap-12"';
+            } else {
+                // Se houver botões, remove a altura fixa e usa flex-col para o layout
+                $card_style = 'class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex flex-col justify-between"';
+            }
+
             echo <<<INICIO
-            <div class="bg-white w-64 px-3 py-6 rounded-2xl border border-gray-200 shadow-2xl flex flex-col justify-between">
+            <div $card_style>
                 <div class="leading-tight">
                     <input type="hidden" name="id_reserva" value="<?= $id_reserva ?>">
                     <p class="text-xs text-black leading-relaxed pt-4"><span class="font-semibold">Data:</span> $data_inicio</p>
