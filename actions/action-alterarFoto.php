@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             
             $db->closeConnection();
+            $_SESSION['user_photo'] = $caminho_foto;
             header("Location: " . BASE_URL . "definicoes/index.php?sucesso_foto=" . urlencode("Foto do perfil alterada com sucesso!"));
             exit();
         } else {
