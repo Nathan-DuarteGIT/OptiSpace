@@ -25,7 +25,7 @@ Aceda à aplicação através de `https://andnat.antrob.eu/index.php`.
 
 ## Aceda rapidamente com o QR Code:
 <a href="https://andnat.antrob.eu/index.php">
-  <img src="assets/images/Optispace-qrcode.png" width="220" alt="QR Code Optispace">
+  <img src="assets/images/optispace-qrcode.jpeg" width="220" alt="QR Code Optispace">
 </a>
 
 ## Licença
