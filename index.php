@@ -17,7 +17,7 @@ $versioncss = filemtime($file_css);
 
 <body class="bg-primary font-sans mx-4 lg:mx-40 overflow-x-hidden">
     <header class="mx-4 lg:mx-40">
-        <nav class="flex flex-wrap justify-between items-center mt-2 gap-4">
+        <nav class="flex flex-wrap justify-between items-center mt-2 gap-y-4">
             <img class="w-32 h-auto" src="assets/images/logo_optispace.png" alt="logo_OptiSpace">
             <ul class="flex justify-between items-center">
                 <li class="ml-4 mr-4"><a href="#inicio">Inicio</a></li>
@@ -29,7 +29,7 @@ $versioncss = filemtime($file_css);
         </nav>
     </header>
 
-    <section id="inicio" class="flex flex-col lg:flex-row items-center my-20 mx-4 lg:mx-40 gap-10">
+    <section id="inicio" class="flex flex-wrap lg:flex-nowrap items-center my-20 mx-4 lg:mx-40 gap-10">
         <div class="flex-1">
             <h1 class="text-4xl font-bold">Reserve com inteligência, otimize com Optispace.</h1>
             <h2 class="text-2xl font-light text-description my-10">A Optispace automatiza a gestão de recursos partilhados com reservas inteligentes, eliminando conflitos e aumentando a produtividade empresarial.</h2>
@@ -39,7 +39,7 @@ $versioncss = filemtime($file_css);
             </div>
         </div>
         <div class="flex-1">
-            <img src="assets/images/pc1.png" alt="um computador">
+            <img class="max-w-full h-auto" src="assets/images/pc1.png" alt="um computador">
         </div>
     </section>
     <section id="servicos" class=" flex flex-col justify-center text-center my-20 overflow-hidden mx-4 lg:mx-40">
@@ -77,9 +77,9 @@ $versioncss = filemtime($file_css);
             </div>
         </div>
     </section>
-    <section id="juntese" class="flex flex-col lg:flex-row items-center gap-8 my-20 mx-4 lg:mx-40">
+    <section id="juntese" class="flex flex-wrap lg:flex-nowrap items-center gap-8 my-20 mx-4 lg:mx-40">
         <div class="flex-1">
-            <img src="assets/images/analiseEmpresa.png" alt="pessoa com uma prancheta e um grafico a subir">
+            <img class="max-w-full h-auto" src="assets/images/analiseEmpresa.png" alt="pessoa com uma prancheta e um grafico a subir">
         </div>
         <div class="flex-1">
             <h1 class="text-3xl font-bold">Registe a sua empresa!</h1>
@@ -88,7 +88,7 @@ $versioncss = filemtime($file_css);
             <a class="btn-outline whitespace-nowrap" href="auth/registo-empresa.php">Registe-se agora</a>
         </div>
     </section>
-    <footer class="flex flex-col justify-center items-center bg-[#085543] py-6 text-white gap-4 -mx-4 lg:-mx-40">
+    <footer class="flex flex-col justify-center items-center bg-[#085543] py-6 text-white gap-4 w-full">
         <img class="w-32 h-auto" src="assets/images/logo_optispace_branca.png" alt="logo OptiSpace">
         <div class="flex flex-col md:flex-row gap-4">
             <p><i class="fa-regular fa-envelope"></i> info@optispace.pt</p>
