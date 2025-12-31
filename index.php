@@ -15,10 +15,9 @@ $versioncss = filemtime($file_css);
     <title>OptiSpace-Homepage</title>
 </head>
 
-<body class="bg-primary font-sans mx-4 lg:mx-40">
-    <!-- falta deixar a header responsiva -->
+<body class="bg-primary font-sans mx-4 lg:mx-40 overflow-x-hidden">
     <header class="mx-4 lg:mx-40">
-        <nav class="flex justify-between items-center ml-8 mr-8 mt-2">
+        <nav class="flex flex-wrap justify-between items-center mt-2 gap-4">
             <img class="w-32 h-auto" src="assets/images/logo_optispace.png" alt="logo_OptiSpace">
             <ul class="flex justify-between items-center">
                 <li class="ml-4 mr-4"><a href="#inicio">Inicio</a></li>
@@ -29,9 +28,8 @@ $versioncss = filemtime($file_css);
             </ul>
         </nav>
     </header>
-    <!-- SVG decorativo -->
 
-    <section id="inicio" class="flex items-center my-20 mx-4 lg:mx-40">
+    <section id="inicio" class="flex flex-col lg:flex-row items-center my-20 mx-4 lg:mx-40 gap-10">
         <div class="flex-1">
             <h1 class="text-4xl font-bold">Reserve com inteligência, otimize com Optispace.</h1>
             <h2 class="text-2xl font-light text-description my-10">A Optispace automatiza a gestão de recursos partilhados com reservas inteligentes, eliminando conflitos e aumentando a produtividade empresarial.</h2>
@@ -79,7 +77,7 @@ $versioncss = filemtime($file_css);
             </div>
         </div>
     </section>
-    <section id="juntese" class="flex items-center gap-8 my-20 mx-4 lg:mx-40">
+    <section id="juntese" class="flex flex-col lg:flex-row items-center gap-8 my-20 mx-4 lg:mx-40">
         <div class="flex-1">
             <img src="assets/images/analiseEmpresa.png" alt="pessoa com uma prancheta e um grafico a subir">
         </div>
@@ -90,7 +88,7 @@ $versioncss = filemtime($file_css);
             <a class="btn-outline whitespace-nowrap" href="auth/registo-empresa.php">Registe-se agora</a>
         </div>
     </section>
-    <footer class=" flex flex-col justify-center items-center bg-[#085543] py-3 -mx-4 lg:-mx-40 text-white gap-[5px]">
+    <footer class="flex flex-col justify-center items-center bg-[#085543] py-6 text-white gap-4 -mx-4 lg:-mx-40">
         <img class="w-32 h-auto" src="assets/images/logo_optispace_branca.png" alt="logo OptiSpace">
         <div class="flex flex-col md:flex-row gap-4">
             <p><i class="fa-regular fa-envelope"></i> info@optispace.pt</p>
