@@ -16,22 +16,20 @@ $versioncss = filemtime($file_css);
 </head>
 
 <body class="bg-primary font-sans mx-4 lg:mx-40">
-    <!-- falta deixar a header responsiva -->
-    <header class="mx-4 lg:mx-40">
-        <nav class="flex justify-between items-center ml-8 mr-8 mt-2">
+    <header class="w-full">
+        <nav class="flex flex-col md:flex-row justify-between items-center px-4 py-2 gap-4">
             <img class="w-32 h-auto" src="assets/images/logo_optispace.png" alt="logo_OptiSpace">
-            <ul class="flex justify-between items-center">
-                <li class="ml-4 mr-4"><a href="#inicio">Inicio</a></li>
-                <li class="ml-4 mr-4"><a href="#servicos">Serviços</a></li>
-                <li class="ml-4 mr-4"><a href="#juntese">Junte-se a nós</a></li>
-                <li class="ml-4 mr-4"><a class="btn-primary" href="auth/registo-empresa.php">Registo</a></li>
-                <li class="ml-4 mr-4"><a class="btn-primary" href="auth/login.php">Entrar</a></li>
+            <ul class="flex flex-wrap justify-center items-center gap-4">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#juntese">Junte-se a nós</a></li>
+                <li><a class="btn-primary" href="auth/registo-empresa.php">Registo</a></li>
+                <li><a class="btn-primary" href="auth/login.php">Entrar</a></li>
             </ul>
         </nav>
     </header>
-    <!-- SVG decorativo -->
 
-    <section id="inicio" class="flex items-center my-20 mx-4 lg:mx-40">
+    <section id="inicio" class="flex flex-col lg:flex-row items-center my-10 lg:my-20 gap-10">
         <div class="flex-1">
             <h1 class="text-4xl font-bold">Reserve com inteligência, otimize com Optispace.</h1>
             <h2 class="text-2xl font-light text-description my-10">A Optispace automatiza a gestão de recursos partilhados com reservas inteligentes, eliminando conflitos e aumentando a produtividade empresarial.</h2>
@@ -41,7 +39,7 @@ $versioncss = filemtime($file_css);
             </div>
         </div>
         <div class="flex-1">
-            <img src="assets/images/pc1.png" alt="um computador">
+            <img class="max-w-full h-auto" src="assets/images/pc1.png" alt="um computador">
         </div>
     </section>
     <section id="servicos" class=" flex flex-col justify-center text-center my-20 overflow-hidden mx-4 lg:mx-40">
@@ -79,9 +77,9 @@ $versioncss = filemtime($file_css);
             </div>
         </div>
     </section>
-    <section id="juntese" class="flex items-center gap-8 my-20 mx-4 lg:mx-40">
+    <section id="juntese" class="flex flex-col lg:flex-row items-center gap-8 my-20">
         <div class="flex-1">
-            <img src="assets/images/analiseEmpresa.png" alt="pessoa com uma prancheta e um grafico a subir">
+            <img class="max-w-full h-auto" src="assets/images/analiseEmpresa.png" alt="pessoa com uma prancheta e um grafico a subir">
         </div>
         <div class="flex-1">
             <h1 class="text-3xl font-bold">Registe a sua empresa!</h1>
